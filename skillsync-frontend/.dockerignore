@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+.vite
+.env.local
+.env.*.local
+.scannerwork
+.git
+.idea
+.vscode
+**/*.log

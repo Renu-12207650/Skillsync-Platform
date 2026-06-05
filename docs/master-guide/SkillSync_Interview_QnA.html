@@ -1,0 +1,2323 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>SkillSync Interview Q&A</title><style>/* ========================================================
+   SkillSync Master Guide — Book Stylesheet
+   ======================================================== */
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+  }
+  @top-right {
+    content: string(chaptertitle);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+    font-style: italic;
+  }
+}
+
+@page :first {
+  @bottom-center { content: none; }
+  @top-right { content: none; }
+}
+
+/* Reset */
+* { box-sizing: border-box; }
+html { font-size: 10.5pt; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #1a1a1a;
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brand tokens */
+:root {
+  --brand: #007A64;
+  --brand-dark: #005A49;
+  --brand-light: #E6F4F0;
+  --accent: #C66B28;
+  --code-bg: #F5F7F9;
+  --code-border: #E1E7EC;
+  --note-bg: #FFF8E1;
+  --note-border: #F0C864;
+  --warn-bg: #FDECEA;
+  --warn-border: #E37B72;
+  --tip-bg: #E6F4F0;
+  --tip-border: #3FA687;
+}
+
+/* ---------- Cover page ---------- */
+.cover {
+  page-break-after: always;
+  height: 255mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(160deg, #007A64 0%, #005A49 55%, #003D33 100%);
+  color: #fff;
+  padding: 40mm 20mm;
+  margin: -20mm -18mm 0 -18mm;
+}
+.cover h1 {
+  font-size: 42pt;
+  margin: 0 0 8mm 0;
+  line-height: 1.1;
+  letter-spacing: -0.5pt;
+  border: none;
+  color: #fff;
+}
+.cover .subtitle {
+  font-size: 16pt;
+  font-weight: 300;
+  margin: 0 0 30mm 0;
+  opacity: 0.92;
+}
+.cover .author {
+  font-size: 12pt;
+  opacity: 0.85;
+  margin-top: 20mm;
+  font-style: italic;
+}
+.cover .divider {
+  width: 40mm;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+  margin: 10mm auto;
+}
+
+/* ---------- Table of Contents ---------- */
+.toc-page {
+  page-break-after: always;
+}
+.toc-page h1 {
+  color: var(--brand);
+  border-bottom: 3px solid var(--brand);
+  padding-bottom: 4mm;
+}
+.toc-page ul { list-style: none; padding-left: 0; }
+.toc-page ul ul { padding-left: 6mm; font-size: 10pt; }
+.toc-page li { margin: 2mm 0; }
+.toc-page a { color: #222; text-decoration: none; }
+.toc-page .toc-part {
+  font-weight: bold;
+  color: var(--brand);
+  margin-top: 6mm;
+  font-size: 12pt;
+}
+
+/* ---------- Part & chapter dividers ---------- */
+.part-divider {
+  page-break-before: always;
+  page-break-after: always;
+  height: 250mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--brand);
+}
+.part-divider .part-label {
+  font-size: 18pt;
+  font-weight: 300;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.part-divider .part-title {
+  font-size: 36pt;
+  margin: 8mm 0 0 0;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.1;
+  border: none;
+}
+.part-divider .part-desc {
+  font-size: 11pt;
+  margin: 14mm 20mm 0 20mm;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  max-width: 140mm;
+}
+
+/* ---------- Headings ---------- */
+h1 {
+  color: var(--brand);
+  font-size: 22pt;
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 2mm;
+  margin: 12mm 0 6mm 0;
+  page-break-before: always;
+  page-break-after: avoid;
+  string-set: chaptertitle content();
+}
+h1.no-break { page-break-before: auto; }
+
+h2 {
+  color: var(--brand-dark);
+  font-size: 16pt;
+  margin: 10mm 0 3mm 0;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid #cfe4dd;
+  page-break-after: avoid;
+}
+h3 {
+  color: #222;
+  font-size: 13pt;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+}
+h4 {
+  color: var(--brand-dark);
+  font-size: 11.5pt;
+  margin: 5mm 0 1mm 0;
+  page-break-after: avoid;
+}
+
+/* ---------- Body text ---------- */
+p { margin: 2mm 0 3mm 0; }
+strong { color: #111; }
+em { color: #333; }
+
+blockquote {
+  border-left: 4px solid var(--brand);
+  background: var(--brand-light);
+  margin: 4mm 0;
+  padding: 3mm 5mm;
+  font-style: italic;
+  color: #222;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+
+/* Callouts (rendered from blockquotes starting with specific emojis/words) */
+blockquote.note {
+  border-left-color: var(--note-border);
+  background: var(--note-bg);
+}
+blockquote.warn {
+  border-left-color: var(--warn-border);
+  background: var(--warn-bg);
+}
+blockquote.tip {
+  border-left-color: var(--tip-border);
+  background: var(--tip-bg);
+}
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 2mm 0 3mm 0; padding-left: 6mm; }
+li { margin: 1mm 0; }
+li > ul, li > ol { margin: 1mm 0; }
+
+/* ---------- Code ---------- */
+code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 0.3mm 1mm;
+  border-radius: 2pt;
+  font-size: 9.5pt;
+  color: #b0413e;
+}
+pre {
+  background: #0f1720;
+  color: #e6edf3;
+  padding: 4mm 5mm;
+  border-radius: 4pt;
+  overflow-x: auto;
+  font-size: 9pt;
+  line-height: 1.5;
+  margin: 3mm 0;
+  page-break-inside: avoid;
+}
+pre code {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Minimal syntax highlighting via class names (markdown-it generic) */
+pre .hljs-keyword, pre .k { color: #ff7b72; }
+pre .hljs-string, pre .s  { color: #a5d6ff; }
+pre .hljs-comment, pre .c { color: #8b949e; font-style: italic; }
+pre .hljs-number, pre .n  { color: #79c0ff; }
+pre .hljs-type, pre .t    { color: #ffa657; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+thead { background: var(--brand); color: #fff; }
+th {
+  padding: 2.5mm 3mm;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9.5pt;
+  border: 1px solid var(--brand-dark);
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d8e0e5;
+  vertical-align: top;
+}
+tbody tr:nth-child(even) { background: #f8fafb; }
+tbody tr:hover { background: #fff7e6; }
+
+/* ---------- Horizontal rule ---------- */
+hr {
+  border: none;
+  border-top: 1px dashed #c9d3d9;
+  margin: 6mm 0;
+}
+
+/* ---------- Links ---------- */
+a { color: var(--brand-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Figures / diagrams ---------- */
+.diagram {
+  background: #fafcfd;
+  border: 1px dashed #a0b3bd;
+  padding: 4mm;
+  margin: 3mm 0;
+  white-space: pre;
+  font-family: "Consolas", monospace;
+  font-size: 8.5pt;
+  line-height: 1.35;
+  page-break-inside: avoid;
+  text-align: center;
+  color: #1a3a33;
+}
+
+/* ---------- "Why X not Y" boxes ---------- */
+.why-box {
+  background: #fafcfd;
+  border: 1px solid #cfe4dd;
+  border-left: 4px solid var(--brand);
+  padding: 3mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+.why-box h4 { margin-top: 0; color: var(--brand-dark); }
+
+/* ---------- "Remember" mnemonic ---------- */
+.remember {
+  background: #fff4d9;
+  border: 1px solid #f0c864;
+  border-left: 4px solid #c99418;
+  padding: 2.5mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #6b4a00;
+}
+
+/* ---------- Print helpers ---------- */
+.no-break, table, pre, blockquote { page-break-inside: avoid; }
+.break-after { page-break-after: always; }
+.break-before { page-break-before: always; }
+
+/* ---------- Section labels ---------- */
+.chapter-label {
+  display: inline-block;
+  font-size: 10pt;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1.5pt;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+</style></head><body><div class="cover">
+<h1 id="interview-qa-asked-questions" tabindex="-1">Interview Q&amp;A — Asked Questions</h1>
+<div class="divider"></div>
+<div class="subtitle">Complete answers with code examples<br/>From real interview questions</div>
+<div class="divider"></div>
+<div class="author">Java · Spring Boot · React · SQL · JWT</div>
+</div>
+<h1 id="part-1-java-questions" tabindex="-1">Part 1: Java Questions</h1>
+<h2 id="q1-what-are-java-streams" tabindex="-1">Q1. What are Java Streams?</h2>
+<p><strong>Definition:</strong> Streams API (Java 8+) processes collections in a functional, declarative style. A stream is a sequence of elements supporting sequential and parallel aggregate operations.</p>
+<p><strong>Key Properties:</strong></p>
+<ul>
+<li><strong>Lazy</strong> — intermediate operations don’t execute until terminal op called</li>
+<li><strong>Single-use</strong> — can only be consumed once</li>
+<li><strong>No mutation</strong> — doesn’t modify the source</li>
+</ul>
+<p><strong>Pipeline:</strong> Source → Intermediate ops → Terminal op</p>
+<pre><code class="language-java">List&lt;String&gt; activeNames = users.stream()                    // SOURCE
+    .filter(u -&gt; u.isActive())                              // intermediate (lazy)
+    .map(User::getName)                                      // intermediate (lazy)
+    .sorted()                                                // intermediate (lazy)
+    .collect(Collectors.toList());                          // TERMINAL (executes)
+</code></pre>
+<h2 id="q2-streams-sorting-and-filtering" tabindex="-1">Q2. Streams — Sorting and Filtering</h2>
+<pre><code class="language-java">List&lt;Employee&gt; employees = List.of(
+    new Employee(1, &quot;Renu&quot;, &quot;Developer&quot;, 50000),
+    new Employee(2, &quot;Amit&quot;, &quot;Manager&quot;, 80000),
+    new Employee(3, &quot;Priya&quot;, &quot;Developer&quot;, 60000)
+);
+
+// FILTERING
+List&lt;Employee&gt; developers = employees.stream()
+    .filter(e -&gt; e.getDesignation().equals(&quot;Developer&quot;))
+    .collect(Collectors.toList());
+
+// SORTING ascending
+List&lt;Employee&gt; bySalary = employees.stream()
+    .sorted(Comparator.comparing(Employee::getSalary))
+    .collect(Collectors.toList());
+
+// SORTING descending
+List&lt;Employee&gt; bySalaryDesc = employees.stream()
+    .sorted(Comparator.comparing(Employee::getSalary).reversed())
+    .collect(Collectors.toList());
+
+// FILTER + SORT + MAP combined
+List&lt;String&gt; topDevNames = employees.stream()
+    .filter(e -&gt; e.getDesignation().equals(&quot;Developer&quot;))
+    .sorted(Comparator.comparing(Employee::getSalary).reversed())
+    .map(Employee::getName)
+    .collect(Collectors.toList());
+
+// GROUPING
+Map&lt;String, List&lt;Employee&gt;&gt; byDesignation = employees.stream()
+    .collect(Collectors.groupingBy(Employee::getDesignation));
+
+// AVERAGE salary by designation
+Map&lt;String, Double&gt; avgByDesignation = employees.stream()
+    .collect(Collectors.groupingBy(
+        Employee::getDesignation,
+        Collectors.averagingDouble(Employee::getSalary)
+    ));
+</code></pre>
+<h2 id="q3-reverse-a-string-in-java-all-ways" tabindex="-1">Q3. Reverse a String in Java — All Ways</h2>
+<pre><code class="language-java">// Method 1: StringBuilder (best for production)
+public String reverse1(String s) {
+    return new StringBuilder(s).reverse().toString();
+}
+
+// Method 2: char array swap (in-place)
+public String reverse2(String s) {
+    char[] chars = s.toCharArray();
+    int left = 0, right = chars.length - 1;
+    while (left &lt; right) {
+        char tmp = chars[left];
+        chars[left++] = chars[right];
+        chars[right--] = tmp;
+    }
+    return new String(chars);
+}
+
+// Method 3: Recursion
+public String reverse3(String s) {
+    if (s.isEmpty()) return s;
+    return reverse3(s.substring(1)) + s.charAt(0);
+}
+
+// Method 4: Stream API
+public String reverse4(String s) {
+    return s.chars()
+        .mapToObj(c -&gt; String.valueOf((char) c))
+        .reduce(&quot;&quot;, (a, b) -&gt; b + a);
+}
+
+// Method 5: Loop backwards
+public String reverse5(String s) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = s.length() - 1; i &gt;= 0; i--) {
+        sb.append(s.charAt(i));
+    }
+    return sb.toString();
+}
+</code></pre>
+<blockquote>
+<p><strong>Interview answer:</strong> “Use <code>new StringBuilder(s).reverse().toString()</code> — clean, fast, idiomatic. If asked to do it manually, use the two-pointer char array swap.”</p>
+</blockquote>
+<h2 id="q4-binary-search-in-java" tabindex="-1">Q4. Binary Search in Java</h2>
+<pre><code class="language-java">// Iterative
+public int binarySearch(int[] arr, int target) {
+    int left = 0, right = arr.length - 1;
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;  // avoids overflow
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] &lt; target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+// Recursive
+public int binarySearchRec(int[] arr, int target, int left, int right) {
+    if (left &gt; right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] &lt; target) return binarySearchRec(arr, target, mid + 1, right);
+    return binarySearchRec(arr, target, left, mid - 1);
+}
+
+// Built-in (Java 7+)
+int[] arr = {1, 3, 5, 7, 9, 11};
+int index = Arrays.binarySearch(arr, 7);  // returns 3
+
+// For collections
+List&lt;Integer&gt; list = List.of(1, 3, 5, 7, 9);
+int idx = Collections.binarySearch(list, 5);  // returns 2
+</code></pre>
+<p><strong>Complexity:</strong> O(log n) time, O(1) iterative / O(log n) recursive space.
+<strong>Prerequisite:</strong> Array MUST be sorted.</p>
+<h2 id="q5-predicate-function-and-functional-interfaces" tabindex="-1">Q5. Predicate, Function, and Functional Interfaces</h2>
+<p>A <strong>functional interface</strong> has exactly <strong>one abstract method</strong> (SAM = Single Abstract Method).</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Use For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>test(T)</code></td>
+<td>boolean</td>
+<td>Filtering</td>
+</tr>
+<tr>
+<td><code>Function&lt;T,R&gt;</code></td>
+<td><code>apply(T)</code></td>
+<td>R</td>
+<td>Transformation</td>
+</tr>
+<tr>
+<td><code>Consumer&lt;T&gt;</code></td>
+<td><code>accept(T)</code></td>
+<td>void</td>
+<td>Side effect</td>
+</tr>
+<tr>
+<td><code>Supplier&lt;T&gt;</code></td>
+<td><code>get()</code></td>
+<td>T</td>
+<td>Provide value</td>
+</tr>
+<tr>
+<td><code>BiFunction&lt;T,U,R&gt;</code></td>
+<td><code>apply(T,U)</code></td>
+<td>R</td>
+<td>Two-input transform</td>
+</tr>
+<tr>
+<td><code>UnaryOperator&lt;T&gt;</code></td>
+<td><code>apply(T)</code></td>
+<td>T</td>
+<td>Same-type transform</td>
+</tr>
+<tr>
+<td><code>BinaryOperator&lt;T&gt;</code></td>
+<td><code>apply(T,T)</code></td>
+<td>T</td>
+<td>Reduce</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java">// PREDICATE — boolean test
+Predicate&lt;Integer&gt; isEven = n -&gt; n % 2 == 0;
+Predicate&lt;Integer&gt; isPositive = n -&gt; n &gt; 0;
+Predicate&lt;Integer&gt; isEvenAndPositive = isEven.and(isPositive);
+Predicate&lt;Integer&gt; isOddOrPositive = isEven.negate().or(isPositive);
+
+System.out.println(isEven.test(4));  // true
+System.out.println(isEvenAndPositive.test(6));  // true
+
+// FUNCTION — transform
+Function&lt;String, Integer&gt; length = String::length;
+Function&lt;Integer, Integer&gt; doubled = n -&gt; n * 2;
+Function&lt;String, Integer&gt; lengthDoubled = length.andThen(doubled);
+System.out.println(lengthDoubled.apply(&quot;Hello&quot;));  // 10
+
+// CONSUMER — side effect
+Consumer&lt;String&gt; printer = System.out::println;
+printer.accept(&quot;Hello&quot;);
+
+// SUPPLIER — provides value
+Supplier&lt;List&lt;String&gt;&gt; listSupplier = ArrayList::new;
+
+// CUSTOM functional interface
+@FunctionalInterface
+interface Validator&lt;T&gt; {
+    boolean validate(T input);
+    
+    default Validator&lt;T&gt; and(Validator&lt;T&gt; other) {
+        return input -&gt; this.validate(input) &amp;&amp; other.validate(input);
+    }
+}
+</code></pre>
+<h2 id="q6-default-and-static-methods-in-interfaces-java-8" tabindex="-1">Q6. Default and Static Methods in Interfaces (Java 8+)</h2>
+<pre><code class="language-java">public interface PaymentProcessor {
+    
+    // Abstract method (must be implemented)
+    void processPayment(double amount);
+    
+    // DEFAULT method — has body, can be overridden
+    default void logTransaction(double amount) {
+        System.out.println(&quot;Processing payment of: &quot; + amount);
+    }
+    
+    // STATIC method — belongs to interface, not instance
+    static PaymentProcessor getDefault() {
+        return amount -&gt; System.out.println(&quot;Default processing: &quot; + amount);
+    }
+    
+    // PRIVATE method (Java 9+) — helper for default methods
+    private String formatAmount(double amount) {
+        return String.format(&quot;$%.2f&quot;, amount);
+    }
+}
+
+class CreditCardProcessor implements PaymentProcessor {
+    @Override
+    public void processPayment(double amount) {
+        logTransaction(amount);  // uses default method
+        System.out.println(&quot;Charged credit card: &quot; + amount);
+    }
+}
+
+// Usage
+PaymentProcessor processor = PaymentProcessor.getDefault();  // static call
+processor.processPayment(100.0);
+</code></pre>
+<p><strong>Why default methods?</strong> Add methods to interfaces without breaking existing implementations (interface evolution).</p>
+<p><strong>Why static methods?</strong> Utility methods related to the interface (like <code>Comparator.comparing()</code>).</p>
+<hr>
+<h1 id="part-2-sql-questions" tabindex="-1">Part 2: SQL Questions</h1>
+<h2 id="q7-sql-display-employee-designation-and-id" tabindex="-1">Q7. SQL — Display Employee Designation and ID</h2>
+<pre><code class="language-sql">-- Basic query
+SELECT employee_id, designation 
+FROM employees;
+
+-- With employee name
+SELECT employee_id, full_name, designation 
+FROM employees
+ORDER BY designation, employee_id;
+
+-- Group by designation with count
+SELECT designation, COUNT(*) AS total_employees
+FROM employees
+GROUP BY designation
+ORDER BY total_employees DESC;
+
+-- With filter (active only)
+SELECT employee_id, designation
+FROM employees
+WHERE status = 'ACTIVE'
+ORDER BY designation;
+
+-- Using JOIN if designations are in another table
+SELECT e.employee_id, d.designation_name
+FROM employees e
+INNER JOIN designations d ON e.designation_id = d.id
+ORDER BY d.designation_name, e.employee_id;
+</code></pre>
+<h2 id="q8-sql-self-join" tabindex="-1">Q8. SQL Self Join</h2>
+<p>A <strong>self join</strong> is when a table is joined with itself — useful for hierarchical data.</p>
+<pre><code class="language-sql">-- Employees table with manager_id pointing to same table
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    manager_id INT,
+    FOREIGN KEY (manager_id) REFERENCES employees(id)
+);
+
+-- Find each employee with their manager's name
+SELECT 
+    e.id AS employee_id,
+    e.name AS employee_name,
+    m.name AS manager_name
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.id;
+
+-- Find employees who earn more than their managers
+SELECT 
+    e.name AS employee,
+    e.salary AS emp_salary,
+    m.name AS manager,
+    m.salary AS mgr_salary
+FROM employees e
+INNER JOIN employees m ON e.manager_id = m.id
+WHERE e.salary &gt; m.salary;
+
+-- Find pairs of employees in same department
+SELECT 
+    e1.name AS employee1,
+    e2.name AS employee2,
+    e1.department
+FROM employees e1
+INNER JOIN employees e2 
+    ON e1.department = e2.department 
+    AND e1.id &lt; e2.id;  -- avoid duplicates and self-pairs
+</code></pre>
+<blockquote>
+<p><strong>Why <code>e1.id &lt; e2.id</code>?</strong> To avoid duplicates like (Alice, Bob) AND (Bob, Alice), and to exclude self-pairs (Alice, Alice).</p>
+</blockquote>
+<hr>
+<h1 id="part-3-spring-boot-questions" tabindex="-1">Part 3: Spring Boot Questions</h1>
+<h2 id="q9-what-is-a-bean-types-of-beans" tabindex="-1">Q9. What is a Bean? Types of Beans</h2>
+<p><strong>Bean</strong> = An object that is <strong>instantiated, assembled, and managed by the Spring IoC container</strong>.</p>
+<p><strong>Bean Scopes (5 types):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Lifespan</th>
+<th>Example Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>singleton</code> (default)</td>
+<td>One per container</td>
+<td>Stateless services</td>
+</tr>
+<tr>
+<td><code>prototype</code></td>
+<td>New per injection</td>
+<td>Stateful objects</td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>Per HTTP request</td>
+<td>Per-request data</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>Per HTTP session</td>
+<td>User session data</td>
+</tr>
+<tr>
+<td><code>application</code></td>
+<td>Per ServletContext</td>
+<td>App-wide config</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bean Stereotypes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Layer</th>
+<th>Adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Component</code></td>
+<td>Generic</td>
+<td>Base bean</td>
+</tr>
+<tr>
+<td><code>@Service</code></td>
+<td>Business logic</td>
+<td>Semantic clarity</td>
+</tr>
+<tr>
+<td><code>@Repository</code></td>
+<td>Data access</td>
+<td>Exception translation</td>
+</tr>
+<tr>
+<td><code>@Controller</code></td>
+<td>Web layer</td>
+<td>View resolution</td>
+</tr>
+<tr>
+<td><code>@RestController</code></td>
+<td>REST API</td>
+<td>+ <code>@ResponseBody</code></td>
+</tr>
+<tr>
+<td><code>@Configuration</code></td>
+<td>Config</td>
+<td>Allows <code>@Bean</code> methods</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java">// Example of all bean types
+@Configuration
+public class AppConfig {
+    
+    @Bean  // Manual bean definition
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+    
+    @Bean
+    @Scope(&quot;prototype&quot;)  // New instance each time
+    public ReportGenerator reportGenerator() {
+        return new ReportGenerator();
+    }
+}
+
+@Service  // Singleton by default
+public class AuthService { }
+
+@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; { }
+
+@RestController
+public class AuthController { }
+</code></pre>
+<h2 id="q10-bean-lifecycle" tabindex="-1">Q10. Bean Lifecycle</h2>
+<pre><code>1. Container started
+2. Bean instantiated (constructor)
+3. Dependencies injected (@Autowired)
+4. @PostConstruct called
+5. InitializingBean.afterPropertiesSet()
+6. Custom init-method called
+7. Bean ready for use
+   ... bean used by application ...
+8. Container shutting down
+9. @PreDestroy called
+10. DisposableBean.destroy()
+11. Custom destroy-method called
+</code></pre>
+<pre><code class="language-java">@Component
+public class LifecycleBean {
+    
+    public LifecycleBean() {
+        System.out.println(&quot;1. Constructor&quot;);
+    }
+    
+    @Autowired
+    public void setDependency(SomeDep dep) {
+        System.out.println(&quot;2. Dependency injected&quot;);
+    }
+    
+    @PostConstruct
+    public void init() {
+        System.out.println(&quot;3. @PostConstruct — bean ready&quot;);
+    }
+    
+    @PreDestroy
+    public void cleanup() {
+        System.out.println(&quot;4. @PreDestroy — bean shutting down&quot;);
+    }
+}
+</code></pre>
+<h2 id="q11-autowired-how-and-why" tabindex="-1">Q11. @Autowired — How and Why</h2>
+<p><code>@Autowired</code> tells Spring to <strong>inject a dependency</strong> automatically.</p>
+<p><strong>3 ways to use:</strong></p>
+<pre><code class="language-java">@Service
+public class AuthService {
+    
+    // 1. Field injection (NOT RECOMMENDED — hard to test)
+    @Autowired
+    private UserRepository userRepository;
+    
+    // 2. Setter injection (for optional deps)
+    private EmailService emailService;
+    
+    @Autowired(required = false)  // optional
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+    
+    // 3. Constructor injection (RECOMMENDED — best practice)
+    private final JwtService jwtService;
+    
+    @Autowired  // optional since Spring 4.3 if only one constructor
+    public AuthService(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
+}
+
+// Modern style with Lombok
+@Service
+@RequiredArgsConstructor  // generates constructor for final fields
+public class AuthService {
+    private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+}
+</code></pre>
+<p><strong>When multiple beans match:</strong></p>
+<pre><code class="language-java">@Autowired
+@Qualifier(&quot;bcryptEncoder&quot;)  // pick specific bean
+private PasswordEncoder encoder;
+
+// OR mark one as primary
+@Bean
+@Primary
+public PasswordEncoder bcryptEncoder() { ... }
+</code></pre>
+<h2 id="q12-common-spring-boot-annotations" tabindex="-1">Q12. Common Spring Boot Annotations</h2>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@SpringBootApplication</code></td>
+<td>Entry point (combines 3 annotations)</td>
+</tr>
+<tr>
+<td><code>@RestController</code></td>
+<td>REST controller, returns JSON</td>
+</tr>
+<tr>
+<td><code>@RequestMapping</code></td>
+<td>Map HTTP requests to methods</td>
+</tr>
+<tr>
+<td><code>@GetMapping</code> <code>@PostMapping</code> <code>@PutMapping</code> <code>@DeleteMapping</code></td>
+<td>HTTP method shortcuts</td>
+</tr>
+<tr>
+<td><code>@PathVariable</code></td>
+<td>Extract from URL path</td>
+</tr>
+<tr>
+<td><code>@RequestParam</code></td>
+<td>Extract query parameter</td>
+</tr>
+<tr>
+<td><code>@RequestBody</code></td>
+<td>Deserialize JSON body</td>
+</tr>
+<tr>
+<td><code>@Valid</code></td>
+<td>Trigger validation</td>
+</tr>
+<tr>
+<td><code>@Autowired</code></td>
+<td>Dependency injection</td>
+</tr>
+<tr>
+<td><code>@Qualifier</code></td>
+<td>Specify bean by name</td>
+</tr>
+<tr>
+<td><code>@Value</code></td>
+<td>Inject property value</td>
+</tr>
+<tr>
+<td><code>@ConfigurationProperties</code></td>
+<td>Bind property prefix to class</td>
+</tr>
+<tr>
+<td><code>@Transactional</code></td>
+<td>Wrap method in transaction</td>
+</tr>
+<tr>
+<td><code>@PreAuthorize</code> <code>@PostAuthorize</code></td>
+<td>Method security</td>
+</tr>
+<tr>
+<td><code>@ExceptionHandler</code></td>
+<td>Handle specific exception</td>
+</tr>
+<tr>
+<td><code>@RestControllerAdvice</code></td>
+<td>Global exception handler</td>
+</tr>
+<tr>
+<td><code>@EnableScheduling</code></td>
+<td>Enable @Scheduled</td>
+</tr>
+<tr>
+<td><code>@Scheduled</code></td>
+<td>Cron jobs</td>
+</tr>
+<tr>
+<td><code>@Async</code></td>
+<td>Run method in separate thread</td>
+</tr>
+</tbody>
+</table>
+<h2 id="q13-spring-boot-services-used-in-skillsync" tabindex="-1">Q13. Spring Boot Services Used in SkillSync</h2>
+<pre><code class="language-java">// 1. AuthService — Authentication &amp; JWT
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+    private final AuthUserRepository repository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthEmailService emailService;
+    
+    public AuthResponse login(LoginRequest req) { ... }
+    public void register(RegisterRequest req) { ... }
+    public void verifyOtp(String email, String otp) { ... }
+}
+
+// 2. JwtService — Token generation/validation
+@Service
+public class JwtService {
+    public String generateToken(User user) { ... }
+    public Claims validateToken(String token) { ... }
+}
+
+// 3. UserService — Profile management
+@Service
+public class UserService { ... }
+
+// 4. MentorService — Mentor profiles, availability
+@Service
+public class MentorService { ... }
+
+// 5. SessionService — Booking, scheduling
+@Service
+public class SessionService { ... }
+
+// 6. NotificationService — Email, push
+@Service
+public class NotificationService { ... }
+
+// 7. SkillService — Skills catalog
+@Service
+public class SkillService { ... }
+</code></pre>
+<hr>
+<h1 id="part-4-jpa-questions" tabindex="-1">Part 4: JPA Questions</h1>
+<h2 id="q14-what-is-jparepository" tabindex="-1">Q14. What is JpaRepository?</h2>
+<p><strong>JpaRepository</strong> is a Spring Data interface that <strong>provides built-in CRUD operations</strong> without writing implementation code.</p>
+<p><strong>Hierarchy:</strong></p>
+<pre><code>Repository (marker)
+  └── CrudRepository (basic CRUD)
+       └── PagingAndSortingRepository (pagination + sorting)
+            └── JpaRepository (JPA-specific: flush, batch operations)
+</code></pre>
+<p><strong>What you get for free:</strong></p>
+<pre><code class="language-java">// All these methods work automatically:
+repository.save(entity);
+repository.saveAll(entities);
+repository.findById(id);
+repository.findAll();
+repository.findAllById(ids);
+repository.count();
+repository.delete(entity);
+repository.deleteById(id);
+repository.deleteAll();
+repository.existsById(id);
+repository.flush();
+repository.findAll(Pageable.ofSize(10));
+repository.findAll(Sort.by(&quot;name&quot;));
+</code></pre>
+<h2 id="q15-methods-in-jparepository-all-patterns" tabindex="-1">Q15. Methods in JpaRepository — All Patterns</h2>
+<pre><code class="language-java">@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    
+    // 1. Query Method — Spring generates from name
+    Optional&lt;User&gt; findByEmail(String email);
+    List&lt;User&gt; findByRole(Role role);
+    List&lt;User&gt; findByRoleAndStatus(Role role, Status status);
+    boolean existsByEmail(String email);
+    long countByRole(Role role);
+    
+    // 2. Advanced query methods
+    List&lt;User&gt; findByEmailContainingIgnoreCase(String keyword);
+    List&lt;User&gt; findByCreatedAtBetween(Instant start, Instant end);
+    List&lt;User&gt; findByAgeGreaterThan(Integer age);
+    List&lt;User&gt; findByEmailStartingWith(String prefix);
+    List&lt;User&gt; findTop10ByOrderByCreatedAtDesc();
+    
+    // 3. JPQL with @Query
+    @Query(&quot;SELECT u FROM User u WHERE u.lastLogin &gt; :since&quot;)
+    List&lt;User&gt; findActiveUsers(@Param(&quot;since&quot;) LocalDateTime since);
+    
+    @Query(&quot;SELECT u FROM User u WHERE u.email = ?1 AND u.enabled = true&quot;)
+    Optional&lt;User&gt; findActiveByEmail(String email);
+    
+    // 4. Native SQL
+    @Query(value = &quot;SELECT * FROM users WHERE created_at &gt; :since&quot;, 
+           nativeQuery = true)
+    List&lt;User&gt; findRecentNative(@Param(&quot;since&quot;) LocalDateTime since);
+    
+    // 5. Modifying queries
+    @Modifying
+    @Transactional
+    @Query(&quot;UPDATE User u SET u.enabled = false WHERE u.id = :id&quot;)
+    int disableUser(@Param(&quot;id&quot;) Long id);
+    
+    @Modifying
+    @Transactional
+    @Query(&quot;DELETE FROM User u WHERE u.lastLogin &lt; :date&quot;)
+    int deleteInactiveUsers(@Param(&quot;date&quot;) LocalDateTime date);
+    
+    // 6. Pagination
+    Page&lt;User&gt; findByRole(Role role, Pageable pageable);
+    
+    // 7. Projection (select specific fields)
+    @Query(&quot;SELECT new com.example.UserDTO(u.id, u.email, u.role) FROM User u&quot;)
+    List&lt;UserDTO&gt; findAllDTOs();
+}
+</code></pre>
+<hr>
+<h1 id="part-5-pagination" tabindex="-1">Part 5: Pagination</h1>
+<h2 id="q16-pagination-code-backend-frontend" tabindex="-1">Q16. Pagination Code — Backend &amp; Frontend</h2>
+<h3 id="backend-spring-boot" tabindex="-1">Backend (Spring Boot)</h3>
+<pre><code class="language-java">// Controller
+@RestController
+@RequestMapping(&quot;/api/users&quot;)
+@RequiredArgsConstructor
+public class UserController {
+    private final UserService userService;
+    
+    @GetMapping
+    public Page&lt;UserDTO&gt; getUsers(
+            @RequestParam(defaultValue = &quot;0&quot;) int page,
+            @RequestParam(defaultValue = &quot;10&quot;) int size,
+            @RequestParam(defaultValue = &quot;id&quot;) String sortBy,
+            @RequestParam(defaultValue = &quot;asc&quot;) String direction) {
+        
+        Sort sort = direction.equalsIgnoreCase(&quot;desc&quot;) 
+            ? Sort.by(sortBy).descending() 
+            : Sort.by(sortBy).ascending();
+        
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return userService.getUsers(pageable);
+    }
+}
+
+// Service
+@Service
+@RequiredArgsConstructor
+public class UserService {
+    private final UserRepository userRepository;
+    
+    public Page&lt;UserDTO&gt; getUsers(Pageable pageable) {
+        Page&lt;User&gt; users = userRepository.findAll(pageable);
+        return users.map(this::toDTO);
+    }
+    
+    public Page&lt;UserDTO&gt; searchUsers(String keyword, Pageable pageable) {
+        return userRepository
+            .findByFullNameContainingIgnoreCase(keyword, pageable)
+            .map(this::toDTO);
+    }
+    
+    private UserDTO toDTO(User u) {
+        return new UserDTO(u.getId(), u.getFullName(), u.getEmail());
+    }
+}
+
+// Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    Page&lt;User&gt; findByFullNameContainingIgnoreCase(String keyword, Pageable pageable);
+}
+</code></pre>
+<p><strong>Response shape:</strong></p>
+<pre><code class="language-json">{
+  &quot;content&quot;: [...],
+  &quot;pageable&quot;: { &quot;pageNumber&quot;: 0, &quot;pageSize&quot;: 10 },
+  &quot;totalElements&quot;: 150,
+  &quot;totalPages&quot;: 15,
+  &quot;first&quot;: true,
+  &quot;last&quot;: false,
+  &quot;number&quot;: 0,
+  &quot;size&quot;: 10
+}
+</code></pre>
+<h3 id="frontend-react" tabindex="-1">Frontend (React)</h3>
+<pre><code class="language-jsx">import { useState, useEffect } from 'react';
+
+function UsersList() {
+  const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() =&gt; {
+    setLoading(true);
+    fetch(`/api/users?page=${page}&amp;size=${pageSize}`)
+      .then(res =&gt; res.json())
+      .then(data =&gt; {
+        setUsers(data.content);
+        setTotalPages(data.totalPages);
+      })
+      .finally(() =&gt; setLoading(false));
+  }, [page, pageSize]);
+
+  return (
+    &lt;div&gt;
+      {loading ? &lt;p&gt;Loading...&lt;/p&gt; : (
+        &lt;&gt;
+          &lt;table&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              {users.map(u =&gt; (
+                &lt;tr key={u.id}&gt;
+                  &lt;td&gt;{u.id}&lt;/td&gt;
+                  &lt;td&gt;{u.fullName}&lt;/td&gt;
+                  &lt;td&gt;{u.email}&lt;/td&gt;
+                &lt;/tr&gt;
+              ))}
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+          
+          &lt;div className=&quot;pagination&quot;&gt;
+            &lt;button 
+              onClick={() =&gt; setPage(p =&gt; Math.max(0, p - 1))} 
+              disabled={page === 0}&gt;
+              Previous
+            &lt;/button&gt;
+            &lt;span&gt;Page {page + 1} of {totalPages}&lt;/span&gt;
+            &lt;button 
+              onClick={() =&gt; setPage(p =&gt; Math.min(totalPages - 1, p + 1))} 
+              disabled={page &gt;= totalPages - 1}&gt;
+              Next
+            &lt;/button&gt;
+          &lt;/div&gt;
+          
+          {/* Numbered pagination */}
+          &lt;div className=&quot;page-numbers&quot;&gt;
+            {Array.from({length: totalPages}, (_, i) =&gt; (
+              &lt;button 
+                key={i}
+                onClick={() =&gt; setPage(i)}
+                className={page === i ? 'active' : ''}&gt;
+                {i + 1}
+              &lt;/button&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<hr>
+<h1 id="part-6-validation" tabindex="-1">Part 6: Validation</h1>
+<h2 id="q17-what-is-validation-where-in-skillsync" tabindex="-1">Q17. What is Validation? Where in SkillSync?</h2>
+<p><strong>Validation</strong> = ensuring incoming data meets business rules before processing.</p>
+<p><strong>3 Layers in SkillSync:</strong></p>
+<h3 id="layer-1-frontend-react-quick-ux-feedback" tabindex="-1">Layer 1: Frontend (React) — Quick UX feedback</h3>
+<pre><code class="language-jsx">const [errors, setErrors] = useState({});
+
+const validateForm = () =&gt; {
+  const newErrors = {};
+  if (!form.email.includes('@')) newErrors.email = 'Invalid email';
+  if (form.password.length &lt; 8) newErrors.password = 'Min 8 characters';
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+const handleSubmit = (e) =&gt; {
+  e.preventDefault();
+  if (!validateForm()) return;
+  // submit
+};
+</code></pre>
+<h3 id="layer-2-backend-dto-bean-validation-jakarta" tabindex="-1">Layer 2: Backend DTO — Bean Validation (Jakarta)</h3>
+<pre><code class="language-java">public class RegisterRequest {
+    @NotBlank(message = &quot;Email required&quot;)
+    @Email(message = &quot;Invalid email format&quot;)
+    private String email;
+    
+    @NotBlank(message = &quot;Password required&quot;)
+    @Size(min = 8, max = 100, message = &quot;Password must be 8-100 chars&quot;)
+    @Pattern(regexp = &quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$&quot;,
+             message = &quot;Must contain uppercase, lowercase, digit&quot;)
+    private String password;
+    
+    @NotBlank
+    @Size(min = 2, max = 100)
+    private String fullName;
+    
+    @NotNull
+    @Min(value = 18, message = &quot;Must be 18+&quot;)
+    @Max(150)
+    private Integer age;
+}
+
+// Controller — @Valid triggers validation
+@PostMapping(&quot;/register&quot;)
+public ResponseEntity&lt;?&gt; register(@Valid @RequestBody RegisterRequest req) {
+    return ResponseEntity.ok(authService.register(req));
+}
+
+// Validation errors handled globally
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;?&gt; handleValidation(MethodArgumentNotValidException ex) {
+        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+        ex.getBindingResult().getFieldErrors().forEach(e -&gt;
+            errors.put(e.getField(), e.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(Map.of(&quot;errors&quot;, errors));
+    }
+}
+</code></pre>
+<h3 id="layer-3-database-constraints" tabindex="-1">Layer 3: Database constraints</h3>
+<pre><code class="language-sql">CREATE TABLE auth_users (
+    user_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,    -- DB-level uniqueness
+    password VARCHAR(255) NOT NULL,
+    age INT CHECK (age &gt;= 18)               -- DB-level check
+);
+</code></pre>
+<p><strong>Common Validation Annotations:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Validates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@NotNull</code></td>
+<td>Not null</td>
+</tr>
+<tr>
+<td><code>@NotBlank</code></td>
+<td>Not null and not whitespace-only (String)</td>
+</tr>
+<tr>
+<td><code>@NotEmpty</code></td>
+<td>Not null and not empty (String/Collection)</td>
+</tr>
+<tr>
+<td><code>@Size(min,max)</code></td>
+<td>Length within range</td>
+</tr>
+<tr>
+<td><code>@Min</code> <code>@Max</code></td>
+<td>Number range</td>
+</tr>
+<tr>
+<td><code>@Email</code></td>
+<td>Email format</td>
+</tr>
+<tr>
+<td><code>@Pattern(regex)</code></td>
+<td>Regex match</td>
+</tr>
+<tr>
+<td><code>@Past</code> <code>@Future</code></td>
+<td>Date in past/future</td>
+</tr>
+<tr>
+<td><code>@Valid</code></td>
+<td>Cascade validation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="part-7-html-css" tabindex="-1">Part 7: HTML &amp; CSS</h1>
+<h2 id="q18-html-form-validations" tabindex="-1">Q18. HTML Form Validations</h2>
+<pre><code class="language-html">&lt;form onsubmit=&quot;return validateForm()&quot;&gt;
+  &lt;!-- HTML5 built-in validation --&gt;
+  &lt;input 
+    type=&quot;email&quot; 
+    name=&quot;email&quot; 
+    required 
+    placeholder=&quot;you@example.com&quot;
+    pattern=&quot;[^@]+@[^@]+\.[^@]+&quot;
+    title=&quot;Enter a valid email&quot;&gt;
+  
+  &lt;input 
+    type=&quot;password&quot; 
+    name=&quot;password&quot; 
+    required 
+    minlength=&quot;8&quot; 
+    maxlength=&quot;100&quot;
+    pattern=&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$&quot;
+    title=&quot;Min 8 chars with upper, lower, digit&quot;&gt;
+  
+  &lt;input 
+    type=&quot;number&quot; 
+    name=&quot;age&quot; 
+    required 
+    min=&quot;18&quot; 
+    max=&quot;120&quot;&gt;
+  
+  &lt;input 
+    type=&quot;tel&quot; 
+    name=&quot;phone&quot; 
+    pattern=&quot;[0-9]{10}&quot; 
+    title=&quot;10 digits&quot;&gt;
+  
+  &lt;input 
+    type=&quot;url&quot; 
+    name=&quot;website&quot; 
+    placeholder=&quot;https://...&quot;&gt;
+  
+  &lt;input 
+    type=&quot;date&quot; 
+    name=&quot;dob&quot; 
+    max=&quot;2007-01-01&quot;&gt;
+  
+  &lt;select name=&quot;role&quot; required&gt;
+    &lt;option value=&quot;&quot;&gt;Select...&lt;/option&gt;
+    &lt;option value=&quot;learner&quot;&gt;Learner&lt;/option&gt;
+    &lt;option value=&quot;mentor&quot;&gt;Mentor&lt;/option&gt;
+  &lt;/select&gt;
+  
+  &lt;textarea 
+    name=&quot;bio&quot; 
+    minlength=&quot;10&quot; 
+    maxlength=&quot;500&quot;&gt;&lt;/textarea&gt;
+  
+  &lt;input type=&quot;checkbox&quot; name=&quot;terms&quot; required&gt;
+  &lt;label&gt;I accept terms&lt;/label&gt;
+  
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>HTML5 Validation Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>required</code></td>
+<td>Field must have value</td>
+</tr>
+<tr>
+<td><code>minlength</code> / <code>maxlength</code></td>
+<td>String length</td>
+</tr>
+<tr>
+<td><code>min</code> / <code>max</code></td>
+<td>Number/date range</td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td>Regex match</td>
+</tr>
+<tr>
+<td><code>type=&quot;email&quot;</code></td>
+<td>Email format</td>
+</tr>
+<tr>
+<td><code>type=&quot;url&quot;</code></td>
+<td>URL format</td>
+</tr>
+<tr>
+<td><code>type=&quot;tel&quot;</code></td>
+<td>Telephone (with pattern)</td>
+</tr>
+<tr>
+<td><code>type=&quot;number&quot;</code></td>
+<td>Numeric only</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>Number increment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="q19-css-selectors-types-used" tabindex="-1">Q19. CSS Selectors — Types Used</h2>
+<pre><code class="language-css">/* 1. ELEMENT (tag) selector */
+p { color: black; }
+h1 { font-size: 2em; }
+
+/* 2. CLASS selector */
+.highlight { background: yellow; }
+.btn-primary { background: blue; }
+
+/* 3. ID selector */
+#header { height: 60px; }
+#main-content { padding: 20px; }
+
+/* 4. UNIVERSAL selector */
+* { box-sizing: border-box; margin: 0; }
+
+/* 5. ATTRIBUTE selector */
+input[type=&quot;email&quot;] { border: 2px solid blue; }
+a[href^=&quot;https&quot;] { color: green; }     /* starts with */
+a[href$=&quot;.pdf&quot;] { color: red; }         /* ends with */
+a[href*=&quot;example&quot;] { color: purple; }   /* contains */
+
+/* 6. PSEUDO-CLASS selector */
+button:hover { background: darkblue; }
+input:focus { outline: 2px solid orange; }
+li:first-child { font-weight: bold; }
+li:last-child { border-bottom: none; }
+li:nth-child(odd) { background: #f0f0f0; }
+li:nth-child(2n+1) { background: gray; }
+a:visited { color: purple; }
+input:disabled { opacity: 0.5; }
+input:checked + label { color: green; }
+
+/* 7. PSEUDO-ELEMENT selector */
+p::first-line { font-weight: bold; }
+p::first-letter { font-size: 2em; }
+.tooltip::before { content: &quot;→ &quot;; }
+.tooltip::after { content: &quot; ←&quot;; }
+::selection { background: yellow; }
+::placeholder { color: gray; }
+
+/* 8. COMBINATOR selectors */
+div p { color: red; }              /* descendant */
+div &gt; p { color: blue; }           /* direct child */
+h1 + p { font-style: italic; }     /* adjacent sibling */
+h1 ~ p { color: gray; }            /* general sibling */
+
+/* 9. GROUPING selector */
+h1, h2, h3 { font-family: 'Inter'; }
+
+/* 10. CLASS combinations */
+.btn.primary { background: blue; }    /* both classes */
+.btn .icon { margin-right: 8px; }      /* descendant */
+</code></pre>
+<p><strong>Specificity (highest wins):</strong></p>
+<ul>
+<li>Inline style: 1000</li>
+<li>ID: 100</li>
+<li>Class/attribute/pseudo-class: 10</li>
+<li>Element/pseudo-element: 1</li>
+</ul>
+<hr>
+<h1 id="part-8-react-questions" tabindex="-1">Part 8: React Questions</h1>
+<h2 id="q20-what-are-react-hooks-types" tabindex="-1">Q20. What are React Hooks? Types</h2>
+<p><strong>Hooks</strong> are functions (Java 16.8+) that let you “hook into” React state and lifecycle features from function components.</p>
+<p><strong>Rules:</strong></p>
+<ol>
+<li>Only call hooks at the top level (not inside conditions/loops)</li>
+<li>Only call hooks from React functions (components or custom hooks)</li>
+</ol>
+<p><strong>Built-in Hooks (14 types):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>Category</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>useState</code></td>
+<td>State</td>
+<td>Local state</td>
+</tr>
+<tr>
+<td><code>useReducer</code></td>
+<td>State</td>
+<td>Complex state logic</td>
+</tr>
+<tr>
+<td><code>useContext</code></td>
+<td>State</td>
+<td>Consume context</td>
+</tr>
+<tr>
+<td><code>useEffect</code></td>
+<td>Effect</td>
+<td>Side effects, lifecycle</td>
+</tr>
+<tr>
+<td><code>useLayoutEffect</code></td>
+<td>Effect</td>
+<td>Sync DOM updates</td>
+</tr>
+<tr>
+<td><code>useInsertionEffect</code></td>
+<td>Effect</td>
+<td>Insert styles</td>
+</tr>
+<tr>
+<td><code>useMemo</code></td>
+<td>Performance</td>
+<td>Memoize value</td>
+</tr>
+<tr>
+<td><code>useCallback</code></td>
+<td>Performance</td>
+<td>Memoize function</td>
+</tr>
+<tr>
+<td><code>useTransition</code></td>
+<td>Performance</td>
+<td>Mark non-urgent updates</td>
+</tr>
+<tr>
+<td><code>useDeferredValue</code></td>
+<td>Performance</td>
+<td>Defer slow re-render</td>
+</tr>
+<tr>
+<td><code>useRef</code></td>
+<td>Refs</td>
+<td>Mutable ref / DOM access</td>
+</tr>
+<tr>
+<td><code>useImperativeHandle</code></td>
+<td>Refs</td>
+<td>Expose imperative API</td>
+</tr>
+<tr>
+<td><code>useId</code></td>
+<td>Utility</td>
+<td>Stable unique ID</td>
+</tr>
+<tr>
+<td><code>useDebugValue</code></td>
+<td>Debug</td>
+<td>Custom hook label</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-jsx">// useState — most common
+const [count, setCount] = useState(0);
+
+// useEffect — side effects
+useEffect(() =&gt; {
+  fetchData();
+  return () =&gt; cleanup();  // cleanup on unmount
+}, [dependency]);
+
+// useContext — consume context
+const auth = useContext(AuthContext);
+
+// useReducer — complex state
+const [state, dispatch] = useReducer(reducer, initialState);
+
+// useMemo — memoize expensive computation
+const sorted = useMemo(() =&gt; 
+  users.sort((a, b) =&gt; a.name.localeCompare(b.name)), 
+  [users]
+);
+
+// useCallback — memoize function
+const handleClick = useCallback(() =&gt; {
+  doSomething(id);
+}, [id]);
+
+// useRef — DOM access or mutable value
+const inputRef = useRef(null);
+useEffect(() =&gt; inputRef.current.focus(), []);
+</code></pre>
+<h2 id="q21-props-parent-to-child-communication" tabindex="-1">Q21. Props — Parent to Child Communication</h2>
+<pre><code class="language-jsx">// PARENT component
+function Parent() {
+  const [count, setCount] = useState(0);
+  const user = { name: 'Renu', age: 25 };
+  
+  const handleIncrement = () =&gt; setCount(c =&gt; c + 1);
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Parent Count: {count}&lt;/h1&gt;
+      
+      {/* Pass primitive */}
+      &lt;Child name=&quot;Renu&quot; age={25} /&gt;
+      
+      {/* Pass object */}
+      &lt;Child user={user} /&gt;
+      
+      {/* Pass function (callback) */}
+      &lt;Child onIncrement={handleIncrement} count={count} /&gt;
+      
+      {/* Pass children */}
+      &lt;Child&gt;
+        &lt;p&gt;This is rendered as children prop&lt;/p&gt;
+      &lt;/Child&gt;
+    &lt;/div&gt;
+  );
+}
+
+// CHILD component
+function Child({ name, age, user, onIncrement, count, children }) {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Name: {name}, Age: {age}&lt;/p&gt;
+      {user &amp;&amp; &lt;p&gt;User: {user.name}&lt;/p&gt;}
+      {children}
+      &lt;button onClick={onIncrement}&gt;Increment ({count})&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+// CHILD-TO-PARENT (via callback)
+function ChildForm({ onSubmit }) {
+  const [text, setText] = useState('');
+  
+  const handleSubmit = () =&gt; {
+    onSubmit(text);  // ← calls parent's function with data
+  };
+  
+  return (
+    &lt;&gt;
+      &lt;input value={text} onChange={e =&gt; setText(e.target.value)} /&gt;
+      &lt;button onClick={handleSubmit}&gt;Send to Parent&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+
+// Parent receives data
+function ParentWithForm() {
+  const [received, setReceived] = useState('');
+  
+  return (
+    &lt;&gt;
+      &lt;ChildForm onSubmit={(data) =&gt; setReceived(data)} /&gt;
+      &lt;p&gt;Received from child: {received}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<p><strong>Communication Patterns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parent → Child</td>
+<td>Props</td>
+</tr>
+<tr>
+<td>Child → Parent</td>
+<td>Callback function passed as prop</td>
+</tr>
+<tr>
+<td>Sibling → Sibling</td>
+<td>Lift state to common parent</td>
+</tr>
+<tr>
+<td>Deep nesting</td>
+<td>Context API</td>
+</tr>
+<tr>
+<td>Anywhere in tree</td>
+<td>State management (Redux, Zustand)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="q22-why-typescript" tabindex="-1">Q22. Why TypeScript?</h2>
+<p><strong>TypeScript</strong> = JavaScript with static types added.</p>
+<p><strong>Benefits:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>Without TS</th>
+<th>With TS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catch errors</td>
+<td>Runtime crashes</td>
+<td>Compile-time errors</td>
+</tr>
+<tr>
+<td>IDE support</td>
+<td>Basic autocomplete</td>
+<td>Full intellisense</td>
+</tr>
+<tr>
+<td>Refactoring</td>
+<td>Risky</td>
+<td>Safe rename across files</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td>Comments</td>
+<td>Types ARE documentation</td>
+</tr>
+<tr>
+<td>Team scaling</td>
+<td>Knowledge tribal</td>
+<td>Self-documenting code</td>
+</tr>
+<tr>
+<td>API contracts</td>
+<td>Trust + tests</td>
+<td>Compiler enforces</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-typescript">// Without TypeScript — bug at runtime
+function calculateTotal(price, qty) {
+  return price * qty;  // what if qty is &quot;5&quot;? → &quot;55&quot; string!
+}
+
+// With TypeScript — caught at compile time
+function calculateTotal(price: number, qty: number): number {
+  return price * qty;
+}
+
+// Interfaces for objects
+interface User {
+  id: number;
+  email: string;
+  role: 'LEARNER' | 'MENTOR' | 'ADMIN';
+  enabled?: boolean;  // optional
+}
+
+const user: User = {
+  id: 1,
+  email: 'renu@example.com',
+  role: 'LEARNER'
+  // TS errors if you forget id or use wrong role!
+};
+
+// Generics
+function getFirst&lt;T&gt;(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+const num = getFirst([1, 2, 3]);  // T = number
+const str = getFirst(['a', 'b']); // T = string
+
+// React with TypeScript
+interface ButtonProps {
+  label: string;
+  onClick: () =&gt; void;
+  variant?: 'primary' | 'secondary';
+}
+
+const Button: React.FC&lt;ButtonProps&gt; = ({ label, onClick, variant = 'primary' }) =&gt; {
+  return &lt;button onClick={onClick} className={variant}&gt;{label}&lt;/button&gt;;
+};
+</code></pre>
+<h2 id="q23-what-is-axios" tabindex="-1">Q23. What is Axios?</h2>
+<p><strong>Axios</strong> = Promise-based HTTP client for browsers and Node.js.</p>
+<p><strong>Why Axios over fetch?</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>fetch (built-in)</th>
+<th>Axios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auto JSON parse</td>
+<td>❌ Manual <code>.json()</code></td>
+<td>✅ Automatic</td>
+</tr>
+<tr>
+<td>HTTP error handling</td>
+<td>❌ Doesn’t reject on 4xx/5xx</td>
+<td>✅ Rejects automatically</td>
+</tr>
+<tr>
+<td>Request/response interceptors</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Request timeout</td>
+<td>❌ Manual (AbortController)</td>
+<td>✅ Built-in</td>
+</tr>
+<tr>
+<td>Request cancellation</td>
+<td>❌ Verbose</td>
+<td>✅ Easy</td>
+</tr>
+<tr>
+<td>XSRF protection</td>
+<td>❌ Manual</td>
+<td>✅ Built-in</td>
+</tr>
+<tr>
+<td>Browser support</td>
+<td>Modern only</td>
+<td>All browsers</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-js">// Setup with interceptors (SkillSync style)
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: '/api',
+  timeout: 10000,
+  headers: { 'Content-Type': 'application/json' }
+});
+
+// REQUEST interceptor — attach JWT
+apiClient.interceptors.request.use(config =&gt; {
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// RESPONSE interceptor — handle 401, refresh token
+apiClient.interceptors.response.use(
+  response =&gt; response,
+  async (error) =&gt; {
+    if (error.response?.status === 401) {
+      // try refresh
+      try {
+        const { data } = await axios.post('/auth/refresh', {
+          refreshToken: localStorage.getItem('refreshToken')
+        });
+        localStorage.setItem('accessToken', data.accessToken);
+        // retry original request
+        error.config.headers.Authorization = `Bearer ${data.accessToken}`;
+        return apiClient(error.config);
+      } catch {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Usage
+const users = await apiClient.get('/users');
+const created = await apiClient.post('/users', { name: 'Renu' });
+const updated = await apiClient.put(`/users/${id}`, data);
+await apiClient.delete(`/users/${id}`);
+</code></pre>
+<hr>
+<h1 id="part-9-testing" tabindex="-1">Part 9: Testing</h1>
+<h2 id="q24-testing-code-backend-junit-mockito" tabindex="-1">Q24. Testing Code — Backend (JUnit + Mockito)</h2>
+<pre><code class="language-java">// Service unit test
+@ExtendWith(MockitoExtension.class)
+class AuthServiceTest {
+    
+    @Mock
+    private AuthUserRepository repository;
+    
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    
+    @Mock
+    private JwtService jwtService;
+    
+    @InjectMocks
+    private AuthService authService;
+    
+    @Test
+    @DisplayName(&quot;Login with valid credentials returns token&quot;)
+    void login_withValidCredentials_returnsToken() {
+        // GIVEN
+        String email = &quot;renu@example.com&quot;;
+        String rawPassword = &quot;Password@123&quot;;
+        String hashedPassword = &quot;$2a$10$...&quot;;
+        
+        AuthUser user = AuthUser.builder()
+            .userId(1L)
+            .email(email)
+            .password(hashedPassword)
+            .enabled(true)
+            .build();
+        
+        when(repository.findByEmail(email)).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(rawPassword, hashedPassword)).thenReturn(true);
+        when(jwtService.generateToken(user)).thenReturn(&quot;jwt.token.here&quot;);
+        
+        // WHEN
+        AuthResponse response = authService.login(new LoginRequest(email, rawPassword));
+        
+        // THEN
+        assertNotNull(response);
+        assertEquals(&quot;jwt.token.here&quot;, response.getAccessToken());
+        verify(repository, times(1)).findByEmail(email);
+        verify(jwtService).generateToken(user);
+    }
+    
+    @Test
+    @DisplayName(&quot;Login with wrong password throws BadCredentialsException&quot;)
+    void login_withWrongPassword_throws() {
+        when(repository.findByEmail(anyString()))
+            .thenReturn(Optional.of(new AuthUser()));
+        when(passwordEncoder.matches(anyString(), anyString())).thenReturn(false);
+        
+        assertThrows(BadCredentialsException.class, () -&gt; 
+            authService.login(new LoginRequest(&quot;a@b.com&quot;, &quot;wrong&quot;))
+        );
+    }
+    
+    @Test
+    @Disabled(&quot;Pending email service mock — will enable after EmailService refactor&quot;)
+    void register_sendsVerificationEmail() {
+        // This test is temporarily skipped
+    }
+    
+    @ParameterizedTest
+    @ValueSource(strings = {&quot;&quot;, &quot; &quot;, &quot;invalid&quot;, &quot;no-at-sign.com&quot;})
+    @DisplayName(&quot;Login rejects invalid email formats&quot;)
+    void login_rejectsInvalidEmails(String invalidEmail) {
+        assertThrows(IllegalArgumentException.class, () -&gt;
+            authService.login(new LoginRequest(invalidEmail, &quot;password&quot;))
+        );
+    }
+    
+    @BeforeEach
+    void setUp() {
+        // Runs before each test
+    }
+    
+    @AfterEach
+    void tearDown() {
+        // Runs after each test
+    }
+}
+
+// Controller integration test
+@SpringBootTest
+@AutoConfigureMockMvc
+class AuthControllerTest {
+    
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
+    
+    @Test
+    void register_validRequest_returns201() throws Exception {
+        RegisterRequest req = RegisterRequest.builder()
+            .email(&quot;new@example.com&quot;)
+            .password(&quot;Password@123&quot;)
+            .fullName(&quot;Test User&quot;)
+            .build();
+        
+        mockMvc.perform(post(&quot;/auth/register&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath(&quot;$.email&quot;).value(&quot;new@example.com&quot;));
+    }
+    
+    @Test
+    void register_invalidEmail_returns400() throws Exception {
+        RegisterRequest req = RegisterRequest.builder()
+            .email(&quot;not-an-email&quot;)
+            .password(&quot;Password@123&quot;)
+            .build();
+        
+        mockMvc.perform(post(&quot;/auth/register&quot;)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(req)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath(&quot;$.errors.email&quot;).exists());
+    }
+}
+</code></pre>
+<h2 id="q25-junit-disabled-annotation" tabindex="-1">Q25. JUnit @Disabled Annotation</h2>
+<p><code>@Disabled</code> skips a test (with optional reason).</p>
+<pre><code class="language-java">class MyTests {
+    
+    @Test
+    @Disabled(&quot;Bug #123: skipping until issue resolved&quot;)
+    void brokenTest() {
+        // not executed
+    }
+    
+    @Disabled  // skip whole class
+    @Test
+    void allTestsInThisClassSkipped() { }
+    
+    // Conditional disable
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
+    void doesntRunOnWindows() { }
+    
+    @Test
+    @DisabledOnJre(JRE.JAVA_8)
+    void requiresJava11Plus() { }
+    
+    @Test
+    @DisabledIfEnvironmentVariable(named = &quot;CI&quot;, matches = &quot;true&quot;)
+    void onlyLocalDev() { }
+}
+</code></pre>
+<p><strong>Key JUnit 5 annotations:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Test</code></td>
+<td>Mark test method</td>
+</tr>
+<tr>
+<td><code>@DisplayName</code></td>
+<td>Custom test name</td>
+</tr>
+<tr>
+<td><code>@BeforeEach</code></td>
+<td>Run before each test</td>
+</tr>
+<tr>
+<td><code>@AfterEach</code></td>
+<td>Run after each test</td>
+</tr>
+<tr>
+<td><code>@BeforeAll</code></td>
+<td>Run once before all tests (static)</td>
+</tr>
+<tr>
+<td><code>@AfterAll</code></td>
+<td>Run once after all tests (static)</td>
+</tr>
+<tr>
+<td><code>@Disabled</code></td>
+<td>Skip test</td>
+</tr>
+<tr>
+<td><code>@Tag</code></td>
+<td>Categorize tests</td>
+</tr>
+<tr>
+<td><code>@RepeatedTest</code></td>
+<td>Run multiple times</td>
+</tr>
+<tr>
+<td><code>@ParameterizedTest</code></td>
+<td>Run with different inputs</td>
+</tr>
+<tr>
+<td><code>@Nested</code></td>
+<td>Group related tests</td>
+</tr>
+<tr>
+<td><code>@Timeout</code></td>
+<td>Fail if exceeds time</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="part-10-jwt-authentication-authorization" tabindex="-1">Part 10: JWT Authentication &amp; Authorization</h1>
+<h2 id="q26-jwt-authentication-vs-authorization" tabindex="-1">Q26. JWT Authentication vs Authorization</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Authentication</th>
+<th>Authorization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Question</td>
+<td>Who are you?</td>
+<td>What can you do?</td>
+</tr>
+<tr>
+<td>When</td>
+<td>Login</td>
+<td>Every request</td>
+</tr>
+<tr>
+<td>Result</td>
+<td>Identity confirmed (JWT issued)</td>
+<td>Access granted/denied</td>
+</tr>
+<tr>
+<td>In JWT</td>
+<td><code>sub</code> claim (user ID)</td>
+<td><code>roles</code>/<code>scopes</code> claim</td>
+</tr>
+<tr>
+<td>Spring</td>
+<td><code>AuthenticationManager</code></td>
+<td><code>@PreAuthorize</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="q27-jwt-interview-questions-answers" tabindex="-1">Q27. JWT Interview Questions &amp; Answers</h2>
+<h3 id="q-what-is-jwt" tabindex="-1">Q: What is JWT?</h3>
+<p><strong>A:</strong> JSON Web Token — a compact, URL-safe, self-contained token format for securely transmitting information. Three parts: Header.Payload.Signature, separated by dots.</p>
+<h3 id="q-how-does-jwt-work" tabindex="-1">Q: How does JWT work?</h3>
+<p><strong>A:</strong></p>
+<ol>
+<li>User logs in with credentials</li>
+<li>Server validates and generates JWT signed with secret</li>
+<li>Client stores JWT (localStorage/cookie)</li>
+<li>Client sends JWT in <code>Authorization: Bearer &lt;token&gt;</code> header</li>
+<li>Server verifies signature on each request</li>
+<li>If valid, processes request; if not, returns 401</li>
+</ol>
+<h3 id="q-how-do-you-secure-jwt" tabindex="-1">Q: How do you secure JWT?</h3>
+<p><strong>A:</strong></p>
+<ul>
+<li>Strong secret (256+ bits)</li>
+<li>Short expiration (15 min for access token)</li>
+<li>Use HTTPS only</li>
+<li>Use <code>httpOnly</code> cookies (prevents XSS)</li>
+<li>Implement refresh tokens</li>
+<li>Validate issuer (<code>iss</code>) and audience (<code>aud</code>)</li>
+<li>Don’t store sensitive data in payload (it’s base64, not encrypted!)</li>
+</ul>
+<h3 id="q-why-jwt-over-sessions" tabindex="-1">Q: Why JWT over Sessions?</h3>
+<p><strong>A:</strong> Stateless — works in microservices without shared session store. Each service can validate independently using the secret.</p>
+<h3 id="q-what-are-jwt-vulnerabilities" tabindex="-1">Q: What are JWT vulnerabilities?</h3>
+<p><strong>A:</strong></p>
+<ul>
+<li><strong>alg=none attack:</strong> attacker changes algo to “none” → no signature check</li>
+<li><strong>Weak secret:</strong> brute force HMAC</li>
+<li><strong>XSS in localStorage:</strong> steal token via JavaScript</li>
+<li><strong>Token replay:</strong> until expiry, stolen token works</li>
+<li><strong>Information disclosure:</strong> payload is base64, anyone can decode</li>
+</ul>
+<h3 id="q-access-token-vs-refresh-token" tabindex="-1">Q: Access Token vs Refresh Token?</h3>
+<p><strong>A:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Access Token</th>
+<th>Refresh Token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lifespan</td>
+<td>Short (15 min)</td>
+<td>Long (7 days)</td>
+</tr>
+<tr>
+<td>Sent on</td>
+<td>Every API request</td>
+<td>Only to /refresh endpoint</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Memory or localStorage</td>
+<td>HttpOnly cookie (best)</td>
+</tr>
+<tr>
+<td>If stolen</td>
+<td>Damage limited (short life)</td>
+<td>Major issue</td>
+</tr>
+</tbody>
+</table>
+<h3 id="q-how-to-logout-with-jwt" tabindex="-1">Q: How to logout with JWT?</h3>
+<p><strong>A:</strong> Three approaches:</p>
+<ol>
+<li><strong>Client-side only:</strong> delete from localStorage (simple, but token still valid until expiry)</li>
+<li><strong>Token blacklist:</strong> maintain Redis set of revoked tokens, check on every request</li>
+<li><strong>Short-lived tokens:</strong> rely on expiry + revoke refresh token</li>
+</ol>
+<h3 id="q-where-to-store-jwt-in-browser" tabindex="-1">Q: Where to store JWT in browser?</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>XSS Safe</th>
+<th>CSRF Safe</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localStorage</td>
+<td>❌</td>
+<td>✅</td>
+<td>Easy, but XSS vulnerable</td>
+</tr>
+<tr>
+<td>sessionStorage</td>
+<td>❌</td>
+<td>✅</td>
+<td>Tab-scoped</td>
+</tr>
+<tr>
+<td>HttpOnly Cookie</td>
+<td>✅</td>
+<td>❌ (need CSRF token)</td>
+<td>Best for production</td>
+</tr>
+<tr>
+<td>Memory variable</td>
+<td>✅</td>
+<td>✅</td>
+<td>Lost on refresh</td>
+</tr>
+</tbody>
+</table>
+<h3 id="q-skillsyncs-jwt-implementation" tabindex="-1">Q: SkillSync’s JWT implementation?</h3>
+<p><strong>A:</strong></p>
+<ul>
+<li>Algorithm: HS512</li>
+<li>Access token expiry: 15 minutes</li>
+<li>Refresh token expiry: 7 days</li>
+<li>Storage: localStorage (acknowledged limitation)</li>
+<li>Validation: API Gateway validates and injects <code>X-User-Id</code>, <code>X-User-Role</code> headers</li>
+<li>Public endpoints: <code>/auth/login</code>, <code>/auth/register</code> skip validation</li>
+<li>Refresh flow: Axios interceptor on 401 → refresh → retry original request</li>
+</ul>
+<pre><code class="language-java">// JWT generation in SkillSync
+public String generateToken(AuthUser user) {
+    Map&lt;String, Object&gt; claims = Map.of(
+        &quot;userId&quot;, user.getUserId(),
+        &quot;email&quot;, user.getEmail(),
+        &quot;role&quot;, user.getRole().name()
+    );
+    
+    return Jwts.builder()
+        .setClaims(claims)
+        .setSubject(user.getUserId().toString())
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis() + 900_000)) // 15 min
+        .signWith(SignatureAlgorithm.HS512, secret)
+        .compact();
+}
+
+// JWT validation in API Gateway
+public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    String token = extractToken(exchange.getRequest());
+    
+    Claims claims = Jwts.parser()
+        .setSigningKey(secret)
+        .parseClaimsJws(token)
+        .getBody();
+    
+    // Inject headers for downstream services
+    ServerHttpRequest mutated = exchange.getRequest().mutate()
+        .header(&quot;X-User-Id&quot;, claims.get(&quot;userId&quot;).toString())
+        .header(&quot;X-User-Role&quot;, claims.get(&quot;role&quot;).toString())
+        .build();
+    
+    return chain.filter(exchange.mutate().request(mutated).build());
+}
+</code></pre>
+<hr>
+<div class="remember" style="text-align: center; font-size: 12pt; padding: 15mm;">
+<p><strong>You have answers to every asked question.</strong></p>
+<p>Read each Q out loud. Explain to a mirror. Trace each code example with your finger.</p>
+<p>The interviewer wants confidence + clarity, not perfection.</p>
+</div>
+</body></html>

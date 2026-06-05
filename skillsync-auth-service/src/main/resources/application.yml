@@ -1,0 +1,88 @@
+server:
+  port: 9081
+
+spring:
+  application:
+    name: skillsync-auth-service
+  config:
+    import: "optional:configserver:http://config-server:9888"
+  datasource:
+    url: jdbc:mysql://mysql:3306/skillsync_auth_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: Welcome@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:renudhankhar8559@gmail.com}
+    password: ${MAIL_PASSWORD:ipxvqbdcjzbcguif}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          # Fail fast on SMTP issues so the @Async send() returns quickly
+          # and the user is never left waiting because of a slow Gmail handshake.
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+jwt:
+  secret: skillsync-secret-key-capgemini-2025-very-long-secure-key
+  access-token-expiry-ms: 900000
+  refresh-token-expiry-ms: 604800000
+
+# SkillSync app-specific config.
+skillsync:
+  # The "developer" / super-admin account. Login with this email triggers an
+  # emailed OTP for an extra verification step.
+  developer-email: ${DEVELOPER_EMAIL:renudhankhar8559@gmail.com}
+  # Activates ServiceJwtFilter (from skillsync-common) so the auth-service
+  # can read X-User-Id / X-User-Role headers injected by the API Gateway.
+  # Without this, @PreAuthorize on /auth/admin/** returns 403.
+  service-jwt-filter:
+    enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:9761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    in.skillsync: DEBUG
+    org.springframework.security: DEBUG

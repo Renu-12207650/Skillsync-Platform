@@ -1,0 +1,175 @@
+server:
+  port: 9080
+
+spring:
+  application:
+    name: skillsync-api-gateway
+
+  config:
+    import: optional:configserver:http://config-server:9888
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+
+      routes:
+
+        # ========================
+        # BUSINESS ROUTES (UNCHANGED)
+        # ========================
+
+        - id: skillsync-auth-service
+          uri: lb://SKILLSYNC-AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        - id: skillsync-user-service
+          uri: lb://SKILLSYNC-USER-SERVICE
+          predicates:
+            - Path=/users/**
+
+        - id: skillsync-mentor-service
+          uri: lb://SKILLSYNC-MENTOR-SERVICE
+          predicates:
+            - Path=/mentors/**
+
+        - id: skillsync-skill-service
+          uri: lb://SKILLSYNC-SKILL-SERVICE
+          predicates:
+            - Path=/skills/**
+
+        - id: skillsync-notification-service
+          uri: lb://SKILLSYNC-NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notifications/**
+
+        - id: skillsync-session-service
+          uri: lb://SKILLSYNC-SESSION-SERVICE
+          predicates:
+            - Path=/sessions/**
+
+        - id: skillsync-support
+          uri: lb://SKILLSYNC-NOTIFICATION-SERVICE
+          predicates:
+            - Path=/support/**
+
+        - id: skillsync-chatbot
+          uri: lb://SKILLSYNC-NOTIFICATION-SERVICE
+          predicates:
+            - Path=/chatbot/**
+
+
+        # ========================
+        # 🔥 FIXED SWAGGER ROUTES
+        # ========================
+
+        - id: auth-api-docs
+          uri: lb://SKILLSYNC-AUTH-SERVICE
+          predicates:
+            - Path=/auth/v3/api-docs
+          filters:
+            - RewritePath=/auth/v3/api-docs, /v3/api-docs
+
+        - id: user-api-docs
+          uri: lb://SKILLSYNC-USER-SERVICE
+          predicates:
+            - Path=/user/v3/api-docs
+          filters:
+            - RewritePath=/user/v3/api-docs, /v3/api-docs
+
+        - id: mentor-api-docs
+          uri: lb://SKILLSYNC-MENTOR-SERVICE
+          predicates:
+            - Path=/mentor/v3/api-docs
+          filters:
+            - RewritePath=/mentor/v3/api-docs, /v3/api-docs
+
+        - id: skill-api-docs
+          uri: lb://SKILLSYNC-SKILL-SERVICE
+          predicates:
+            - Path=/skill/v3/api-docs
+          filters:
+            - RewritePath=/skill/v3/api-docs, /v3/api-docs
+
+        - id: notification-api-docs
+          uri: lb://SKILLSYNC-NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notification/v3/api-docs
+          filters:
+            - RewritePath=/notification/v3/api-docs, /v3/api-docs
+
+        - id: session-api-docs
+          uri: lb://SKILLSYNC-SESSION-SERVICE
+          predicates:
+            - Path=/session/v3/api-docs
+          filters:
+            - RewritePath=/session/v3/api-docs, /v3/api-docs
+
+
+jwt:
+  secret: skillsync-secret-key-capgemini-2025-very-long-secure-key
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:9761/eureka/
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+
+
+# ========================
+# 🔥 FIXED SWAGGER UI CONFIG
+# ========================
+
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+    urls:
+
+      - name: Auth Service
+        url: /auth/v3/api-docs
+
+      - name: User Service
+        url: /user/v3/api-docs
+
+      - name: Mentor Service
+        url: /mentor/v3/api-docs
+
+      - name: Skill Service
+        url: /skill/v3/api-docs
+
+      - name: Notification Service
+        url: /notification/v3/api-docs
+
+      - name: Session Service
+        url: /session/v3/api-docs
+
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,prometheus
+
+
+logging:
+  level:
+    in.skillsync: DEBUG
+    org.springframework.cloud.gateway: DEBUG

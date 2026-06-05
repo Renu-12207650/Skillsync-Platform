@@ -1,0 +1,349 @@
+/* ========================================================
+   SkillSync Master Guide — Book Stylesheet
+   ======================================================== */
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+  }
+  @top-right {
+    content: string(chaptertitle);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+    font-style: italic;
+  }
+}
+
+@page :first {
+  @bottom-center { content: none; }
+  @top-right { content: none; }
+}
+
+/* Reset */
+* { box-sizing: border-box; }
+html { font-size: 10.5pt; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #1a1a1a;
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brand tokens */
+:root {
+  --brand: #007A64;
+  --brand-dark: #005A49;
+  --brand-light: #E6F4F0;
+  --accent: #C66B28;
+  --code-bg: #F5F7F9;
+  --code-border: #E1E7EC;
+  --note-bg: #FFF8E1;
+  --note-border: #F0C864;
+  --warn-bg: #FDECEA;
+  --warn-border: #E37B72;
+  --tip-bg: #E6F4F0;
+  --tip-border: #3FA687;
+}
+
+/* ---------- Cover page ---------- */
+.cover {
+  page-break-after: always;
+  height: 255mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(160deg, #007A64 0%, #005A49 55%, #003D33 100%);
+  color: #fff;
+  padding: 40mm 20mm;
+  margin: -20mm -18mm 0 -18mm;
+}
+.cover h1 {
+  font-size: 42pt;
+  margin: 0 0 8mm 0;
+  line-height: 1.1;
+  letter-spacing: -0.5pt;
+  border: none;
+  color: #fff;
+}
+.cover .subtitle {
+  font-size: 16pt;
+  font-weight: 300;
+  margin: 0 0 30mm 0;
+  opacity: 0.92;
+}
+.cover .author {
+  font-size: 12pt;
+  opacity: 0.85;
+  margin-top: 20mm;
+  font-style: italic;
+}
+.cover .divider {
+  width: 40mm;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+  margin: 10mm auto;
+}
+
+/* ---------- Table of Contents ---------- */
+.toc-page {
+  page-break-after: always;
+}
+.toc-page h1 {
+  color: var(--brand);
+  border-bottom: 3px solid var(--brand);
+  padding-bottom: 4mm;
+}
+.toc-page ul { list-style: none; padding-left: 0; }
+.toc-page ul ul { padding-left: 6mm; font-size: 10pt; }
+.toc-page li { margin: 2mm 0; }
+.toc-page a { color: #222; text-decoration: none; }
+.toc-page .toc-part {
+  font-weight: bold;
+  color: var(--brand);
+  margin-top: 6mm;
+  font-size: 12pt;
+}
+
+/* ---------- Part & chapter dividers ---------- */
+.part-divider {
+  page-break-before: always;
+  page-break-after: always;
+  height: 250mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--brand);
+}
+.part-divider .part-label {
+  font-size: 18pt;
+  font-weight: 300;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.part-divider .part-title {
+  font-size: 36pt;
+  margin: 8mm 0 0 0;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.1;
+  border: none;
+}
+.part-divider .part-desc {
+  font-size: 11pt;
+  margin: 14mm 20mm 0 20mm;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  max-width: 140mm;
+}
+
+/* ---------- Headings ---------- */
+h1 {
+  color: var(--brand);
+  font-size: 22pt;
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 2mm;
+  margin: 12mm 0 6mm 0;
+  page-break-before: always;
+  page-break-after: avoid;
+  string-set: chaptertitle content();
+}
+h1.no-break { page-break-before: auto; }
+
+h2 {
+  color: var(--brand-dark);
+  font-size: 16pt;
+  margin: 10mm 0 3mm 0;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid #cfe4dd;
+  page-break-after: avoid;
+}
+h3 {
+  color: #222;
+  font-size: 13pt;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+}
+h4 {
+  color: var(--brand-dark);
+  font-size: 11.5pt;
+  margin: 5mm 0 1mm 0;
+  page-break-after: avoid;
+}
+
+/* ---------- Body text ---------- */
+p { margin: 2mm 0 3mm 0; }
+strong { color: #111; }
+em { color: #333; }
+
+blockquote {
+  border-left: 4px solid var(--brand);
+  background: var(--brand-light);
+  margin: 4mm 0;
+  padding: 3mm 5mm;
+  font-style: italic;
+  color: #222;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+
+/* Callouts (rendered from blockquotes starting with specific emojis/words) */
+blockquote.note {
+  border-left-color: var(--note-border);
+  background: var(--note-bg);
+}
+blockquote.warn {
+  border-left-color: var(--warn-border);
+  background: var(--warn-bg);
+}
+blockquote.tip {
+  border-left-color: var(--tip-border);
+  background: var(--tip-bg);
+}
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 2mm 0 3mm 0; padding-left: 6mm; }
+li { margin: 1mm 0; }
+li > ul, li > ol { margin: 1mm 0; }
+
+/* ---------- Code ---------- */
+code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 0.3mm 1mm;
+  border-radius: 2pt;
+  font-size: 9.5pt;
+  color: #b0413e;
+}
+pre {
+  background: #0f1720;
+  color: #e6edf3;
+  padding: 4mm 5mm;
+  border-radius: 4pt;
+  overflow-x: auto;
+  font-size: 9pt;
+  line-height: 1.5;
+  margin: 3mm 0;
+  page-break-inside: avoid;
+}
+pre code {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Minimal syntax highlighting via class names (markdown-it generic) */
+pre .hljs-keyword, pre .k { color: #ff7b72; }
+pre .hljs-string, pre .s  { color: #a5d6ff; }
+pre .hljs-comment, pre .c { color: #8b949e; font-style: italic; }
+pre .hljs-number, pre .n  { color: #79c0ff; }
+pre .hljs-type, pre .t    { color: #ffa657; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+thead { background: var(--brand); color: #fff; }
+th {
+  padding: 2.5mm 3mm;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9.5pt;
+  border: 1px solid var(--brand-dark);
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d8e0e5;
+  vertical-align: top;
+}
+tbody tr:nth-child(even) { background: #f8fafb; }
+tbody tr:hover { background: #fff7e6; }
+
+/* ---------- Horizontal rule ---------- */
+hr {
+  border: none;
+  border-top: 1px dashed #c9d3d9;
+  margin: 6mm 0;
+}
+
+/* ---------- Links ---------- */
+a { color: var(--brand-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Figures / diagrams ---------- */
+.diagram {
+  background: #fafcfd;
+  border: 1px dashed #a0b3bd;
+  padding: 4mm;
+  margin: 3mm 0;
+  white-space: pre;
+  font-family: "Consolas", monospace;
+  font-size: 8.5pt;
+  line-height: 1.35;
+  page-break-inside: avoid;
+  text-align: center;
+  color: #1a3a33;
+}
+
+/* ---------- "Why X not Y" boxes ---------- */
+.why-box {
+  background: #fafcfd;
+  border: 1px solid #cfe4dd;
+  border-left: 4px solid var(--brand);
+  padding: 3mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+.why-box h4 { margin-top: 0; color: var(--brand-dark); }
+
+/* ---------- "Remember" mnemonic ---------- */
+.remember {
+  background: #fff4d9;
+  border: 1px solid #f0c864;
+  border-left: 4px solid #c99418;
+  padding: 2.5mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #6b4a00;
+}
+
+/* ---------- Print helpers ---------- */
+.no-break, table, pre, blockquote { page-break-inside: avoid; }
+.break-after { page-break-after: always; }
+.break-before { page-break-before: always; }
+
+/* ---------- Section labels ---------- */
+.chapter-label {
+  display: inline-block;
+  font-size: 10pt;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1.5pt;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}

@@ -1,0 +1,92 @@
+server:
+  port: 9088
+
+spring:
+  application:
+    name: skillsync-notification-service
+  config:
+    import: "optional:configserver:http://config-server:9888"
+  datasource:
+    url: jdbc:mysql://mysql:3306/skillsync_notification_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: Welcome@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: auto
+        retry:
+          enabled: true
+          initial-interval: 2000
+          max-attempts: 3
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: renudhankhar8559@gmail.com
+    password: ipxvqbdcjzbcguif
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:9761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    in.skillsync: DEBUG
+    org.springframework.amqp: DEBUG
+
+skillsync:
+  service-jwt-filter:
+    enabled: true
+  support:
+    # Where Nikki forwards every "Contact admins" message via SMTP.
+    admin-email: ${ADMIN_EMAIL:renudhankhar8559@gmail.com}
+
+# Elaichi (general-purpose AI bot) configuration.
+# Works with any OpenAI-compatible chat completions endpoint:
+#   - OpenAI:  base-url=https://api.openai.com/v1   model=gpt-4o-mini
+#   - Groq:    base-url=https://api.groq.com/openai/v1   model=llama-3.3-70b-versatile
+# Set OPENAI_API_KEY (and optionally OPENAI_BASE_URL / OPENAI_MODEL) in env / .env
+# to enable real LLM answers. Without a key, Elaichi runs in demo mode.
+openai:
+  api-key:  ${OPENAI_API_KEY:}
+  base-url: ${OPENAI_BASE_URL:https://api.groq.com/openai/v1}
+  model:    ${OPENAI_MODEL:llama-3.3-70b-versatile}

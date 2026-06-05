@@ -1,0 +1,46 @@
+server:
+  port: 9761
+
+spring:
+  application:
+    name: skillsync-eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${random.value}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:9761/eureka/
+  server:
+    # Faster propagation: drop dead instances quickly, refresh registry
+    # cache aggressively so the gateway sees new services in seconds, not
+    # 30-second windows.
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+    response-cache-update-interval-ms: 5000
+    response-cache-auto-expiration-in-seconds: 5
+    use-read-only-response-cache: false
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN

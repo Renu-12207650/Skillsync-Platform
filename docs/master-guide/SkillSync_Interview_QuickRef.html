@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SkillSync Interview Quick Reference</title>
+<style>/* ========================================================
+   SkillSync Master Guide — Book Stylesheet
+   ======================================================== */
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+  }
+  @top-right {
+    content: string(chaptertitle);
+    font-family: "Georgia", serif;
+    font-size: 9pt;
+    color: #777;
+    font-style: italic;
+  }
+}
+
+@page :first {
+  @bottom-center { content: none; }
+  @top-right { content: none; }
+}
+
+/* Reset */
+* { box-sizing: border-box; }
+html { font-size: 10.5pt; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #1a1a1a;
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brand tokens */
+:root {
+  --brand: #007A64;
+  --brand-dark: #005A49;
+  --brand-light: #E6F4F0;
+  --accent: #C66B28;
+  --code-bg: #F5F7F9;
+  --code-border: #E1E7EC;
+  --note-bg: #FFF8E1;
+  --note-border: #F0C864;
+  --warn-bg: #FDECEA;
+  --warn-border: #E37B72;
+  --tip-bg: #E6F4F0;
+  --tip-border: #3FA687;
+}
+
+/* ---------- Cover page ---------- */
+.cover {
+  page-break-after: always;
+  height: 255mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(160deg, #007A64 0%, #005A49 55%, #003D33 100%);
+  color: #fff;
+  padding: 40mm 20mm;
+  margin: -20mm -18mm 0 -18mm;
+}
+.cover h1 {
+  font-size: 42pt;
+  margin: 0 0 8mm 0;
+  line-height: 1.1;
+  letter-spacing: -0.5pt;
+  border: none;
+  color: #fff;
+}
+.cover .subtitle {
+  font-size: 16pt;
+  font-weight: 300;
+  margin: 0 0 30mm 0;
+  opacity: 0.92;
+}
+.cover .author {
+  font-size: 12pt;
+  opacity: 0.85;
+  margin-top: 20mm;
+  font-style: italic;
+}
+.cover .divider {
+  width: 40mm;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+  margin: 10mm auto;
+}
+
+/* ---------- Table of Contents ---------- */
+.toc-page {
+  page-break-after: always;
+}
+.toc-page h1 {
+  color: var(--brand);
+  border-bottom: 3px solid var(--brand);
+  padding-bottom: 4mm;
+}
+.toc-page ul { list-style: none; padding-left: 0; }
+.toc-page ul ul { padding-left: 6mm; font-size: 10pt; }
+.toc-page li { margin: 2mm 0; }
+.toc-page a { color: #222; text-decoration: none; }
+.toc-page .toc-part {
+  font-weight: bold;
+  color: var(--brand);
+  margin-top: 6mm;
+  font-size: 12pt;
+}
+
+/* ---------- Part & chapter dividers ---------- */
+.part-divider {
+  page-break-before: always;
+  page-break-after: always;
+  height: 250mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--brand);
+}
+.part-divider .part-label {
+  font-size: 18pt;
+  font-weight: 300;
+  letter-spacing: 4pt;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.part-divider .part-title {
+  font-size: 36pt;
+  margin: 8mm 0 0 0;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1.1;
+  border: none;
+}
+.part-divider .part-desc {
+  font-size: 11pt;
+  margin: 14mm 20mm 0 20mm;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  max-width: 140mm;
+}
+
+/* ---------- Headings ---------- */
+h1 {
+  color: var(--brand);
+  font-size: 22pt;
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 2mm;
+  margin: 12mm 0 6mm 0;
+  page-break-before: always;
+  page-break-after: avoid;
+  string-set: chaptertitle content();
+}
+h1.no-break { page-break-before: auto; }
+
+h2 {
+  color: var(--brand-dark);
+  font-size: 16pt;
+  margin: 10mm 0 3mm 0;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid #cfe4dd;
+  page-break-after: avoid;
+}
+h3 {
+  color: #222;
+  font-size: 13pt;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+}
+h4 {
+  color: var(--brand-dark);
+  font-size: 11.5pt;
+  margin: 5mm 0 1mm 0;
+  page-break-after: avoid;
+}
+
+/* ---------- Body text ---------- */
+p { margin: 2mm 0 3mm 0; }
+strong { color: #111; }
+em { color: #333; }
+
+blockquote {
+  border-left: 4px solid var(--brand);
+  background: var(--brand-light);
+  margin: 4mm 0;
+  padding: 3mm 5mm;
+  font-style: italic;
+  color: #222;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+
+/* Callouts (rendered from blockquotes starting with specific emojis/words) */
+blockquote.note {
+  border-left-color: var(--note-border);
+  background: var(--note-bg);
+}
+blockquote.warn {
+  border-left-color: var(--warn-border);
+  background: var(--warn-bg);
+}
+blockquote.tip {
+  border-left-color: var(--tip-border);
+  background: var(--tip-bg);
+}
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 2mm 0 3mm 0; padding-left: 6mm; }
+li { margin: 1mm 0; }
+li > ul, li > ol { margin: 1mm 0; }
+
+/* ---------- Code ---------- */
+code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 0.3mm 1mm;
+  border-radius: 2pt;
+  font-size: 9.5pt;
+  color: #b0413e;
+}
+pre {
+  background: #0f1720;
+  color: #e6edf3;
+  padding: 4mm 5mm;
+  border-radius: 4pt;
+  overflow-x: auto;
+  font-size: 9pt;
+  line-height: 1.5;
+  margin: 3mm 0;
+  page-break-inside: avoid;
+}
+pre code {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Minimal syntax highlighting via class names (markdown-it generic) */
+pre .hljs-keyword, pre .k { color: #ff7b72; }
+pre .hljs-string, pre .s  { color: #a5d6ff; }
+pre .hljs-comment, pre .c { color: #8b949e; font-style: italic; }
+pre .hljs-number, pre .n  { color: #79c0ff; }
+pre .hljs-type, pre .t    { color: #ffa657; }
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+thead { background: var(--brand); color: #fff; }
+th {
+  padding: 2.5mm 3mm;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9.5pt;
+  border: 1px solid var(--brand-dark);
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d8e0e5;
+  vertical-align: top;
+}
+tbody tr:nth-child(even) { background: #f8fafb; }
+tbody tr:hover { background: #fff7e6; }
+
+/* ---------- Horizontal rule ---------- */
+hr {
+  border: none;
+  border-top: 1px dashed #c9d3d9;
+  margin: 6mm 0;
+}
+
+/* ---------- Links ---------- */
+a { color: var(--brand-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Figures / diagrams ---------- */
+.diagram {
+  background: #fafcfd;
+  border: 1px dashed #a0b3bd;
+  padding: 4mm;
+  margin: 3mm 0;
+  white-space: pre;
+  font-family: "Consolas", monospace;
+  font-size: 8.5pt;
+  line-height: 1.35;
+  page-break-inside: avoid;
+  text-align: center;
+  color: #1a3a33;
+}
+
+/* ---------- "Why X not Y" boxes ---------- */
+.why-box {
+  background: #fafcfd;
+  border: 1px solid #cfe4dd;
+  border-left: 4px solid var(--brand);
+  padding: 3mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  page-break-inside: avoid;
+}
+.why-box h4 { margin-top: 0; color: var(--brand-dark); }
+
+/* ---------- "Remember" mnemonic ---------- */
+.remember {
+  background: #fff4d9;
+  border: 1px solid #f0c864;
+  border-left: 4px solid #c99418;
+  padding: 2.5mm 5mm;
+  margin: 3mm 0;
+  border-radius: 0 4pt 4pt 0;
+  font-style: italic;
+  font-weight: 500;
+  color: #6b4a00;
+}
+
+/* ---------- Print helpers ---------- */
+.no-break, table, pre, blockquote { page-break-inside: avoid; }
+.break-after { page-break-after: always; }
+.break-before { page-break-before: always; }
+
+/* ---------- Section labels ---------- */
+.chapter-label {
+  display: inline-block;
+  font-size: 10pt;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1.5pt;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+</style>
+</head>
+<body>
+<div class="cover">
+<h1 id="skillsync-interview-quick-reference" tabindex="-1">SkillSync Interview Quick Reference</h1>
+<div class="divider"></div>
+<div class="subtitle">Memory Cards · Comparison Tables · Visual Cheat Sheets</div>
+<div class="author">JWT Anatomy · Trap Questions · One-Page Summaries</div>
+</div>
+<h1 id="1-jwt-anatomy-the-three-parts" tabindex="-1">1. JWT Anatomy — The Three Parts</h1>
+<h2 id="jwt-structure-visual" tabindex="-1">JWT Structure Visual</h2>
+<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+.
+eyJzdWIiOiIxMjMiLCJuYW1lIjoiUmVudSJ9
+.
+SflKxwRJSMeKKF2QT4fwpMe...
+
+[HEADER] . [PAYLOAD] . [SIGNATURE]
+  Base64Url   Base64Url    Base64Url
+</code></pre>
+<h2 id="the-three-parts-table" tabindex="-1">The Three Parts Table</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>HEADER</th>
+<th>PAYLOAD</th>
+<th>SIGNATURE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Position</strong></td>
+<td>1st (before first dot)</td>
+<td>2nd (between dots)</td>
+<td>3rd (after second dot)</td>
+</tr>
+<tr>
+<td><strong>Content</strong></td>
+<td>Algorithm + Type</td>
+<td>Claims (data)</td>
+<td>Verification hash</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td><code>{&quot;alg&quot;:&quot;HS256&quot;,&quot;typ&quot;:&quot;JWT&quot;}</code></td>
+<td><code>{&quot;sub&quot;:&quot;123&quot;,&quot;role&quot;:&quot;ADMIN&quot;}</code></td>
+<td>HMACSHA256(header.payload, secret)</td>
+</tr>
+<tr>
+<td><strong>Readable?</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>❌ Needs secret</td>
+</tr>
+<tr>
+<td><strong>Changeable?</strong></td>
+<td>❌ Breaks signature</td>
+<td>❌ Breaks signature</td>
+<td>N/A (this IS security)</td>
+</tr>
+<tr>
+<td><strong>Interview Trap</strong></td>
+<td>alg=none attack</td>
+<td>Don’t put secrets here</td>
+<td>Min 256-bit secret</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jwt-algorithms" tabindex="-1">JWT Algorithms</h2>
+<table>
+<thead>
+<tr>
+<th>Algo</th>
+<th>Type</th>
+<th>Use When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HS256</td>
+<td>Shared secret</td>
+<td>Microservices sharing secret</td>
+</tr>
+<tr>
+<td>HS512</td>
+<td>Shared secret</td>
+<td>Higher security (SkillSync default)</td>
+</tr>
+<tr>
+<td>RS256</td>
+<td>Key pair</td>
+<td>Third parties need public key</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jwt-vs-session" tabindex="-1">JWT vs Session</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Session</th>
+<th>JWT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage</td>
+<td>Server (Redis)</td>
+<td>Client (localStorage)</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>Sticky sessions</td>
+<td>Any server validates</td>
+</tr>
+<tr>
+<td>Logout</td>
+<td>Instant delete</td>
+<td>Wait for expiry/blacklist</td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td>Vulnerable</td>
+<td>Safe (header, not cookie)</td>
+</tr>
+<tr>
+<td>XSS</td>
+<td>Safe (httpOnly)</td>
+<td>Vulnerable (localStorage)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>32 bytes</td>
+<td>~500 bytes</td>
+</tr>
+<tr>
+<td>Best For</td>
+<td>Monoliths</td>
+<td>Microservices</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="2-java-core-memory-cards" tabindex="-1">2. Java Core — Memory Cards</h1>
+<h2 id="-vs-equals-vs-hashcode" tabindex="-1">== vs .equals() vs hashCode()</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>==</th>
+<th>.equals()</th>
+<th>hashCode()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compares</td>
+<td>Reference (address)</td>
+<td>Content</td>
+<td>Integer for buckets</td>
+</tr>
+<tr>
+<td>Primitives</td>
+<td>Value</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Objects</td>
+<td>Identity</td>
+<td>Content (if overridden)</td>
+<td>Hash bucket finder</td>
+</tr>
+<tr>
+<td>String Pool</td>
+<td>“abc”==“abc” true</td>
+<td>Always use this!</td>
+<td>Equal content → equal hash</td>
+</tr>
+</tbody>
+</table>
+<p><strong>THE CONTRACT:</strong> If <code>a.equals(b)</code> → then <code>a.hashCode()==b.hashCode()</code></p>
+<h2 id="final-vs-finally-vs-finalize" tabindex="-1">final vs finally vs finalize()</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>final</th>
+<th>finally</th>
+<th>finalize()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What</td>
+<td>Keyword</td>
+<td>Block</td>
+<td>Method (deprecated)</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Lock/unchangeable</td>
+<td>Always runs cleanup</td>
+<td>Pre-GC hook</td>
+</tr>
+<tr>
+<td>Remember</td>
+<td>“Locked forever”</td>
+<td>“Always runs”</td>
+<td>“Final farewell”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="checked-vs-unchecked" tabindex="-1">Checked vs Unchecked</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Checked</th>
+<th>Unchecked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extends</td>
+<td>Exception (not Runtime)</td>
+<td>RuntimeException</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>IOException, SQLException</td>
+<td>NullPointerException</td>
+</tr>
+<tr>
+<td>Compiler</td>
+<td>Forces catch/declare</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>Means</td>
+<td>Recoverable</td>
+<td>Bug in code</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="3-collections-quick-ref" tabindex="-1">3. Collections Quick Ref</h1>
+<h2 id="list-comparison" tabindex="-1">List Comparison</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ArrayList</th>
+<th>LinkedList</th>
+<th>Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Get index</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Add end</td>
+<td>O(1)*</td>
+<td>O(1)</td>
+<td>O(1)*</td>
+</tr>
+<tr>
+<td>Add middle</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Thread-safe</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Use when</td>
+<td>Random access</td>
+<td>Frequent insert/delete</td>
+<td>Legacy only</td>
+</tr>
+</tbody>
+</table>
+<h2 id="map-comparison" tabindex="-1">Map Comparison</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>HashMap</th>
+<th>LinkedHashMap</th>
+<th>TreeMap</th>
+<th>ConcurrentHashMap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Order</td>
+<td>None</td>
+<td>Insertion</td>
+<td>Sorted</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Null key</td>
+<td>1</td>
+<td>1</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Thread-safe</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(log n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Lock level</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Bucket-level</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HashMap Internals:</strong> 16 buckets, 0.75 load factor, chain→tree at 8 items</p>
+<h2 id="string-vs-stringbuilder-vs-stringbuffer" tabindex="-1">String vs StringBuilder vs StringBuffer</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>String</th>
+<th>StringBuilder</th>
+<th>StringBuffer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mutable</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Thread-safe</td>
+<td>✅ (immutable)</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>N/A</td>
+<td>Fast</td>
+<td>Slower</td>
+</tr>
+<tr>
+<td>Use for</td>
+<td>Constants</td>
+<td>Single-thread concat</td>
+<td>Multi-thread concat</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="4-spring-boot-quick-ref" tabindex="-1">4. Spring Boot Quick Ref</h1>
+<h2 id="bean-scopes" tabindex="-1">Bean Scopes</h2>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Instances</th>
+<th>Use For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleton</td>
+<td>1 per container</td>
+<td>Most services</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>New each request</td>
+<td>Stateful objects</td>
+</tr>
+<tr>
+<td>request</td>
+<td>1 per HTTP request</td>
+<td>Per-request data</td>
+</tr>
+<tr>
+<td>session</td>
+<td>1 per user session</td>
+<td>User-scoped data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="di-types" tabindex="-1">DI Types</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Use When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constructor</td>
+<td>Immutable, testable</td>
+<td>Verbose</td>
+<td><strong>Default</strong></td>
+</tr>
+<tr>
+<td>Setter</td>
+<td>Optional</td>
+<td>Mutable, forgettable</td>
+<td>Optional deps</td>
+</tr>
+<tr>
+<td>Field</td>
+<td>Less code</td>
+<td>Hard to test</td>
+<td>Avoid</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key-annotations" tabindex="-1">Key Annotations</h2>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Combines</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@SpringBootApplication</td>
+<td>@Configuration + @EnableAutoConfiguration + @ComponentScan</td>
+<td>App entry</td>
+</tr>
+<tr>
+<td>@RestController</td>
+<td>@Controller + @ResponseBody</td>
+<td>JSON API</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>@Component</td>
+<td>Business logic</td>
+</tr>
+<tr>
+<td>@Repository</td>
+<td>@Component + exception translation</td>
+<td>Data access</td>
+</tr>
+</tbody>
+</table>
+<h2 id="transactional-gotchas" tabindex="-1">@Transactional Gotchas</h2>
+<ol>
+<li><strong>Self-invocation bypasses proxy</strong> — split to another bean</li>
+<li><strong>Checked exceptions don’t rollback</strong> — use <code>rollbackFor=Exception.class</code></li>
+<li><strong>Private methods not transactional</strong> — must be public</li>
+<li><strong>Propagation:</strong> REQUIRED (default), REQUIRES_NEW, NESTED</li>
+</ol>
+<hr>
+<h1 id="5-sql-visual-guide" tabindex="-1">5. SQL Visual Guide</h1>
+<h2 id="joins-diagram" tabindex="-1">Joins Diagram</h2>
+<pre><code>INNER JOIN (A ∩ B)     LEFT JOIN (A + match)     RIGHT JOIN (B + match)
+    ●●●                  ●●●○○                    ○○●●●
+
+FULL OUTER (A ∪ B)     CROSS JOIN (A × B)
+    ●●●●●                Every row A × Every row B
+</code></pre>
+<h2 id="join-types-table" tabindex="-1">Join Types Table</h2>
+<table>
+<thead>
+<tr>
+<th>Join</th>
+<th>Returns</th>
+<th>Use When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INNER</td>
+<td>Matching rows only</td>
+<td>Only want complete data</td>
+</tr>
+<tr>
+<td>LEFT</td>
+<td>All left + matched right</td>
+<td>Need all left, right optional</td>
+</tr>
+<tr>
+<td>RIGHT</td>
+<td>All right + matched left</td>
+<td>Reverse of LEFT (rare)</td>
+</tr>
+<tr>
+<td>FULL</td>
+<td>All from both</td>
+<td>Need complete set</td>
+</tr>
+<tr>
+<td>CROSS</td>
+<td>Cartesian product</td>
+<td>Generate combinations</td>
+</tr>
+<tr>
+<td>SELF</td>
+<td>Table joined to itself</td>
+<td>Hierarchies</td>
+</tr>
+</tbody>
+</table>
+<h2 id="acid-properties" tabindex="-1">ACID Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Property</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Atomicity</td>
+<td>Debit + credit both succeed or both fail</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Consistency</td>
+<td>Constraints never violated</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Isolation</td>
+<td>Concurrent transactions don’t interfere</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Durability</td>
+<td>Committed data survives crash</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Remember: “A Crash Is Drama-free”</p>
+</blockquote>
+<h2 id="isolation-levels" tabindex="-1">Isolation Levels</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Dirty Read</th>
+<th>Non-Repeatable</th>
+<th>Phantom</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>❌ Allowed</td>
+<td>❌ Allowed</td>
+<td>❌ Allowed</td>
+<td>Never</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>✅ Blocked</td>
+<td>❌ Allowed</td>
+<td>❌ Allowed</td>
+<td>Oracle, PG</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>✅ Blocked</td>
+<td>✅ Blocked</td>
+<td>❌ Allowed</td>
+<td>MySQL</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>✅ Blocked</td>
+<td>✅ Blocked</td>
+<td>✅ Blocked</td>
+<td>Critical data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="6-javascript-the-weird-parts" tabindex="-1">6. JavaScript — The Weird Parts</h1>
+<h2 id="var-vs-let-vs-const" tabindex="-1">var vs let vs const</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>var</th>
+<th>let</th>
+<th>const</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope</td>
+<td>Function</td>
+<td>Block</td>
+<td>Block</td>
+</tr>
+<tr>
+<td>Hoisting</td>
+<td>Yes (undefined)</td>
+<td>Yes (TDZ)</td>
+<td>Yes (TDZ)</td>
+</tr>
+<tr>
+<td>Redeclare</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Reassign</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>Never</td>
+<td>When needed</td>
+<td><strong>Default</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-vs-" tabindex="-1">== vs ===</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>==</th>
+<th>===</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Loose equality</td>
+<td>Strict equality</td>
+</tr>
+<tr>
+<td>Types</td>
+<td>Coerces (“5” == 5)</td>
+<td>Must match</td>
+</tr>
+<tr>
+<td>Use</td>
+<td>❌ Never</td>
+<td>✅ Always</td>
+</tr>
+</tbody>
+</table>
+<h2 id="this-binding" tabindex="-1">this Binding</h2>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>this refers to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global</td>
+<td>window (undefined in strict)</td>
+</tr>
+<tr>
+<td>Function call</td>
+<td>window/undefined</td>
+</tr>
+<tr>
+<td>Method call</td>
+<td>The object</td>
+</tr>
+<tr>
+<td>Constructor</td>
+<td>New instance</td>
+</tr>
+<tr>
+<td>Arrow function</td>
+<td>Enclosing scope</td>
+</tr>
+<tr>
+<td>call/apply/bind</td>
+<td>First argument</td>
+</tr>
+</tbody>
+</table>
+<h2 id="event-loop-order" tabindex="-1">Event Loop Order</h2>
+<pre><code>1. Run call stack
+2. Drain microtasks (Promises)
+3. Run one macrotask (setTimeout)
+4. Repeat
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-js">console.log(1);
+setTimeout(() =&gt; console.log(2), 0);
+Promise.resolve().then(() =&gt; console.log(3));
+console.log(4);
+// 1, 4, 3, 2
+</code></pre>
+<hr>
+<h1 id="7-react-hooks-at-a-glance" tabindex="-1">7. React Hooks at a Glance</h1>
+<h2 id="all-built-in-hooks" tabindex="-1">All Built-in Hooks</h2>
+<table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>Purpose</th>
+<th>Key Point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>useState</td>
+<td>Persistent state</td>
+<td>Never mutate directly</td>
+</tr>
+<tr>
+<td>useEffect</td>
+<td>Side effects</td>
+<td>Cleanup in return</td>
+</tr>
+<tr>
+<td>useContext</td>
+<td>Consume context</td>
+<td>No prop drilling</td>
+</tr>
+<tr>
+<td>useReducer</td>
+<td>Complex state</td>
+<td>Like Redux lite</td>
+</tr>
+<tr>
+<td>useCallback</td>
+<td>Memoized function</td>
+<td>For child props</td>
+</tr>
+<tr>
+<td>useMemo</td>
+<td>Memoized value</td>
+<td>Expensive calculations</td>
+</tr>
+<tr>
+<td>useRef</td>
+<td>Mutable reference</td>
+<td>DOM access, prev value</td>
+</tr>
+<tr>
+<td>useId</td>
+<td>Stable unique ID</td>
+<td>React 18+</td>
+</tr>
+<tr>
+<td>useTransition</td>
+<td>Non-urgent updates</td>
+<td>Keep UI responsive</td>
+</tr>
+<tr>
+<td>useDeferredValue</td>
+<td>Defer re-render</td>
+<td>Stale value for slow children</td>
+</tr>
+</tbody>
+</table>
+<h2 id="useeffect-dependencies" tabindex="-1">useEffect Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Deps</th>
+<th>Runs When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Omitted</td>
+<td>Every render</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>Once on mount</td>
+</tr>
+<tr>
+<td>[a, b]</td>
+<td>On mount + when a or b changes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usememo-vs-usecallback" tabindex="-1">useMemo vs useCallback</h2>
+<pre><code class="language-js">useMemo(() =&gt; computeExpensive(a), [a]);  // Cache result
+useCallback(() =&gt; doSomething(a), [a]);   // Cache function
+// Equivalent: useCallback(fn, deps) === useMemo(() =&gt; fn, deps)
+</code></pre>
+<hr>
+<h1 id="8-system-design-decisions" tabindex="-1">8. System Design Decisions</h1>
+<h2 id="tech-stack-choices" tabindex="-1">Tech Stack Choices</h2>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Why This</th>
+<th>Why Not Others</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spring Boot</td>
+<td>Mature, huge ecosystem</td>
+<td>Quarkus (less hiring)</td>
+</tr>
+<tr>
+<td>JWT</td>
+<td>Stateless microservices</td>
+<td>Sessions (shared store bottleneck)</td>
+</tr>
+<tr>
+<td>BCrypt</td>
+<td>Adaptive, battle-tested</td>
+<td>MD5/SHA (fast=crackable)</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>Smart broker, easy DLQ</td>
+<td>Kafka (overkill), Redis (no persist)</td>
+</tr>
+<tr>
+<td>React</td>
+<td>Biggest ecosystem</td>
+<td>Angular (steeper curve)</td>
+</tr>
+<tr>
+<td>Vite</td>
+<td>Fast HMR, modern</td>
+<td>CRA (deprecated)</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>Familiar, ubiquitous</td>
+<td>PostgreSQL (better, but less familiar)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="monolith-vs-microservices" tabindex="-1">Monolith vs Microservices</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Monolith</th>
+<th>Microservices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deploy</td>
+<td>One artifact</td>
+<td>Many</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>All or nothing</td>
+<td>Per-service</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>Code</td>
+<td>Operational</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>Easy (ACID)</td>
+<td>Hard (Saga)</td>
+</tr>
+<tr>
+<td>Teams</td>
+<td>Single team</td>
+<td>Multiple teams</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Small teams</td>
+<td>Large org</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="9-interview-trap-questions" tabindex="-1">9. Interview Trap Questions</h1>
+<h2 id="trap-1-string-pool" tabindex="-1">Trap 1: String Pool</h2>
+<pre><code class="language-java">String a = &quot;abc&quot;;
+String b = &quot;abc&quot;;
+String c = new String(&quot;abc&quot;);
+a == b;      // true (same pool reference)
+a == c;      // false (new object)
+a.equals(c); // true (content)
+</code></pre>
+<blockquote>
+<p>Ask: “What’s the output and why?”</p>
+</blockquote>
+<h2 id="trap-2-volatile-" tabindex="-1">Trap 2: volatile ++</h2>
+<pre><code class="language-java">volatile int count = 0;
+count++;  // NOT thread-safe! Read-modify-write
+// Use AtomicInteger instead
+</code></pre>
+<h2 id="trap-3-hashmap-equals-only" tabindex="-1">Trap 3: HashMap equals only</h2>
+<pre><code class="language-java">// Override equals but NOT hashCode
+Set&lt;User&gt; set = new HashSet&lt;&gt;();
+set.add(userA);
+set.contains(userB);  // false even if equals true!
+</code></pre>
+<h2 id="trap-4-this-in-inner-class" tabindex="-1">Trap 4: this in inner class</h2>
+<pre><code class="language-java">class Outer {
+    void method() {
+        Runnable r = () -&gt; {
+            // this refers to Outer! (lexical)
+        };
+        Runnable r2 = new Runnable() {
+            public void run() {
+                // this refers to anonymous Runnable
+            }
+        };
+    }
+}
+</code></pre>
+<h2 id="trap-5-promise-order" tabindex="-1">Trap 5: Promise order</h2>
+<pre><code class="language-js">Promise.resolve(1)
+  .then(x =&gt; { console.log(x); return x + 1; })
+  .then(x =&gt; console.log(x));
+// Output: 1, 2 (chaining works)
+</code></pre>
+<h2 id="trap-6-useeffect-with-object-deps" tabindex="-1">Trap 6: useEffect with object deps</h2>
+<pre><code class="language-js">useEffect(() =&gt; {}, [{id: 1}]);  // Runs every render!
+// Object is new reference each time
+</code></pre>
+<hr>
+<h1 id="10-one-page-full-stack-flow" tabindex="-1">10. One-Page Full-Stack Flow</h1>
+<h2 id="login-request-journey" tabindex="-1">Login Request Journey</h2>
+<pre><code>[Browser] Enter credentials
+    ↓
+[React] LoginForm onSubmit
+    axios.post('/auth/login', {email, password})
+    ↓
+[Axios Interceptor] Attach base URL
+    ↓
+[Gateway :8888] Route to auth-service
+    Skip JWT filter (public endpoint)
+    ↓
+[Auth Service :8081]
+    AuthController.login()
+    ↓
+    AuthService.authenticate()
+    ↓
+    AuthenticationManager
+    ↓
+    UserDetailsService + BCrypt check
+    ↓
+    JwtService.generateToken()
+    ↓
+[Response] {accessToken, refreshToken, user}
+    ↓
+[Axios Interceptor] Store in localStorage
+    ↓
+[React AuthContext] setUser(), navigate('/dashboard')
+    ↓
+[Subsequent Requests]
+    Authorization: Bearer &lt;accessToken&gt;
+    ↓
+[Gateway] Validate JWT signature
+    Inject X-User-Id, X-User-Role headers
+    ↓
+[Target Service] Process with user context
+</code></pre>
+<hr>
+<div class="remember" style="text-align: center; font-size: 12pt; padding: 15mm;">
+<p><strong>Quick Review Tips:</strong></p>
+<ol>
+<li>Read tables aloud — hearing reinforces memory</li>
+<li>Explain concepts to an imaginary interviewer</li>
+<li>Trace through code with finger/pen</li>
+<li>If stuck, think “What would break?”</li>
+</ol>
+<p>You’ve prepared. Now execute.</p>
+</div>
+
+</body>
+</html>

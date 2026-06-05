@@ -1,0 +1,39 @@
+server:
+  port: 9888
+
+spring:
+  application:
+    name: skillsync-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Renu-12207650/skillsync-configs
+          default-label: main
+          clone-on-start: true
+          timeout: 10
+          search-paths: '.'
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:9761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,prometheus
+
+logging:
+  level:
+    org.springframework.cloud.config: DEBUG

@@ -1,0 +1,2738 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Interview Prep</title>
+<style>
+  body { font-family: 'Calibri', 'Segoe UI', Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #222; max-width: 100%; }
+  h1 { font-size: 22pt; color: #007A64; border-bottom: 2px solid #007A64; padding-bottom: 6px; margin-top: 24px; }
+  h2 { font-size: 16pt; color: #009B80; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-top: 20px; }
+  h3 { font-size: 13pt; color: #1a1a1a; margin-top: 16px; }
+  h4 { font-size: 11pt; color: #444; margin-top: 12px; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-family: 'Consolas', 'Courier New', monospace; font-size: 10pt; color: #c7254e; }
+  pre { background: #f6f8fa; border: 1px solid #ddd; padding: 10px; border-radius: 4px; overflow-x: auto; font-family: 'Consolas', monospace; font-size: 9.5pt; }
+  pre code { background: transparent; padding: 0; color: #222; }
+  blockquote { border-left: 4px solid #007A64; background: #f0fbf8; margin: 8px 0; padding: 8px 16px; color: #444; }
+  table { border-collapse: collapse; margin: 8px 0; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+  th { background: #007A64; color: white; }
+  tr:nth-child(even) { background: #f7f7f7; }
+  ul, ol { margin: 6px 0; padding-left: 28px; }
+  li { margin: 3px 0; }
+  a { color: #007A64; }
+  hr { border: none; border-top: 2px solid #ddd; margin: 20px 0; }
+  strong { color: #007A64; }
+</style>
+</head><body>
+<h1>SkillSync Interview Prep — Java Full Stack (React)</h1>
+<blockquote>
+<p><strong>Interview in 48 hrs.</strong> Day 1: Core concepts. Day 2 morning: Project viva + tricky Qs. Ctrl+F any topic.</p>
+</blockquote>
+<h2>Table of Contents</h2>
+<h3>Backend (Java side)</h3>
+<ol>
+<li><a href="#study-plan">48-hr Study Plan</a></li>
+<li><a href="#core-java">Core Java</a></li>
+<li><a href="#collections--streams">Collections &amp; Streams</a></li>
+<li><a href="#multithreading">Multithreading</a></li>
+<li><a href="#spring-boot">Spring Boot</a></li>
+<li><a href="#spring-security--jwt">Spring Security &amp; JWT</a></li>
+<li><a href="#jpa--hibernate">JPA / Hibernate</a></li>
+<li><a href="#microservices-patterns">Microservices Patterns</a></li>
+<li><a href="#rest-api-design">REST API Design</a></li>
+<li><a href="#sql">SQL</a></li>
+<li><a href="#design-patterns">Design Patterns</a></li>
+<li><a href="#dsa-quick-reference">DSA Quick Reference</a></li>
+</ol>
+<h3>Frontend (React side)</h3>
+<ol start="13">
+<li><a href="#html5-essentials">HTML5 Essentials</a></li>
+<li><a href="#css-deep-dive">CSS Deep Dive</a></li>
+<li><a href="#javascript-fundamentals">JavaScript Fundamentals</a></li>
+<li><a href="#typescript-essentials">TypeScript Essentials</a></li>
+<li><a href="#react-comprehensive">React (Comprehensive)</a></li>
+<li><a href="#state-management">State Management</a></li>
+<li><a href="#forms--validation">Forms &amp; Validation</a></li>
+<li><a href="#browser--web-apis">Browser &amp; Web APIs</a></li>
+<li><a href="#frontend-performance">Frontend Performance</a></li>
+<li><a href="#frontend-security">Frontend Security</a></li>
+<li><a href="#testing-frontend--backend">Testing (Frontend &amp; Backend)</a></li>
+<li><a href="#build-tools-vite-webpack">Build Tools (Vite, Webpack)</a></li>
+<li><a href="#accessibility-a11y">Accessibility (a11y)</a></li>
+</ol>
+<h3>Project &amp; Behavioral</h3>
+<ol start="26">
+<li><a href="#skillsync-project-viva">SkillSync Project Viva</a> ⭐ <strong>most important</strong></li>
+<li><a href="#system-design-lite">System Design Lite</a></li>
+<li><a href="#tricky-interview-qs">Tricky Interview Qs</a></li>
+<li><a href="#hr--behavioral">HR / Behavioral</a></li>
+</ol>
+<hr>
+<h2>Study Plan</h2>
+<h3>Day 1 (Tomorrow)</h3>
+<ul>
+<li><strong>Morning (3h)</strong>: Core Java + Collections + Multithreading</li>
+<li><strong>Afternoon (3h)</strong>: Spring Boot + Security + JPA</li>
+<li><strong>Evening (2h)</strong>: React fundamentals + hooks</li>
+</ul>
+<h3>Day 2 (Interview day — morning before)</h3>
+<ul>
+<li><strong>1h</strong>: SkillSync project walkthrough — <strong>rehearse out loud</strong></li>
+<li><strong>1h</strong>: SQL queries + system design lite</li>
+<li><strong>30min</strong>: Tricky Qs + HR answers</li>
+<li><strong>Before interview</strong>: Re-read SkillSync section twice</li>
+</ul>
+<hr>
+<h2>Core Java</h2>
+<h3>Q: What&#39;s the difference between JDK, JRE, and JVM?</h3>
+<ul>
+<li><strong>JVM</strong>: Runtime engine that executes bytecode (<code>.class</code> files). Platform-specific.</li>
+<li><strong>JRE</strong>: JVM + core libraries needed to <em>run</em> Java apps.</li>
+<li><strong>JDK</strong>: JRE + compiler (<code>javac</code>) + tools (<code>javap</code>, <code>jar</code>). Needed to <em>develop</em> Java apps.</li>
+</ul>
+<h3>Q: Explain OOP pillars with examples.</h3>
+<ul>
+<li><strong>Encapsulation</strong>: Private fields + public getters/setters. Example: <code>AuthUser</code> entity has <code>private String password</code> with a setter that BCrypt-hashes it.</li>
+<li><strong>Inheritance</strong>: <code>class Dog extends Animal</code>. In Spring, <code>@RestController</code> inherits from <code>@Controller</code>.</li>
+<li><strong>Polymorphism</strong>: <ul>
+<li><em>Compile-time</em> (method overloading): same name, different params.</li>
+<li><em>Runtime</em> (method overriding): child overrides parent method. Example: <code>toString()</code> override.</li>
+</ul>
+</li>
+<li><strong>Abstraction</strong>: Hide implementation via abstract classes / interfaces. Example: <code>JpaRepository</code> interface — you just declare methods, Spring implements.</li>
+</ul>
+<h3>Q: <code>==</code> vs <code>.equals()</code>?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>==</code></th>
+<th><code>.equals()</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Compares</td>
+<td>reference (address)</td>
+<td>content</td>
+</tr>
+<tr>
+<td>Primitives</td>
+<td>value</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Default Object</td>
+<td>reference</td>
+<td>reference (Object&#39;s default)</td>
+</tr>
+<tr>
+<td>Override needed?</td>
+<td>No (operator)</td>
+<td>Yes, to compare content</td>
+</tr>
+</tbody></table>
+<p><strong>Tricky example (String pool):</strong></p>
+<pre><code class="language-java">String a = &quot;abc&quot;;              // pooled
+String b = &quot;abc&quot;;              // same pool reference
+String c = new String(&quot;abc&quot;);  // new heap object
+
+a == b;          // true — same pooled reference
+a == c;          // false — different objects
+a.equals(c);     // true — same content
+</code></pre>
+<p><strong>Remember:</strong> <em>&quot;<code>==</code> asks &#39;same box?&#39; — <code>.equals()</code> asks &#39;same content?&#39;&quot;</em></p>
+<h3>Q: Why override <code>equals()</code> and <code>hashCode()</code> together?</h3>
+<p><strong>Rule (memorize this):</strong></p>
+<blockquote>
+<p>If <code>a.equals(b)</code> is <code>true</code>, then <code>a.hashCode()</code> MUST equal <code>b.hashCode()</code>.</p>
+</blockquote>
+<p><strong>Why it matters:</strong>
+Hash-based collections (<code>HashMap</code>, <code>HashSet</code>, <code>HashTable</code>) work in 2 steps:</p>
+<ol>
+<li>Use <code>hashCode()</code> to find the bucket.</li>
+<li>Use <code>equals()</code> to find the exact match within that bucket.</li>
+</ol>
+<p>If you only override <code>equals()</code>, two &quot;equal&quot; objects land in <strong>different buckets</strong> → <code>set.contains(obj)</code> returns false, <code>map.get(key)</code> returns null. Bug city.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">User a = new User(1, &quot;Renu&quot;);
+User b = new User(1, &quot;Renu&quot;);
+Set&lt;User&gt; s = new HashSet&lt;&gt;();
+s.add(a);
+s.contains(b); // false if hashCode() not overridden!
+</code></pre>
+<p><strong>Remember:</strong> <em>&quot;Override equals → override hashCode. Otherwise HashMap breaks silently.&quot;</em> Lombok&#39;s <code>@EqualsAndHashCode</code> does both for you in one annotation.</p>
+<h3>Q: Abstract class vs Interface?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Abstract class</th>
+<th>Interface</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Methods</td>
+<td>Can have implemented + abstract</td>
+<td>Default/static allowed (Java 8+), rest abstract</td>
+</tr>
+<tr>
+<td>Fields</td>
+<td>Any (instance, static, final)</td>
+<td><code>public static final</code> only</td>
+</tr>
+<tr>
+<td>Inheritance</td>
+<td>Single (<code>extends</code>)</td>
+<td>Multiple (<code>implements</code>)</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>&quot;is-a&quot; with shared code</td>
+<td>Capability contract</td>
+</tr>
+</tbody></table>
+<h3>Q: Final vs Finally vs Finalize?</h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Type</th>
+<th>Purpose</th>
+<th>Memorize</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>final</code></td>
+<td>keyword</td>
+<td>restrict modification</td>
+<td>&quot;final = locked forever&quot;</td>
+</tr>
+<tr>
+<td><code>finally</code></td>
+<td>block</td>
+<td>always run (cleanup)</td>
+<td>&quot;finally = always runs&quot;</td>
+</tr>
+<tr>
+<td><code>finalize()</code></td>
+<td>method</td>
+<td>called by GC before collection (deprecated)</td>
+<td>&quot;finalize = farewell&quot;</td>
+</tr>
+</tbody></table>
+<pre><code class="language-java">final class Constants {}            // can&#39;t extend
+final int X = 5;                    // can&#39;t reassign
+try { ... } finally { closeAll(); } // always runs
+</code></pre>
+<p><strong>Gotcha:</strong> <code>finally</code> runs even if try has <code>return</code>. Doesn&#39;t run only on <code>System.exit()</code> or JVM crash.</p>
+<h3>Q: What&#39;s new in Java 8+?</h3>
+<ul>
+<li><strong>Lambdas</strong>: <code>list.forEach(x -&gt; System.out.println(x))</code></li>
+<li><strong>Streams</strong>: <code>list.stream().filter(x -&gt; x &gt; 5).collect(toList())</code></li>
+<li><strong>Optional</strong>: <code>Optional.ofNullable(obj).orElse(default)</code></li>
+<li><strong>Default methods</strong> in interfaces</li>
+<li><strong><code>var</code></strong> (Java 10): local type inference</li>
+<li><strong>Records</strong> (Java 14): immutable data classes: <code>record User(String name, int age){}</code></li>
+<li><strong>Sealed classes</strong> (Java 17)</li>
+<li><strong>Text blocks</strong>: <code>&quot;&quot;&quot;multi-line string&quot;&quot;&quot;</code></li>
+</ul>
+<h3>Q: Checked vs Unchecked exceptions?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Checked</th>
+<th>Unchecked</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Parent</td>
+<td><code>Exception</code> (not RuntimeException)</td>
+<td><code>RuntimeException</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td><code>IOException</code>, <code>SQLException</code></td>
+<td><code>NullPointerException</code>, <code>IllegalArgumentException</code></td>
+</tr>
+<tr>
+<td>Must catch / declare?</td>
+<td>Yes (compiler enforces)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Recoverable (file missing, network)</td>
+<td>Programming bugs</td>
+</tr>
+</tbody></table>
+<p><strong>Spring philosophy:</strong> Wraps all checked into runtime (e.g., <code>JdbcTemplate</code> converts <code>SQLException</code> → <code>DataAccessException</code>). Cleaner code, no boilerplate <code>throws</code> clauses.</p>
+<p><strong>Remember:</strong> <em>&quot;Checked = compiler nags. Unchecked = your bug.&quot;</em></p>
+<h3>Q: String vs StringBuilder vs StringBuffer?</h3>
+<ul>
+<li><strong>String</strong>: Immutable. Each concatenation creates new object.</li>
+<li><strong>StringBuilder</strong>: Mutable, <strong>not thread-safe</strong>, faster.</li>
+<li><strong>StringBuffer</strong>: Mutable, <strong>thread-safe</strong> (synchronized), slower.</li>
+</ul>
+<hr>
+<h2>Collections &amp; Streams</h2>
+<h3>The hierarchy:</h3>
+<pre><code>Collection (interface)
+├── List (ordered, duplicates allowed)
+│   ├── ArrayList (dynamic array, fast random access)
+│   ├── LinkedList (doubly-linked, fast insert/delete)
+│   └── Vector (synchronized, legacy)
+├── Set (no duplicates)
+│   ├── HashSet (no order)
+│   ├── LinkedHashSet (insertion order)
+│   └── TreeSet (sorted)
+└── Queue / Deque
+    ├── PriorityQueue (sorted)
+    └── ArrayDeque
+
+Map (NOT a Collection)
+├── HashMap (no order)
+├── LinkedHashMap (insertion order)
+├── TreeMap (sorted by key)
+└── ConcurrentHashMap (thread-safe)
+</code></pre>
+<h3>Q: HashMap internal working?</h3>
+<p><strong>The 4-step story (memorize):</strong></p>
+<ol>
+<li><strong>Bucket array</strong>: Internal <code>Node&lt;K,V&gt;[]</code> array, default size <strong>16</strong>, load factor <strong>0.75</strong>.</li>
+<li><strong><code>put(key, value)</code></strong>:<ul>
+<li>Compute <code>hash(key)</code> → bucket index = <code>(n - 1) &amp; hash</code>.</li>
+<li>Empty bucket → insert. Collision → chain (linked list).</li>
+<li><strong>Java 8+</strong>: chain length &gt; 8 → convert to <strong>red-black tree</strong> (O(log n) instead of O(n)).</li>
+</ul>
+</li>
+<li><strong><code>get(key)</code></strong>: compute hash → bucket → traverse list/tree, compare with <code>equals()</code>.</li>
+<li><strong>Resize</strong>: When <code>size &gt; capacity × 0.75</code> → double capacity, rehash all entries.</li>
+</ol>
+<p><strong>Why load factor 0.75?</strong> Sweet spot between space (less = wasted) and time (more = collisions).</p>
+<p><strong>Why initial size 16?</strong> Power of 2 lets bucket index use fast bitwise <code>&amp;</code> instead of <code>%</code>.</p>
+<p><strong>Remember:</strong> <em>&quot;16 buckets, 0.75 load, chain → tree at 8.&quot;</em></p>
+<h3>Q: HashMap vs ConcurrentHashMap vs Hashtable?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>HashMap</th>
+<th>Hashtable</th>
+<th>ConcurrentHashMap</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Thread-safe</td>
+<td>❌</td>
+<td>✅ (full lock)</td>
+<td>✅ (segment lock)</td>
+</tr>
+<tr>
+<td>Null key/value</td>
+<td>1 null key, many null values</td>
+<td>None allowed</td>
+<td>None allowed</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Fastest</td>
+<td>Slowest (single lock)</td>
+<td>Fast (locks per bucket)</td>
+</tr>
+<tr>
+<td>Era</td>
+<td>Modern</td>
+<td>Legacy (Java 1)</td>
+<td>Java 1.5+</td>
+</tr>
+</tbody></table>
+<p><strong>Why ConcurrentHashMap is faster than Hashtable?</strong></p>
+<ul>
+<li>Hashtable: ONE big lock on the whole map → only one thread at a time.</li>
+<li>ConcurrentHashMap (Java 8+): locks only the <strong>bucket node</strong> being written using CAS + <code>synchronized</code>. 16 threads can write to 16 different buckets simultaneously.</li>
+</ul>
+<p><strong>Remember:</strong> <em>&quot;HashMap = solo. Hashtable = traffic jam. ConcurrentHashMap = multi-lane highway.&quot;</em></p>
+<h3>Q: Fail-fast vs Fail-safe iterators?</h3>
+<ul>
+<li><strong>Fail-fast</strong> (<code>ArrayList</code>, <code>HashMap</code>): Throw <code>ConcurrentModificationException</code> if collection modified during iteration.</li>
+<li><strong>Fail-safe</strong> (<code>ConcurrentHashMap</code>, <code>CopyOnWriteArrayList</code>): Work on a copy/snapshot. No exception.</li>
+</ul>
+<h3>Q: Stream API essentials:</h3>
+<p><strong>The pipeline mental model:</strong></p>
+<blockquote>
+<p><em>&quot;Source → intermediate ops (lazy) → terminal op (triggers execution).&quot;</em></p>
+</blockquote>
+<pre><code class="language-java">// Filter + map + collect
+List&lt;String&gt; names = users.stream()           // SOURCE
+    .filter(u -&gt; u.getAge() &gt; 18)              // intermediate (lazy)
+    .map(User::getName)                        // intermediate (lazy)
+    .collect(Collectors.toList());             // TERMINAL (executes pipeline)
+
+// Grouping
+Map&lt;Role, List&lt;User&gt;&gt; byRole = users.stream()
+    .collect(Collectors.groupingBy(User::getRole));
+
+// Reduce
+int sum = nums.stream().reduce(0, Integer::sum);
+
+// Parallel (only when CPU-bound + large data + stateless ops)
+list.parallelStream().forEach(...);
+</code></pre>
+<p><strong>Key principles:</strong></p>
+<ul>
+<li><strong>Lazy</strong>: Intermediate ops don&#39;t run until terminal op is called.</li>
+<li><strong>Single-use</strong>: A stream can be consumed only once — throws <code>IllegalStateException</code> if reused.</li>
+<li><strong>No mutation</strong>: Streams don&#39;t modify the source.</li>
+</ul>
+<p><strong>Remember:</strong> <em>&quot;Filter → map → collect. Lazy until terminal.&quot;</em></p>
+<h3>Q: <code>map</code> vs <code>flatMap</code>?</h3>
+<ul>
+<li><code>map</code>: 1→1 transformation. <code>Stream&lt;User&gt;</code> → <code>Stream&lt;String&gt;</code>.</li>
+<li><code>flatMap</code>: 1→many, flatten. <code>Stream&lt;List&lt;String&gt;&gt;</code> → <code>Stream&lt;String&gt;</code>.</li>
+</ul>
+<hr>
+<h2>Multithreading</h2>
+<h3>Q: Thread vs Runnable?</h3>
+<ul>
+<li><code>Thread</code>: Extend class. Only single inheritance.</li>
+<li><code>Runnable</code>: Implement interface. Preferred — allows other inheritance. Use <code>new Thread(runnable).start()</code>.</li>
+<li>Modern: <code>ExecutorService</code> / <code>CompletableFuture</code>.</li>
+</ul>
+<h3>Q: <code>synchronized</code> keyword?</h3>
+<p><strong>Two ways to use it:</strong></p>
+<pre><code class="language-java">// 1. Method-level: locks `this` (or class object for static)
+public synchronized void increment() { count++; }
+
+// 2. Block-level: lock a specific object (preferred — finer control)
+synchronized(lockObj) { ... }
+</code></pre>
+<p><strong>What it guarantees:</strong></p>
+<ol>
+<li><strong>Mutual exclusion</strong> — only one thread inside at a time.</li>
+<li><strong>Visibility</strong> — changes flush to main memory on exit.</li>
+<li><strong>Happens-before</strong> ordering (JMM guarantee).</li>
+</ol>
+<h3>Q: <code>volatile</code> vs <code>synchronized</code>?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>volatile</code></th>
+<th><code>synchronized</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Visibility</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Atomicity</td>
+<td>❌ (only single read/write)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Mutual exclusion</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Performance cost</td>
+<td>Low</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Status flags (<code>boolean running</code>)</td>
+<td>Multi-step state changes</td>
+</tr>
+</tbody></table>
+<p><strong>The classic mistake:</strong></p>
+<pre><code class="language-java">volatile int count;
+count++;   // STILL not thread-safe! (read-modify-write — 3 ops)
+</code></pre>
+<p>Use <code>AtomicInteger</code> for counters, or <code>synchronized</code> for compound operations.</p>
+<p><strong>Remember:</strong> <em>&quot;<code>volatile</code> = always see the latest. <code>synchronized</code> = only I&#39;m doing it.&quot;</em></p>
+<h3>Q: Executor Framework?</h3>
+<pre><code class="language-java">ExecutorService pool = Executors.newFixedThreadPool(4);
+Future&lt;Integer&gt; future = pool.submit(() -&gt; expensiveCall());
+Integer result = future.get(); // blocks
+pool.shutdown();
+</code></pre>
+<h3>Q: CompletableFuture:</h3>
+<pre><code class="language-java">CompletableFuture.supplyAsync(() -&gt; fetchUser(id))
+    .thenApply(user -&gt; user.getEmail())
+    .thenAccept(email -&gt; send(email))
+    .exceptionally(ex -&gt; handle(ex));
+</code></pre>
+<h3>Q: Deadlock — how to prevent?</h3>
+<ul>
+<li>Always acquire locks in the same order.</li>
+<li>Use <code>tryLock</code> with timeout.</li>
+<li>Avoid nested locks.</li>
+</ul>
+<hr>
+<h2>Spring Boot</h2>
+<h3>Q: What is Spring Boot vs Spring?</h3>
+<ul>
+<li><strong>Spring Framework</strong>: Core DI/IoC container, AOP, MVC. Requires lots of XML/Java config.</li>
+<li><strong>Spring Boot</strong>: Opinionated starter on top of Spring. Auto-configuration, embedded Tomcat, starters, production-ready features (Actuator).</li>
+</ul>
+<h3>Q: What is IoC / DI?</h3>
+<p><strong>One-liner:</strong></p>
+<blockquote>
+<p><em>&quot;Don&#39;t create your dependencies. Ask for them.&quot;</em></p>
+</blockquote>
+<p><strong>IoC (Inversion of Control)</strong>: The container (Spring) creates and wires objects — not your code.
+<strong>DI (Dependency Injection)</strong>: How IoC is achieved — inject dependencies via constructor/setter/field.</p>
+<p><strong>Without DI:</strong></p>
+<pre><code class="language-java">class AuthService {
+    AuthUserRepository repo = new AuthUserRepositoryImpl();  // tight coupling!
+}
+</code></pre>
+<p><strong>With DI (SkillSync style):</strong></p>
+<pre><code class="language-java">@Service
+@RequiredArgsConstructor
+class AuthService {
+    private final AuthUserRepository repo;  // Spring injects via constructor
+}
+</code></pre>
+<p><strong>Constructor vs Setter vs Field:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Constructor</td>
+<td>Immutable, easy testing, fail-fast on missing dep</td>
+<td>Verbose without Lombok</td>
+<td><strong>Default choice</strong> — SkillSync uses this</td>
+</tr>
+<tr>
+<td>Setter</td>
+<td>Optional dependencies</td>
+<td>Mutable, can forget to set</td>
+<td>Optional dependencies</td>
+</tr>
+<tr>
+<td>Field (<code>@Autowired</code> on field)</td>
+<td>Less code</td>
+<td>Hard to test, hidden deps, can&#39;t be <code>final</code></td>
+<td>Avoid — anti-pattern</td>
+</tr>
+</tbody></table>
+<p><strong>Remember:</strong> <em>&quot;Constructor inject = mandatory dep. Setter = optional. Field = lazy + bad.&quot;</em></p>
+<h3>Q: Bean scopes?</h3>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Lifespan</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>singleton</code> (default)</td>
+<td>One per Spring container</td>
+<td>Stateless services (99% of beans)</td>
+</tr>
+<tr>
+<td><code>prototype</code></td>
+<td>New instance per <code>getBean()</code> call</td>
+<td>Stateful objects, expensive but transient</td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>Per HTTP request (web only)</td>
+<td>Per-request data</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>Per HTTP session (web only)</td>
+<td>User-specific session data</td>
+</tr>
+<tr>
+<td><code>application</code></td>
+<td>Per ServletContext</td>
+<td>App-wide servlet beans</td>
+</tr>
+<tr>
+<td><code>websocket</code></td>
+<td>Per WebSocket session</td>
+<td>Chat apps</td>
+</tr>
+</tbody></table>
+<p><strong>Common gotcha:</strong> Injecting a <code>prototype</code> bean into a <code>singleton</code> — you get the SAME prototype instance forever (singleton resolved once). Fix with <code>ObjectFactory&lt;MyBean&gt;</code> or <code>@Lookup</code>.</p>
+<p><strong>Remember:</strong> <em>&quot;Singleton = one ring to rule them all. Prototype = new every time.&quot;</em></p>
+<h3>Q: Bean lifecycle?</h3>
+<ol>
+<li>Instantiate</li>
+<li>Populate properties (DI)</li>
+<li><code>BeanNameAware.setBeanName()</code></li>
+<li><code>@PostConstruct</code> / <code>InitializingBean.afterPropertiesSet()</code> / custom init method</li>
+<li>Ready for use</li>
+<li><code>@PreDestroy</code> / <code>DisposableBean.destroy()</code> / custom destroy method</li>
+</ol>
+<h3>Q: Key annotations</h3>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Component</code></td>
+<td>Generic Spring-managed bean</td>
+</tr>
+<tr>
+<td><code>@Service</code></td>
+<td>Business logic (semantic alias)</td>
+</tr>
+<tr>
+<td><code>@Repository</code></td>
+<td>DAO layer; translates SQL exceptions</td>
+</tr>
+<tr>
+<td><code>@Controller</code></td>
+<td>MVC controller (returns view)</td>
+</tr>
+<tr>
+<td><code>@RestController</code></td>
+<td><code>@Controller</code> + <code>@ResponseBody</code></td>
+</tr>
+<tr>
+<td><code>@Configuration</code></td>
+<td>Config class with <code>@Bean</code> methods</td>
+</tr>
+<tr>
+<td><code>@Bean</code></td>
+<td>Method-level bean definition</td>
+</tr>
+<tr>
+<td><code>@Autowired</code></td>
+<td>Inject by type</td>
+</tr>
+<tr>
+<td><code>@Qualifier(&quot;name&quot;)</code></td>
+<td>Disambiguate when multiple beans</td>
+</tr>
+<tr>
+<td><code>@Value(&quot;${prop}&quot;)</code></td>
+<td>Inject property</td>
+</tr>
+<tr>
+<td><code>@Transactional</code></td>
+<td>Declarative transaction</td>
+</tr>
+<tr>
+<td><code>@RequestMapping</code> / <code>@GetMapping</code> / <code>@PostMapping</code></td>
+<td>REST routing</td>
+</tr>
+<tr>
+<td><code>@PathVariable</code> / <code>@RequestParam</code> / <code>@RequestBody</code></td>
+<td>Request binding</td>
+</tr>
+<tr>
+<td><code>@Valid</code></td>
+<td>Trigger Bean Validation</td>
+</tr>
+<tr>
+<td><code>@ControllerAdvice</code></td>
+<td>Global exception handler</td>
+</tr>
+<tr>
+<td><code>@EnableCaching</code> / <code>@Cacheable</code></td>
+<td>Cache</td>
+</tr>
+<tr>
+<td><code>@Async</code></td>
+<td>Run method in thread pool</td>
+</tr>
+<tr>
+<td><code>@Scheduled</code></td>
+<td>Cron/fixed-rate task</td>
+</tr>
+</tbody></table>
+<h3>Q: Spring Boot starter — what is it?</h3>
+<p>Curated dependencies for a feature. Example: <code>spring-boot-starter-web</code> pulls in Tomcat, Jackson, Spring MVC. Single import instead of 10.</p>
+<h3>Q: How does auto-configuration work?</h3>
+<ul>
+<li><code>@SpringBootApplication</code> = <code>@Configuration + @EnableAutoConfiguration + @ComponentScan</code>.</li>
+<li><code>@EnableAutoConfiguration</code> triggers loading from <code>META-INF/spring.factories</code> (or <code>AutoConfiguration.imports</code> in 2.7+).</li>
+<li>Each auto-config class uses <code>@ConditionalOn...</code> (e.g., <code>@ConditionalOnClass(DataSource.class)</code>) to configure beans only if dependencies present.</li>
+</ul>
+<h3>Q: Profiles?</h3>
+<ul>
+<li><code>@Profile(&quot;dev&quot;)</code> on bean/class.</li>
+<li><code>spring.profiles.active=dev</code> in <code>application.yml</code> or env var.</li>
+<li>Separate configs: <code>application-dev.yml</code>, <code>application-prod.yml</code>.</li>
+</ul>
+<h3>Q: Exception handling:</h3>
+<pre><code class="language-java">@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handle(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(new ErrorResponse(ex.getMessage()));
+    }
+}
+</code></pre>
+<p><strong>SkillSync uses this</strong> in <code>skillsync-common</code> — centralized across all services.</p>
+<h3>Q: Validation:</h3>
+<pre><code class="language-java">@PostMapping(&quot;/register&quot;)
+public AuthResponse register(@Valid @RequestBody RegisterRequest req) { ... }
+
+public class RegisterRequest {
+    @NotBlank @Email String email;
+    @Size(min=8) String password;
+}
+</code></pre>
+<h3>Q: <code>@Transactional</code> — how it works?</h3>
+<p><strong>The mechanism (proxy-based AOP):</strong></p>
+<ol>
+<li>Spring wraps your <code>@Service</code> bean in a proxy.</li>
+<li>Proxy intercepts the method call.</li>
+<li>Before method: <code>BEGIN TRANSACTION</code>.</li>
+<li>After method success: <code>COMMIT</code>.</li>
+<li>If <code>RuntimeException</code> thrown: <code>ROLLBACK</code>.</li>
+</ol>
+<p><strong>The 3 famous gotchas:</strong></p>
+<p><strong>Gotcha 1 — Self-invocation:</strong></p>
+<pre><code class="language-java">@Service
+class UserService {
+    public void outer() { this.inner(); }   // ⚠️ bypasses proxy
+    @Transactional public void inner() { ... }
+}
+</code></pre>
+<p><code>this.inner()</code> calls the bare method, not through the proxy. Tx ignored. Fix: split into two beans, or <code>@EnableAspectJAutoProxy(exposeProxy=true)</code> + <code>((UserService) AopContext.currentProxy()).inner()</code>.</p>
+<p><strong>Gotcha 2 — Checked exceptions don&#39;t rollback by default:</strong></p>
+<pre><code class="language-java">@Transactional                                // rolls back on RuntimeException only
+@Transactional(rollbackFor = Exception.class) // rolls back on ANY exception
+</code></pre>
+<p><strong>Gotcha 3 — Private methods can&#39;t be <code>@Transactional</code></strong> (proxy can&#39;t intercept).</p>
+<p><strong>Propagation modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>REQUIRED</code> (default)</td>
+<td>Join existing tx, or create new</td>
+</tr>
+<tr>
+<td><code>REQUIRES_NEW</code></td>
+<td>Always new tx; suspend existing</td>
+</tr>
+<tr>
+<td><code>NESTED</code></td>
+<td>Nested savepoint within existing</td>
+</tr>
+<tr>
+<td><code>SUPPORTS</code></td>
+<td>Join if exists, else non-tx</td>
+</tr>
+<tr>
+<td><code>MANDATORY</code></td>
+<td>Throw if no tx exists</td>
+</tr>
+<tr>
+<td><code>NEVER</code></td>
+<td>Throw if tx exists</td>
+</tr>
+</tbody></table>
+<p><strong>Isolation levels (problems they prevent):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Dirty read</th>
+<th>Non-repeatable read</th>
+<th>Phantom read</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ_UNCOMMITTED</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>READ_COMMITTED</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>REPEATABLE_READ (MySQL default)</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<p><strong>Remember:</strong> <em>&quot;Proxy intercepts. Self-call skips. Runtime rolls back.&quot;</em></p>
+<h3>Q: How do you define a Global Exception Handler?</h3>
+<p><strong>Rule (one-liner):</strong></p>
+<blockquote>
+<p><em>&quot;Don&#39;t <code>try-catch</code> in every controller. Catch all exceptions in ONE central class using <code>@RestControllerAdvice</code> + <code>@ExceptionHandler</code>.&quot;</em></p>
+</blockquote>
+<p><strong>Why it matters:</strong></p>
+<ul>
+<li><strong>Consistency</strong>: All errors return the same JSON shape.</li>
+<li><strong>DRY</strong>: No exception boilerplate scattered across controllers.</li>
+<li><strong>HTTP semantics</strong>: Map exception types → correct status codes (<code>404</code>, <code>409</code>, <code>500</code>).</li>
+</ul>
+<p><strong>The 3 ingredients:</strong></p>
+<pre><code class="language-java">@RestControllerAdvice   // 1. Apply to ALL controllers (= @ControllerAdvice + @ResponseBody)
+@Slf4j
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)   // 2. Which exception
+    public ResponseEntity&lt;ErrorResponse&gt; handle(ResourceNotFoundException ex) {
+        log.warn(&quot;Resource not found: {}&quot;, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)   // 3. Status + body
+                .body(ErrorResponse.builder()
+                        .timestamp(LocalDateTime.now().toString())
+                        .status(404)
+                        .error(&quot;Not Found&quot;)
+                        .message(ex.getMessage())
+                        .build());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)   // @Valid failures
+    public ResponseEntity&lt;Map&lt;String,Object&gt;&gt; handleValidation(MethodArgumentNotValidException ex) {
+        Map&lt;String,String&gt; fieldErrors = new HashMap&lt;&gt;();
+        ex.getBindingResult().getAllErrors().forEach(err -&gt; {
+            fieldErrors.put(((FieldError)err).getField(), err.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(Map.of(
+            &quot;status&quot;, 400, &quot;error&quot;, &quot;Validation Failed&quot;, &quot;errors&quot;, fieldErrors));
+    }
+
+    @ExceptionHandler(Exception.class)   // catch-all, MUST be last
+    public ResponseEntity&lt;ErrorResponse&gt; handleGeneric(Exception ex) {
+        log.error(&quot;Unexpected error: &quot;, ex);
+        return ResponseEntity.status(500)
+                .body(buildError(500, &quot;An unexpected error occurred.&quot;));
+    }
+}
+</code></pre>
+<p><strong><code>@ControllerAdvice</code> vs <code>@RestControllerAdvice</code>:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>@ControllerAdvice</code></th>
+<th><code>@RestControllerAdvice</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Returns</td>
+<td>View name (Thymeleaf)</td>
+<td>JSON (auto-<code>@ResponseBody</code>)</td>
+</tr>
+<tr>
+<td>Use for</td>
+<td>Server-rendered apps</td>
+<td>REST APIs (SkillSync uses this)</td>
+</tr>
+</tbody></table>
+<p><strong>SkillSync&#39;s GlobalExceptionHandler covers 8 scenarios:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Exception</th>
+<th>Status</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>MethodArgumentNotValidException</code></td>
+<td>400</td>
+<td><code>@Valid</code> failed</td>
+</tr>
+<tr>
+<td><code>HttpMessageNotReadableException</code></td>
+<td>400</td>
+<td>Malformed JSON body</td>
+</tr>
+<tr>
+<td><code>BadCredentialsException</code></td>
+<td>401</td>
+<td>Wrong login credentials</td>
+</tr>
+<tr>
+<td><code>AccessDeniedException</code></td>
+<td>403</td>
+<td>Re-thrown so Spring Security handles it</td>
+</tr>
+<tr>
+<td><code>UnauthorizedActionException</code></td>
+<td>403</td>
+<td>Custom — editing someone else&#39;s data</td>
+</tr>
+<tr>
+<td><code>ResourceNotFoundException</code></td>
+<td>404</td>
+<td>Custom — user/skill/session not found</td>
+</tr>
+<tr>
+<td><code>DuplicateEmailException</code></td>
+<td>409</td>
+<td>Register with existing email</td>
+</tr>
+<tr>
+<td><code>Exception.class</code></td>
+<td>500</td>
+<td>Last-resort catch-all</td>
+</tr>
+</tbody></table>
+<p><strong>Smart design</strong>: SkillSync&#39;s handler lives in <code>skillsync-common</code> so <strong>all 7 microservices share it</strong> via dependency. Auto-detected because each service scans <code>in.skillsync</code> package.</p>
+<p><strong>The 4 famous gotchas:</strong></p>
+<ol>
+<li><strong>Filter exceptions are NOT caught</strong> — <code>@RestControllerAdvice</code> runs in the dispatcher servlet. JWT filter errors must use <code>AuthenticationEntryPoint</code> / <code>AccessDeniedHandler</code>.</li>
+<li><strong>Order matters</strong> — most specific exceptions first; <code>Exception.class</code> always last (else it swallows everything).</li>
+<li><strong>Don&#39;t leak internal info</strong> — never <code>.message(ex.toString())</code> to client. Log full stack server-side; return generic message.</li>
+<li><strong>Don&#39;t catch <code>Throwable</code> or <code>Error</code></strong> — let JVM-fatal errors (OOM, StackOverflow) propagate.</li>
+</ol>
+<p><strong>Targeting specific scope:</strong></p>
+<pre><code class="language-java">@RestControllerAdvice(basePackages = &quot;in.skillsync.auth.controller&quot;)
+@RestControllerAdvice(assignableTypes = {AuthController.class})
+@RestControllerAdvice(annotations = {RestController.class})
+</code></pre>
+<p><strong>Remember:</strong> <em>&quot;<code>@RestControllerAdvice</code> = JSON. <code>@ControllerAdvice</code> = views. Specific first, <code>Exception.class</code> last. Filters bypass it.&quot;</em></p>
+<hr>
+<h2>Spring Security &amp; JWT</h2>
+<h3>Q: How does Spring Security work?</h3>
+<p>Filter chain: each request passes through a chain of filters (<code>SecurityFilterChain</code>). Authentication filter extracts credentials → <code>AuthenticationManager</code> → <code>AuthenticationProvider</code> → <code>UserDetailsService</code> → populate <code>SecurityContextHolder</code>. Authorization filter checks roles.</p>
+<h3>Q: JWT vs Session?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Session</th>
+<th>JWT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>State</td>
+<td>Server-side (DB / Redis)</td>
+<td>Client-side (token holds state)</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>Sticky sessions OR shared store</td>
+<td><strong>Stateless</strong> — any server can verify</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Cookie (session ID)</td>
+<td><code>Authorization: Bearer &lt;token&gt;</code> header</td>
+</tr>
+<tr>
+<td>Revoke</td>
+<td>Easy (delete from store)</td>
+<td>Hard (token valid until expiry)</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Tiny (~32 chars)</td>
+<td>Larger (~500 chars)</td>
+</tr>
+<tr>
+<td>CSRF risk</td>
+<td>Yes (cookies auto-sent)</td>
+<td>No (header set by JS)</td>
+</tr>
+</tbody></table>
+<p><strong>Why SkillSync uses JWT:</strong> Microservices need to be stateless. With sessions, every service would need to query a shared session store on every request — bottleneck. JWT lets the API gateway validate once and pass user info via headers.</p>
+<p><strong>Mitigation for revoke problem:</strong> Short-lived access tokens (15 min) + refresh tokens (7 days). To force logout, blacklist refresh tokens in Redis.</p>
+<h3>Q: JWT structure?</h3>
+<p><code>header.payload.signature</code> (base64url-encoded)</p>
+<ul>
+<li><strong>Header</strong>: <code>{ &quot;alg&quot;: &quot;HS256&quot;, &quot;typ&quot;: &quot;JWT&quot; }</code></li>
+<li><strong>Payload (claims)</strong>: <code>{ &quot;sub&quot;: userId, &quot;role&quot;: &quot;ROLE_ADMIN&quot;, &quot;exp&quot;: ..., &quot;iat&quot;: ... }</code></li>
+<li><strong>Signature</strong>: <code>HMAC-SHA256(header + &quot;.&quot; + payload, secret)</code></li>
+</ul>
+<h3>Q: How does SkillSync JWT flow work?</h3>
+<ol>
+<li>User POSTs <code>/auth/login</code> with email/password.</li>
+<li>Auth-service validates via <code>AuthenticationManager</code> (BCrypt compare).</li>
+<li>Returns <code>{ accessToken, refreshToken, role, email, userId }</code>.</li>
+<li>Frontend stores access token in memory (refresh in httpOnly cookie ideally; here localStorage).</li>
+<li>Every subsequent request: <code>Authorization: Bearer &lt;accessToken&gt;</code>.</li>
+<li><strong>API Gateway</strong> (<code>JwtAuthenticationFilter</code>) validates signature + expiry. Injects <code>X-User-Id</code>, <code>X-User-Role</code>, <code>X-User-Email</code> headers.</li>
+<li>Downstream services trust these headers via <code>ServiceJwtFilter</code> (in <code>skillsync-common</code>) — no re-validation needed.</li>
+</ol>
+<h3>Q: How is password stored?</h3>
+<ul>
+<li><code>BCryptPasswordEncoder</code> with strength 10 (salt + 2^10 rounds).</li>
+<li>Hash stored as <code>$2a$10$...</code> or <code>$2b$10$...</code>.</li>
+<li>One-way — cannot decrypt, only compare via <code>matches(raw, hashed)</code>.</li>
+</ul>
+<hr>
+<h2>JPA / Hibernate</h2>
+<h3>Q: JPA vs Hibernate?</h3>
+<ul>
+<li><strong>JPA</strong>: Specification (interfaces/annotations).</li>
+<li><strong>Hibernate</strong>: Most popular JPA implementation.</li>
+</ul>
+<h3>Q: Common annotations:</h3>
+<ul>
+<li><code>@Entity</code>, <code>@Table(name=...)</code>, <code>@Id</code>, <code>@GeneratedValue(strategy=IDENTITY)</code></li>
+<li><code>@Column(nullable=false, unique=true, length=255)</code></li>
+<li><code>@OneToOne</code>, <code>@OneToMany(mappedBy=&quot;...&quot;, cascade=CascadeType.ALL)</code>, <code>@ManyToOne</code>, <code>@ManyToMany</code></li>
+<li><code>@JoinColumn(name=&quot;user_id&quot;)</code></li>
+<li><code>@Transient</code> (skip persistence)</li>
+<li><code>@CreationTimestamp</code>, <code>@UpdateTimestamp</code></li>
+</ul>
+<h3>Q: Fetch types?</h3>
+<ul>
+<li><code>EAGER</code>: Load related entities immediately (default for <code>@ManyToOne</code>, <code>@OneToOne</code>).</li>
+<li><code>LAZY</code>: Load on access (default for <code>@OneToMany</code>, <code>@ManyToMany</code>). Preferred for performance, but beware <strong>LazyInitializationException</strong> outside transaction.</li>
+</ul>
+<h3>Q: N+1 problem?</h3>
+<p>Querying a parent with lazy children: 1 query for parents + N queries for each child collection access. Solutions:</p>
+<ul>
+<li><code>@EntityGraph(attributePaths=&quot;children&quot;)</code> on repo method</li>
+<li><code>JOIN FETCH</code> in JPQL: <code>SELECT u FROM User u JOIN FETCH u.orders</code></li>
+<li>Batch fetching: <code>@BatchSize(size=20)</code></li>
+</ul>
+<h3>Q: Spring Data JPA magic methods:</h3>
+<ul>
+<li><code>findByEmail(String email)</code> → auto-generates query</li>
+<li><code>findByEmailAndEnabledTrue(...)</code></li>
+<li><code>findByNameContainingIgnoreCase(String name)</code></li>
+<li>Custom: <code>@Query(&quot;SELECT u FROM User u WHERE ...&quot;)</code></li>
+</ul>
+<h3>Q: First-level vs Second-level cache?</h3>
+<ul>
+<li><strong>L1</strong> (always on): Session-scoped. Same entity queried twice in one tx → one DB hit.</li>
+<li><strong>L2</strong> (optional, e.g. Ehcache, Hazelcast): Application-scoped. Shared across sessions.</li>
+</ul>
+<hr>
+<h2>Microservices Patterns</h2>
+<h3>Q: Monolith vs Microservices?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Monolith</th>
+<th>Microservices</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Deploy</td>
+<td>One artifact</td>
+<td>Independent per service</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>All or nothing</td>
+<td>Scale only the hot service</td>
+</tr>
+<tr>
+<td>Tech stack</td>
+<td>One</td>
+<td>Per-service freedom</td>
+</tr>
+<tr>
+<td>Local dev</td>
+<td>Easy (run one app)</td>
+<td>Hard (run many + deps)</td>
+</tr>
+<tr>
+<td>Network calls</td>
+<td>Method calls (fast)</td>
+<td>Network (slow, can fail)</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>DB transactions easy</td>
+<td>Distributed (saga pattern)</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Small teams / startups</td>
+<td>Large org / independent teams</td>
+</tr>
+</tbody></table>
+<p><strong>The honest take for a junior interview:</strong></p>
+<blockquote>
+<p>&quot;Microservices solve <strong>organizational</strong> problems, not technical ones. A small team is faster with a well-structured monolith. Microservices shine when you have multiple teams that need to deploy independently.&quot;</p>
+</blockquote>
+<p><strong>Remember:</strong> <em>&quot;Monolith = simple but coupled. Microservices = complex but independent.&quot;</em></p>
+<h3>Q: Common patterns:</h3>
+<ol>
+<li><strong>API Gateway</strong>: Single entry point (SkillSync uses Spring Cloud Gateway). Routing, auth, rate limiting.</li>
+<li><strong>Service Discovery</strong>: Eureka / Consul. Services register themselves; others find them dynamically.</li>
+<li><strong>Config Server</strong>: Centralized config (Spring Cloud Config) — SkillSync uses Git-backed.</li>
+<li><strong>Circuit Breaker</strong>: Resilience4j / Hystrix. Prevent cascading failures.</li>
+<li><strong>Saga</strong>: Distributed transactions via event choreography or orchestration.</li>
+<li><strong>Event-Driven</strong>: RabbitMQ/Kafka for async. SkillSync uses RabbitMQ for notifications.</li>
+<li><strong>CQRS</strong>: Separate read and write models.</li>
+<li><strong>Sidecar</strong>: Service mesh (Istio).</li>
+</ol>
+<h3>Q: How do SkillSync services communicate?</h3>
+<ul>
+<li><strong>Sync</strong>: REST via API Gateway (<code>Spring Cloud Gateway</code> with reactive <code>GlobalFilter</code> for JWT).</li>
+<li><strong>Async</strong>: RabbitMQ (notifications — session-booked, mentor-approved events).</li>
+<li><strong>Service discovery</strong>: Eureka — services register with <code>eureka-server:9761</code>. Gateway routes use <code>lb://SKILLSYNC-AUTH-SERVICE</code>.</li>
+</ul>
+<h3>Q: Distributed tracing?</h3>
+<ul>
+<li>Spring Cloud Sleuth + <strong>Zipkin</strong> adds <code>traceId</code>/<code>spanId</code> to every log and propagates across services.</li>
+<li>SkillSync logs show <code>[traceId-spanId]</code> — one request across 5 services can be traced end-to-end.</li>
+</ul>
+<h3>Q: Observability stack?</h3>
+<p><strong>SkillSync has full observability</strong>:</p>
+<ul>
+<li><strong>Metrics</strong>: Prometheus scrapes <code>/actuator/prometheus</code> from every service.</li>
+<li><strong>Logs</strong>: Loki aggregates.</li>
+<li><strong>Traces</strong>: Zipkin.</li>
+<li><strong>Dashboards</strong>: Grafana.</li>
+</ul>
+<hr>
+<h2>REST API Design</h2>
+<h3>Q: REST principles?</h3>
+<ul>
+<li><strong>Stateless</strong>: Server doesn&#39;t store client state.</li>
+<li><strong>Resource-based</strong>: URLs name resources, not actions. <code>/users/1</code> not <code>/getUser?id=1</code>.</li>
+<li><strong>HTTP verbs</strong>: GET (read, idempotent), POST (create), PUT (full update, idempotent), PATCH (partial), DELETE (idempotent).</li>
+<li><strong>Status codes</strong>: 200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 500 Server Error.</li>
+<li><strong>HATEOAS</strong> (rarely enforced): Response includes links to next actions.</li>
+</ul>
+<h3>Q: Idempotency?</h3>
+<p>Same request produces same result. GET, PUT, DELETE are idempotent. POST is not (creates new each time).</p>
+<h3>Q: Versioning strategies?</h3>
+<ul>
+<li>URI: <code>/v1/users</code>, <code>/v2/users</code> (most common)</li>
+<li>Header: <code>Accept: application/vnd.app.v2+json</code></li>
+<li>Query param: <code>/users?v=2</code></li>
+</ul>
+<hr>
+<h2>Design Patterns</h2>
+<blockquote>
+<p>Interviewers love asking <em>“which design patterns have you used?”</em> — pick 3-4 you can explain with real examples.</p>
+</blockquote>
+<h3>Creational patterns</h3>
+<ul>
+<li><strong>Singleton</strong>: One instance per JVM. Spring beans (<code>@Service</code>, <code>@Component</code>) are singletons by default.</li>
+<li><strong>Factory</strong>: Method returns object based on input. Example: <code>BeanFactory</code>, <code>LoggerFactory.getLogger(...)</code>.</li>
+<li><strong>Builder</strong>: Step-by-step object creation. Example: <code>Lombok @Builder</code>, <code>StringBuilder</code>, <code>UriComponentsBuilder</code>.</li>
+<li><strong>Prototype</strong>: Clone existing object. Example: <code>Object.clone()</code>, Spring <code>prototype</code> scope.</li>
+</ul>
+<h3>Structural patterns</h3>
+<ul>
+<li><strong>Adapter</strong>: Convert one interface to another. Example: <code>Arrays.asList(...)</code> adapts array to List.</li>
+<li><strong>Decorator</strong>: Wrap object to add behavior. Example: <code>BufferedReader</code> wraps <code>Reader</code>. Spring AOP advices are decorators.</li>
+<li><strong>Proxy</strong>: Stand-in that controls access. Spring uses <strong>dynamic proxies</strong> for <code>@Transactional</code>, <code>@Async</code>, <code>@PreAuthorize</code>.</li>
+<li><strong>Facade</strong>: Simplified interface to subsystem. Example: <code>JdbcTemplate</code> hides JDBC boilerplate.</li>
+</ul>
+<h3>Behavioral patterns</h3>
+<ul>
+<li><strong>Strategy</strong>: Interchangeable algorithms. Example: Spring&#39;s <code>PasswordEncoder</code> (BCrypt, Argon2, Pbkdf2 all implement same interface).</li>
+<li><strong>Observer</strong>: One-to-many notification. Example: <code>ApplicationEventPublisher</code> + <code>@EventListener</code> in Spring.</li>
+<li><strong>Template Method</strong>: Skeleton with steps to override. Example: <code>JdbcTemplate</code>, <code>RestTemplate</code>.</li>
+<li><strong>Chain of Responsibility</strong>: Filters in a chain. Example: Spring Security <code>SecurityFilterChain</code>, Servlet filters.</li>
+<li><strong>Command</strong>: Encapsulate request as object. Example: <code>Runnable</code>, <code>Callable</code>.</li>
+</ul>
+<h3>Q: Which patterns are in SkillSync?</h3>
+<ul>
+<li><strong>Singleton</strong>: All Spring beans (services, repos, controllers).</li>
+<li><strong>Strategy</strong>: <code>PasswordEncoder</code> interface — <code>BCryptPasswordEncoder</code> is the chosen strategy.</li>
+<li><strong>Chain of Responsibility</strong>: <code>JwtAuthenticationFilter</code> → <code>ServiceJwtFilter</code> → controller filter chain.</li>
+<li><strong>Builder</strong>: Lombok <code>@Builder</code> on <code>AuthUser</code>, <code>AuthResponse</code>.</li>
+<li><strong>Proxy</strong>: <code>@Transactional</code> on <code>AuthService.login()</code> — Spring wraps it in a tx-managing proxy.</li>
+<li><strong>Facade</strong>: <code>AuthService</code> is a facade hiding repository + JWT + email + AOP details from the controller.</li>
+<li><strong>Observer</strong>: RabbitMQ event listeners (notification-service consumes events).</li>
+</ul>
+<hr>
+<h2>DSA Quick Reference</h2>
+<h3>Big-O cheat sheet</h3>
+<table>
+<thead>
+<tr>
+<th>Structure</th>
+<th>Access</th>
+<th>Search</th>
+<th>Insert</th>
+<th>Delete</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Array</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>ArrayList</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(1) amortized</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>LinkedList</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>HashMap/HashSet</td>
+<td>—</td>
+<td>O(1) avg</td>
+<td>O(1) avg</td>
+<td>O(1) avg</td>
+</tr>
+<tr>
+<td>TreeMap/TreeSet</td>
+<td>—</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>Stack/Queue</td>
+<td>—</td>
+<td>—</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Heap</td>
+<td>—</td>
+<td>—</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+</tr>
+</tbody></table>
+<h3>Sorting algorithms</h3>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Best</th>
+<th>Avg</th>
+<th>Worst</th>
+<th>Space</th>
+<th>Stable?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bubble</td>
+<td>O(n)</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Insertion</td>
+<td>O(n)</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Merge</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Quick</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n²)</td>
+<td>O(log n)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Heap</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>Arrays.sort</code> (primitives) = Dual-Pivot Quicksort. <code>Collections.sort</code> / <code>Arrays.sort</code> (objects) = TimSort (stable).</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>Common patterns to recognize</h3>
+<ul>
+<li><strong>Two pointers</strong>: sorted array problems, palindrome check, remove duplicates.</li>
+<li><strong>Sliding window</strong>: longest substring, max sum subarray of size k.</li>
+<li><strong>Fast &amp; slow pointers</strong>: detect cycle in linked list (Floyd&#39;s), find middle node.</li>
+<li><strong>Hash map for O(1) lookup</strong>: two-sum, anagram groups, frequency count.</li>
+<li><strong>Stack</strong>: valid parentheses, next greater element, monotonic stack.</li>
+<li><strong>Recursion + memoization</strong>: fibonacci, climbing stairs, edit distance.</li>
+<li><strong>BFS</strong>: shortest path in unweighted graph, level-order tree traversal.</li>
+<li><strong>DFS</strong>: tree problems, graph cycle detection, backtracking (n-queens, sudoku).</li>
+<li><strong>Binary search</strong>: sorted array, search range, peak element, first/last occurrence.</li>
+<li><strong>Heap (PriorityQueue)</strong>: top-K elements, kth largest, merge K sorted lists.</li>
+<li><strong>Dynamic programming</strong>: optimal substructure + overlapping subproblems.</li>
+</ul>
+<h3>10 must-know problems</h3>
+<ol>
+<li><strong>Two Sum</strong> — hash map.</li>
+<li><strong>Reverse a Linked List</strong> — iterative or recursive.</li>
+<li><strong>Detect cycle in Linked List</strong> — Floyd&#39;s tortoise and hare.</li>
+<li><strong>Valid Parentheses</strong> — stack.</li>
+<li><strong>Merge Two Sorted Lists</strong> — pointers.</li>
+<li><strong>Best Time to Buy/Sell Stock</strong> — single pass.</li>
+<li><strong>Longest Substring Without Repeating Characters</strong> — sliding window + set.</li>
+<li><strong>Maximum Subarray (Kadane&#39;s)</strong> — DP.</li>
+<li><strong>Binary Tree Level Order Traversal</strong> — BFS with queue.</li>
+<li><strong>Number of Islands</strong> — DFS/BFS on grid.</li>
+</ol>
+<h3>Java tip for coding rounds</h3>
+<ul>
+<li><code>Arrays.sort(arr)</code>, <code>Collections.sort(list)</code>, <code>list.sort(Comparator.reverseOrder())</code></li>
+<li><code>Map&lt;K,V&gt;</code>: <code>getOrDefault</code>, <code>computeIfAbsent</code>, <code>merge</code></li>
+<li><code>PriorityQueue&lt;&gt;(Comparator.reverseOrder())</code> = max-heap</li>
+<li><code>Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;()</code> (faster than <code>Stack</code>)</li>
+<li><code>String.toCharArray()</code>, <code>Arrays.stream(arr).boxed().toList()</code></li>
+</ul>
+<hr>
+<h2>HTML5 Essentials</h2>
+<h3>Q: What&#39;s new in HTML5?</h3>
+<ul>
+<li><strong>Semantic tags</strong>: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>. Better SEO + a11y.</li>
+<li><strong>Form input types</strong>: <code>email</code>, <code>tel</code>, <code>number</code>, <code>date</code>, <code>range</code>, <code>color</code>, <code>search</code>, <code>url</code>.</li>
+<li><strong>Native validation</strong>: <code>required</code>, <code>pattern</code>, <code>min</code>, <code>max</code>, <code>minlength</code>, <code>maxlength</code>.</li>
+<li><strong>APIs</strong>: <code>localStorage</code>, <code>sessionStorage</code>, Geolocation, WebSocket, Web Workers, Drag &amp; Drop, Canvas, History API.</li>
+<li><strong>Multimedia</strong>: <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code> (no Flash needed).</li>
+<li><strong>Doctype simplified</strong>: <code>&lt;!DOCTYPE html&gt;</code>.</li>
+</ul>
+<h3>Q: Block vs inline elements?</h3>
+<ul>
+<li><strong>Block</strong>: Take full width, start on new line. <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;section&gt;</code>.</li>
+<li><strong>Inline</strong>: Take only needed width, flow inline. <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;img&gt;</code>.</li>
+<li><strong>Inline-block</strong>: Inline placement + can have width/height/padding/margin.</li>
+</ul>
+<h3>Q: <code>&lt;script&gt;</code> placement?</h3>
+<ul>
+<li><code>&lt;script&gt;</code> (default): Block parsing, fetch, execute.</li>
+<li><code>&lt;script async&gt;</code>: Fetch in parallel, execute as soon as ready (may be out of order).</li>
+<li><code>&lt;script defer&gt;</code>: Fetch in parallel, execute <strong>after</strong> HTML parsed, in order. <strong>Preferred</strong> for most scripts.</li>
+</ul>
+<h3>Q: Meta tags every page should have?</h3>
+<pre><code class="language-html">&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;meta name=&quot;description&quot; content=&quot;...&quot;&gt;
+&lt;meta name=&quot;theme-color&quot; content=&quot;#007A64&quot;&gt;
+&lt;meta property=&quot;og:title&quot; content=&quot;...&quot;&gt;  &lt;!-- social previews --&gt;
+</code></pre>
+<h3>Q: <code>data-*</code> attributes?</h3>
+<p>Custom data on element, accessible via <code>dataset</code>:</p>
+<pre><code class="language-html">&lt;button data-user-id=&quot;42&quot;&gt;Edit&lt;/button&gt;
+&lt;script&gt;btn.dataset.userId  // &quot;42&quot;&lt;/script&gt;
+</code></pre>
+<h3>Q: What&#39;s the DOM?</h3>
+<p>Document Object Model — tree representation of HTML. JavaScript can read/modify it: <code>document.querySelector</code>, <code>element.appendChild</code>, etc.</p>
+<hr>
+<h2>CSS Deep Dive</h2>
+<h3>Q: Box model?</h3>
+<p>Every element is a box: <strong>content → padding → border → margin</strong>.</p>
+<ul>
+<li><code>box-sizing: content-box</code> (default): width = content only.</li>
+<li><code>box-sizing: border-box</code> (preferred): width includes padding + border. Set globally:<pre><code class="language-css">*, *::before, *::after { box-sizing: border-box; }
+</code></pre>
+</li>
+</ul>
+<h3>Q: Selectors specificity?</h3>
+<p>Higher specificity wins; ties broken by source order.</p>
+<ul>
+<li>Inline style → 1000</li>
+<li>ID (<code>#id</code>) → 100</li>
+<li>Class (<code>.class</code>), attribute (<code>[type]</code>), pseudo-class (<code>:hover</code>) → 10</li>
+<li>Element (<code>div</code>), pseudo-element (<code>::before</code>) → 1</li>
+<li><code>!important</code> overrides all (avoid).</li>
+</ul>
+<h3>Q: Position values?</h3>
+<ul>
+<li><code>static</code> (default): Normal flow, ignores top/left.</li>
+<li><code>relative</code>: Offset from its normal position; original space preserved.</li>
+<li><code>absolute</code>: Removed from flow, positioned relative to nearest positioned ancestor.</li>
+<li><code>fixed</code>: Relative to viewport (sticks during scroll).</li>
+<li><code>sticky</code>: Toggles between relative and fixed based on scroll.</li>
+</ul>
+<h3>Q: Flexbox cheat sheet</h3>
+<pre><code class="language-css">.parent {
+  display: flex;
+  flex-direction: row | column;
+  justify-content: flex-start | center | space-between | space-around | space-evenly;
+  align-items: stretch | center | flex-start | flex-end | baseline;
+  flex-wrap: nowrap | wrap;
+  gap: 16px;
+}
+.child {
+  flex: 1;             /* shorthand: grow shrink basis */
+  align-self: center;
+  order: 2;
+}
+</code></pre>
+<ul>
+<li><code>justify-content</code> = main axis. <code>align-items</code> = cross axis.</li>
+<li><code>flex: 1</code> = <code>flex: 1 1 0%</code> (grow, shrink, basis).</li>
+</ul>
+<h3>Q: Grid cheat sheet</h3>
+<pre><code class="language-css">.parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 3 equal cols */
+  grid-template-rows: 80px auto;
+  grid-template-areas: &quot;header header header&quot; &quot;sidebar main main&quot;;
+  gap: 16px;
+}
+.child {
+  grid-column: 1 / 3;       /* span cols 1 to 3 */
+  grid-area: main;
+}
+</code></pre>
+<ul>
+<li>Use <strong>Grid for 2D layouts</strong>, <strong>Flexbox for 1D</strong>.</li>
+</ul>
+<h3>Q: How to center a div?</h3>
+<pre><code class="language-css">/* Flexbox (preferred) */
+.parent { display: flex; justify-content: center; align-items: center; }
+
+/* Grid */
+.parent { display: grid; place-items: center; }
+
+/* Absolute */
+.child {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+</code></pre>
+<h3>Q: Pseudo-classes vs pseudo-elements?</h3>
+<ul>
+<li><strong>Pseudo-class</strong> (<code>:hover</code>, <code>:focus</code>, <code>:nth-child(2n)</code>, <code>:not(.x)</code>): State of element.</li>
+<li><strong>Pseudo-element</strong> (<code>::before</code>, <code>::after</code>, <code>::first-line</code>, <code>::placeholder</code>): Virtual sub-element.</li>
+</ul>
+<h3>Q: CSS variables?</h3>
+<pre><code class="language-css">:root {
+  --brand: #007A64;
+  --space-md: 16px;
+}
+.btn { background: var(--brand); padding: var(--space-md); }
+</code></pre>
+<p>React in JS: <code>el.style.setProperty(&#39;--brand&#39;, &#39;red&#39;)</code>. SkillSync uses these for theming.</p>
+<h3>Q: Responsive — media queries:</h3>
+<pre><code class="language-css">@media (max-width: 768px) { .sidebar { display: none; } }
+@media (prefers-color-scheme: dark) { :root { --bg: #111; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</code></pre>
+<h3>Q: BEM, CSS Modules, CSS-in-JS — what&#39;s the difference?</h3>
+<ul>
+<li><strong>BEM</strong>: Naming convention. <code>.card__title--featured</code>. Plain CSS, no tooling.</li>
+<li><strong>CSS Modules</strong>: Locally-scoped class names auto-generated. <code>import s from &#39;./x.module.css&#39;</code>.</li>
+<li><strong>CSS-in-JS</strong> (styled-components, Emotion): Write CSS in JS. Runtime overhead but dynamic.</li>
+<li><strong>Utility-first</strong> (Tailwind): Atomic classes. Fast prototyping.</li>
+<li>SkillSync uses <strong>inline styles + CSS variables</strong> — pragmatic for a small team.</li>
+</ul>
+<h3>Q: <code>display: none</code> vs <code>visibility: hidden</code> vs <code>opacity: 0</code>?</h3>
+<ul>
+<li><code>display: none</code>: Removed from layout. No space taken.</li>
+<li><code>visibility: hidden</code>: Hidden but space taken. Not focusable.</li>
+<li><code>opacity: 0</code>: Visually invisible, takes space, <strong>still clickable / focusable</strong>.</li>
+</ul>
+<h3>Q: Animation vs Transition?</h3>
+<ul>
+<li><strong>Transition</strong>: From state A to B on a trigger (hover, class change). <code>transition: opacity 200ms ease;</code></li>
+<li><strong>Animation</strong>: Multi-step via <code>@keyframes</code>. Runs on its own, can loop.</li>
+</ul>
+<pre><code class="language-css">@keyframes pulse { 0%,100% {opacity:1} 50% {opacity:.5} }
+.dot { animation: pulse 2s infinite; }
+</code></pre>
+<hr>
+<h2>JavaScript Fundamentals</h2>
+<h3>Q: <code>var</code> vs <code>let</code> vs <code>const</code>?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>var</code></th>
+<th><code>let</code></th>
+<th><code>const</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scope</td>
+<td>function</td>
+<td>block</td>
+<td>block</td>
+</tr>
+<tr>
+<td>Hoisting</td>
+<td>hoisted (init <code>undefined</code>)</td>
+<td>hoisted but in TDZ</td>
+<td>same as <code>let</code></td>
+</tr>
+<tr>
+<td>Reassign</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Redeclare</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody></table>
+<p><strong>TDZ (Temporal Dead Zone):</strong></p>
+<pre><code class="language-js">console.log(x);  // ReferenceError (TDZ)
+let x = 5;
+
+console.log(y);  // undefined (var hoisted)
+var y = 5;
+</code></pre>
+<p><strong><code>const</code> gotcha:</strong> It&#39;s the <strong>binding</strong> that&#39;s constant, not the value.</p>
+<pre><code class="language-js">const arr = [1, 2];
+arr.push(3);    // ✅ OK — mutating the array
+arr = [4];      // ❌ TypeError — reassigning the binding
+</code></pre>
+<p><strong>Modern best practice:</strong></p>
+<ol>
+<li>Use <code>const</code> by default.</li>
+<li>Use <code>let</code> only when you need to reassign.</li>
+<li><strong>Never use <code>var</code></strong> in new code.</li>
+</ol>
+<p><strong>Remember:</strong> <em>&quot;<code>const</code> first, <code>let</code> if must reassign, <code>var</code> never.&quot;</em></p>
+<h3>Q: What is hoisting?</h3>
+<p>Var/function declarations are moved to the top of their scope at parse time.</p>
+<pre><code class="language-js">console.log(x); // undefined (not error)
+var x = 5;
+
+foo();          // works — function declarations fully hoisted
+function foo() {}
+
+bar();          // TypeError: bar is not a function
+var bar = function() {};
+</code></pre>
+<h3>Q: Closure?</h3>
+<p><strong>One-liner:</strong></p>
+<blockquote>
+<p><em>&quot;A function that remembers variables from where it was created, even after that scope is gone.&quot;</em></p>
+</blockquote>
+<pre><code class="language-js">function counter() {
+  let count = 0;                    // ← captured by closure
+  return () =&gt; ++count;             // inner function keeps access to count
+}
+const c = counter();
+c(); // 1
+c(); // 2
+c(); // 3 — count survives because the returned function still holds a reference
+</code></pre>
+<p><strong>Real-world uses:</strong></p>
+<ol>
+<li><strong>Data privacy</strong> (counter above — <code>count</code> can&#39;t be touched from outside).</li>
+<li><strong>Currying</strong>: <code>add(2)(3)</code> returns a closure with <code>2</code> baked in.</li>
+<li><strong>React custom hooks</strong> — every <code>useState</code> is a closure capturing the setter.</li>
+<li><strong>Event handlers</strong> — the handler closes over the component&#39;s variables at definition time (this is why &quot;stale closure&quot; bugs happen in React).</li>
+</ol>
+<p><strong>Classic interview trick:</strong></p>
+<pre><code class="language-js">for (var i = 0; i &lt; 3; i++) {
+  setTimeout(() =&gt; console.log(i), 100);  // logs 3, 3, 3
+}
+for (let i = 0; i &lt; 3; i++) {
+  setTimeout(() =&gt; console.log(i), 100);  // logs 0, 1, 2 — each iter has own `i`
+}
+</code></pre>
+<p><strong>Remember:</strong> <em>&quot;Closure = function + its lexical scope, frozen in amber.&quot;</em></p>
+<h3>Q: <code>this</code> binding rules?</h3>
+<ol>
+<li><strong>Default</strong>: global (<code>window</code> in browser; <code>undefined</code> in strict mode).</li>
+<li><strong>Method call</strong>: <code>obj.method()</code> → <code>this = obj</code>.</li>
+<li><strong>Constructor</strong>: <code>new Foo()</code> → <code>this</code> = new instance.</li>
+<li><strong>Explicit</strong>: <code>fn.call(ctx)</code>, <code>fn.apply(ctx, args)</code>, <code>fn.bind(ctx)</code>.</li>
+<li><strong>Arrow functions</strong>: Lexical <code>this</code> — inherits from enclosing scope. <strong>Don&#39;t have their own <code>this</code></strong>.</li>
+</ol>
+<h3>Q: Prototypes &amp; inheritance?</h3>
+<p>Every object has a <code>__proto__</code> (link to its prototype). Methods are looked up the prototype chain.</p>
+<pre><code class="language-js">class Animal { eat() { console.log(&#39;eat&#39;); } }
+class Dog extends Animal { bark() { console.log(&#39;woof&#39;); } }
+new Dog().eat();  // walks prototype chain
+</code></pre>
+<p>Classes are syntactic sugar over prototypes.</p>
+<h3>Q: Event Loop?</h3>
+<p>JS is <strong>single-threaded</strong> but non-blocking via:</p>
+<ul>
+<li><strong>Call stack</strong>: Synchronous code.</li>
+<li><strong>Web APIs</strong>: setTimeout, fetch, DOM events run outside the engine.</li>
+<li><strong>Microtask queue</strong>: Promise callbacks (<code>.then</code>), <code>queueMicrotask</code>. Runs <strong>before</strong> macrotasks.</li>
+<li><strong>Macrotask (task) queue</strong>: setTimeout, setInterval, I/O, UI events.</li>
+</ul>
+<p>Loop: Stack empty → drain microtasks → run one macrotask → repeat.</p>
+<pre><code class="language-js">console.log(&#39;1&#39;);
+setTimeout(() =&gt; console.log(&#39;2&#39;), 0);
+Promise.resolve().then(() =&gt; console.log(&#39;3&#39;));
+console.log(&#39;4&#39;);
+// Output: 1, 4, 3, 2
+</code></pre>
+<h3>Q: Promises &amp; async/await?</h3>
+<pre><code class="language-js">// Promise
+fetch(&#39;/api&#39;).then(r =&gt; r.json()).then(d =&gt; use(d)).catch(e =&gt; log(e));
+
+// async/await — same code
+async function load() {
+  try {
+    const r = await fetch(&#39;/api&#39;);
+    const d = await r.json();
+    use(d);
+  } catch (e) { log(e); }
+}
+</code></pre>
+<ul>
+<li>Promise states: pending → fulfilled / rejected.</li>
+<li><code>Promise.all([p1,p2])</code> — waits for all (fails fast on first reject).</li>
+<li><code>Promise.allSettled</code> — waits for all, never rejects.</li>
+<li><code>Promise.race</code> — first to settle wins.</li>
+<li><code>Promise.any</code> — first to fulfill.</li>
+</ul>
+<h3>Q: Callback hell — solution?</h3>
+<p>Nested callbacks → unreadable. <strong>Promises</strong> flatten with chaining; <strong>async/await</strong> makes it look synchronous.</p>
+<h3>Q: Spread / rest / destructuring?</h3>
+<pre><code class="language-js">const [a, ...rest] = [1, 2, 3];      // a=1, rest=[2,3]
+const { name, ...others } = user;
+const merged = { ...obj1, ...obj2 };
+function sum(...nums) { return nums.reduce((a,b)=&gt;a+b); }
+</code></pre>
+<h3>Q: <code>==</code> vs <code>===</code>?</h3>
+<ul>
+<li><code>==</code>: Loose equality, performs type coercion. <code>&quot;5&quot; == 5</code> → true.</li>
+<li><code>===</code>: Strict — same type AND value. <strong>Always use <code>===</code></strong>.</li>
+</ul>
+<h3>Q: What is <code>null</code> vs <code>undefined</code>?</h3>
+<ul>
+<li><code>undefined</code>: Variable declared but not assigned. Default for missing function params.</li>
+<li><code>null</code>: Explicit &quot;no value&quot; assigned by you.</li>
+</ul>
+<h3>Q: Shallow vs deep copy?</h3>
+<pre><code class="language-js">const obj = { a: 1, nested: { b: 2 } };
+const shallow = { ...obj };               // nested still shared
+const deep = JSON.parse(JSON.stringify(obj));  // simple deep (loses functions, dates)
+const deep2 = structuredClone(obj);        // modern, handles dates/Map/Set
+</code></pre>
+<h3>Q: <code>map</code> vs <code>forEach</code> vs <code>filter</code> vs <code>reduce</code>?</h3>
+<ul>
+<li><code>map(fn)</code>: Returns new array with transformed values.</li>
+<li><code>forEach(fn)</code>: Iterates, no return.</li>
+<li><code>filter(fn)</code>: Returns new array of items passing predicate.</li>
+<li><code>reduce(fn, init)</code>: Accumulate to single value.</li>
+<li><code>find(fn)</code>: First matching item or undefined.</li>
+<li><code>some(fn)</code>: Returns true if any match.</li>
+<li><code>every(fn)</code>: Returns true if all match.</li>
+</ul>
+<h3>Q: Debounce vs Throttle?</h3>
+<ul>
+<li><strong>Debounce</strong>: Wait until N ms after last call. Useful for: search-as-you-type, resize.</li>
+<li><strong>Throttle</strong>: At most once per N ms. Useful for: scroll, mouse-move.</li>
+</ul>
+<h3>Q: ES Modules?</h3>
+<pre><code class="language-js">// math.js
+export function add(a,b) { return a+b; }
+export default function mul(a,b) { return a*b; }
+
+// app.js
+import mul, { add } from &#39;./math.js&#39;;
+</code></pre>
+<ul>
+<li>Static (analyzable for tree-shaking).</li>
+<li>vs CommonJS (<code>require</code>/<code>module.exports</code>) — dynamic, used in Node.</li>
+</ul>
+<h3>Q: Generators / iterators?</h3>
+<p>Function that can pause/resume with <code>yield</code>. Rarely asked but good to know.</p>
+<pre><code class="language-js">function* gen() { yield 1; yield 2; }
+for (const v of gen()) console.log(v); // 1, 2
+</code></pre>
+<hr>
+<h2>TypeScript Essentials</h2>
+<h3>Q: Why TypeScript?</h3>
+<ul>
+<li>Catches type errors at compile time (vs runtime in JS).</li>
+<li>Better IDE autocomplete + refactoring.</li>
+<li>Self-documenting code.</li>
+</ul>
+<h3>Q: Basic types</h3>
+<pre><code class="language-ts">let name: string = &#39;Renu&#39;;
+let age: number = 25;
+let active: boolean = true;
+let tags: string[] = [&#39;js&#39;];
+let pair: [string, number] = [&#39;x&#39;, 1];   // tuple
+let anything: any = 5;                   // avoid
+let unknown_: unknown = JSON.parse(&#39;{}&#39;); // safer than any
+</code></pre>
+<h3>Q: Interface vs Type alias?</h3>
+<ul>
+<li>Both define shapes. Mostly interchangeable.</li>
+<li><strong>Interface</strong>: Can be reopened (declaration merging). Preferred for object shapes.</li>
+<li><strong>Type</strong>: Can do unions, intersections, mapped types, conditional types.</li>
+</ul>
+<pre><code class="language-ts">interface User { id: number; name: string; }
+type Role = &#39;admin&#39; | &#39;user&#39;;
+type WithEmail = User &amp; { email: string };  // intersection
+</code></pre>
+<h3>Q: Generics</h3>
+<pre><code class="language-ts">function identity&lt;T&gt;(x: T): T { return x; }
+interface ApiResponse&lt;T&gt; { data: T; error?: string; }
+const r: ApiResponse&lt;User&gt; = { data: { id: 1, name: &#39;X&#39; } };
+</code></pre>
+<h3>Q: Utility types</h3>
+<ul>
+<li><code>Partial&lt;T&gt;</code> — all fields optional.</li>
+<li><code>Required&lt;T&gt;</code> — all required.</li>
+<li><code>Pick&lt;T,K&gt;</code> — subset of keys.</li>
+<li><code>Omit&lt;T,K&gt;</code> — exclude keys.</li>
+<li><code>Record&lt;K,V&gt;</code> — object with key/value types.</li>
+<li><code>Readonly&lt;T&gt;</code> — immutable.</li>
+</ul>
+<h3>Q: React + TS quick patterns</h3>
+<pre><code class="language-tsx">interface Props { name: string; age?: number; onClick: (id: number) =&gt; void; }
+const Card: React.FC&lt;Props&gt; = ({ name, age = 0, onClick }) =&gt; &lt;div onClick={() =&gt; onClick(1)}&gt;{name}&lt;/div&gt;;
+
+const [user, setUser] = useState&lt;User | null&gt;(null);
+const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+</code></pre>
+<hr>
+<h2>React (Comprehensive)</h2>
+<h3>Q: Class vs Functional components?</h3>
+<p>Modern React — <strong>functional only</strong>. Hooks replaced class state/lifecycle.</p>
+<pre><code class="language-jsx">// Functional (modern)
+function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(c =&gt; c+1)}&gt;{count}&lt;/button&gt;;
+}
+
+// Class (legacy)
+class Counter extends React.Component {
+  state = { count: 0 };
+  render() { return &lt;button onClick={() =&gt; this.setState({count: this.state.count+1})}&gt;{this.state.count}&lt;/button&gt;; }
+}
+</code></pre>
+<h3>Q: JSX — what is it?</h3>
+<p>Syntactic sugar over <code>React.createElement(type, props, ...children)</code>. Babel/SWC compiles JSX to JS.</p>
+<h3>Q: How does React render?</h3>
+<ol>
+<li>State/props change triggers re-render.</li>
+<li>React builds new <strong>virtual DOM</strong> tree.</li>
+<li>Diffs against previous (reconciliation algorithm).</li>
+<li>Computes minimal real DOM updates.</li>
+<li>Commits to DOM.</li>
+</ol>
+<h3>Q: useState?</h3>
+<p><strong>Mental model:</strong></p>
+<blockquote>
+<p><em>&quot;Tell React: when this value changes, re-render the component.&quot;</em></p>
+</blockquote>
+<pre><code class="language-jsx">const [count, setCount] = useState(0);
+setCount(count + 1);           // direct
+setCount(prev =&gt; prev + 1);    // functional — safer for async/batched updates
+</code></pre>
+<p><strong>Common pitfalls:</strong></p>
+<pre><code class="language-jsx">// ❌ Stale state in async closure
+setTimeout(() =&gt; setCount(count + 1), 1000);  // count captured at render time
+
+// ✅ Functional form sees latest
+setTimeout(() =&gt; setCount(c =&gt; c + 1), 1000);
+
+// ❌ Don&#39;t mutate state
+state.list.push(item);    // React won&#39;t re-render
+setState({...state});
+
+// ✅ Create new reference
+setState({...state, list: [...state.list, item]});
+</code></pre>
+<p><strong>Remember:</strong> <em>&quot;useState = remember + re-render. Always new reference, never mutate.&quot;</em></p>
+<h3>Q: useEffect — lifecycle equivalents?</h3>
+<p><strong>The 3 patterns by deps array:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Deps</th>
+<th>Runs when</th>
+<th>Class equivalent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>omitted</strong></td>
+<td>After every render</td>
+<td>every lifecycle</td>
+</tr>
+<tr>
+<td><code>[]</code> (empty)</td>
+<td>Once after mount</td>
+<td><code>componentDidMount</code></td>
+</tr>
+<tr>
+<td><code>[a, b]</code></td>
+<td>On mount + when <code>a</code> or <code>b</code> changes</td>
+<td><code>componentDidUpdate</code> (selective)</td>
+</tr>
+</tbody></table>
+<pre><code class="language-jsx">// Run once on mount
+useEffect(() =&gt; { fetchUser(); }, []);
+
+// Re-run when userId changes
+useEffect(() =&gt; { fetchUser(userId); }, [userId]);
+
+// Cleanup before next run + on unmount
+useEffect(() =&gt; {
+  const id = setInterval(tick, 1000);
+  return () =&gt; clearInterval(id);  // ← cleanup function
+}, []);
+</code></pre>
+<p><strong>Cleanup runs:</strong></p>
+<ol>
+<li>Before the effect runs again (deps changed).</li>
+<li>Before component unmounts.</li>
+</ol>
+<p><strong>Common bugs:</strong></p>
+<ul>
+<li><strong>Missing cleanup</strong> → memory leaks (intervals, listeners, subscriptions).</li>
+<li><strong>Missing deps</strong> → stale closures. Use ESLint plugin <code>react-hooks/exhaustive-deps</code>.</li>
+<li><strong>Object/array deps</strong> → trigger every render. Memoize them with <code>useMemo</code>.</li>
+</ul>
+<p><strong>Remember:</strong> <em>&quot;Empty deps = mount only. No deps = every render. Always cleanup subscriptions.&quot;</em></p>
+<h3>Q: useReducer — when over useState?</h3>
+<p>When state logic is complex or next state depends on previous in non-trivial ways.</p>
+<pre><code class="language-jsx">function reducer(state, action) {
+  switch(action.type) {
+    case &#39;add&#39;: return { count: state.count + 1 };
+    case &#39;reset&#39;: return { count: 0 };
+  }
+}
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+dispatch({ type: &#39;add&#39; });
+</code></pre>
+<h3>Q: useLayoutEffect vs useEffect?</h3>
+<ul>
+<li><code>useEffect</code>: Async, runs <strong>after</strong> browser paint. Don&#39;t block paint.</li>
+<li><code>useLayoutEffect</code>: Sync, runs <strong>before</strong> paint. Use for DOM measurements that need to be applied before user sees screen.</li>
+</ul>
+<h3>Q: Newer hooks (React 18)</h3>
+<ul>
+<li><code>useId()</code> — stable unique id (for label/input pairs in SSR).</li>
+<li><code>useTransition()</code> — mark updates as non-urgent (don&#39;t block UI).</li>
+<li><code>useDeferredValue(value)</code> — defer re-render of expensive child.</li>
+<li><code>useSyncExternalStore</code> — for libraries integrating with React.</li>
+</ul>
+<h3>Q: Custom hooks — when to extract?</h3>
+<p>When the same logic (state + effects) is reused in multiple components. Naming convention: <code>useX</code>.</p>
+<pre><code class="language-jsx">function useFetch(url) {
+  const [data, setData] = useState(null);
+  useEffect(() =&gt; { fetch(url).then(r =&gt; r.json()).then(setData); }, [url]);
+  return data;
+}
+</code></pre>
+<h3>Q: useMemo vs useCallback?</h3>
+<p><strong>One-liner difference:</strong></p>
+<blockquote>
+<p><code>useMemo</code> caches a <strong>value</strong>. <code>useCallback</code> caches a <strong>function</strong>.</p>
+</blockquote>
+<pre><code class="language-jsx">// useMemo — cache expensive computation
+const sortedUsers = useMemo(() =&gt; users.sort(byName), [users]);
+
+// useCallback — cache function reference
+const handleClick = useCallback((id) =&gt; doSomething(id), []);
+
+// Equivalence (useCallback is sugar):
+useCallback(fn, deps) === useMemo(() =&gt; fn, deps);
+</code></pre>
+<p><strong>When to use each:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>useMemo</code></td>
+<td>Calculation is <strong>slow</strong> AND result is used in render</td>
+</tr>
+<tr>
+<td><code>useCallback</code></td>
+<td>Function passed as prop to a <code>React.memo</code>-wrapped child</td>
+</tr>
+<tr>
+<td><code>React.memo</code></td>
+<td>Component re-renders too often with same props</td>
+</tr>
+</tbody></table>
+<p><strong>Anti-pattern:</strong> Wrapping every value/function. Memoization has its own cost. <strong>Profile first, memoize second.</strong></p>
+<p><strong>Remember:</strong> <em>&quot;useMemo = remember the result. useCallback = remember the function. Both: only when slow.&quot;</em></p>
+<h3>Q: useRef?</h3>
+<ul>
+<li>Access DOM: <code>const inputRef = useRef(); &lt;input ref={inputRef} /&gt;; inputRef.current.focus()</code></li>
+<li>Persist mutable value without re-rendering.</li>
+</ul>
+<h3>Q: useContext?</h3>
+<p>Avoid prop drilling. SkillSync uses it for <code>AuthContext</code> — <code>useAuth()</code> hook returns <code>{user, isAuthenticated, login, logout}</code> anywhere in tree.</p>
+<h3>Q: Custom hooks?</h3>
+<p>Extract reusable logic. SkillSync: <code>useToast()</code> returns <code>{push, success, error}</code>.</p>
+<h3>Q: Controlled vs Uncontrolled inputs?</h3>
+<ul>
+<li><strong>Controlled</strong>: Value is bound to state. <code>&lt;input value={name} onChange={e =&gt; setName(e.target.value)}/&gt;</code>. Preferred.</li>
+<li><strong>Uncontrolled</strong>: DOM holds value, read via ref.</li>
+</ul>
+<h3>Q: Virtual DOM?</h3>
+<p>React maintains in-memory tree. On state change, diffs new vs old tree → computes minimal real DOM updates. Makes React fast.</p>
+<h3>Q: Key in list — why?</h3>
+<pre><code class="language-jsx">{users.map(u =&gt; &lt;Row key={u.id} {...u} /&gt;)}
+</code></pre>
+<p>Helps React identify items across re-renders. Never use array index as key if order changes.</p>
+<h3>Q: React performance tips?</h3>
+<ul>
+<li><code>React.memo(Component)</code> — skip re-render if props unchanged.</li>
+<li><code>useMemo</code> / <code>useCallback</code> for expensive calcs / stable refs.</li>
+<li>Code splitting: <code>const Lazy = React.lazy(() =&gt; import(&#39;./X&#39;))</code> + <code>&lt;Suspense&gt;</code>.</li>
+<li>Virtualization for long lists (react-window).</li>
+<li>Avoid inline objects/functions in props (cause re-render).</li>
+</ul>
+<h3>Q: State management?</h3>
+<ul>
+<li>Local: <code>useState</code> / <code>useReducer</code>.</li>
+<li>Shared: <code>useContext</code> (small apps).</li>
+<li>Large: Redux Toolkit, Zustand, Jotai, TanStack Query (for server state).</li>
+<li>SkillSync uses Context + local state — no Redux needed.</li>
+</ul>
+<h3>Q: Error Boundaries?</h3>
+<p>Class component that catches errors in children&#39;s lifecycle/render. Prevents whole app crash.</p>
+<pre><code class="language-jsx">class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error, info) { logToService(error, info); }
+  render() { return this.state.hasError ? &lt;Fallback/&gt; : this.props.children; }
+}
+</code></pre>
+<p>Note: Hooks can&#39;t replace this yet — must be a class.</p>
+<h3>Q: forwardRef?</h3>
+<p>Pass refs through components. Useful when wrapping native inputs.</p>
+<pre><code class="language-jsx">const Input = forwardRef((props, ref) =&gt; &lt;input ref={ref} {...props} /&gt;);
+</code></pre>
+<h3>Q: Portals?</h3>
+<p>Render a child outside parent DOM hierarchy (modals, toasts, tooltips):</p>
+<pre><code class="language-jsx">ReactDOM.createPortal(&lt;Modal/&gt;, document.body);
+</code></pre>
+<h3>Q: Suspense + lazy?</h3>
+<p>Code-split components, show fallback while loading:</p>
+<pre><code class="language-jsx">const Admin = lazy(() =&gt; import(&#39;./Admin&#39;));
+&lt;Suspense fallback={&lt;Spinner/&gt;}&gt;&lt;Admin/&gt;&lt;/Suspense&gt;
+</code></pre>
+<h3>Q: Higher-Order Component (HOC)?</h3>
+<p>Function taking a component and returning a new one with added behavior. Mostly replaced by hooks now.</p>
+<pre><code class="language-jsx">const withAuth = Wrapped =&gt; props =&gt; isAuthed() ? &lt;Wrapped {...props}/&gt; : &lt;Login/&gt;;
+</code></pre>
+<h3>Q: React.memo?</h3>
+<p>Memoize a component — skip re-render if props (shallow compare) unchanged.</p>
+<pre><code class="language-jsx">const Row = React.memo(function Row({user}) { return &lt;li&gt;{user.name}&lt;/li&gt;; });
+</code></pre>
+<h3>Q: Reconciliation algorithm (&quot;Fiber&quot;)?</h3>
+<ul>
+<li>Old (stack reconciler): synchronous, blocks main thread for big trees.</li>
+<li><strong>Fiber</strong> (React 16+): work split into units, can pause/resume/abort. Enables Concurrent features (Suspense, Transitions).</li>
+</ul>
+<h3>Q: Synthetic Events?</h3>
+<p>React wraps native DOM events into <code>SyntheticEvent</code> for cross-browser consistency. Pooled in older versions; in React 17+ no longer pooled.</p>
+<h3>Q: Why is <code>key</code> important and why not array index?</h3>
+<p>React uses <code>key</code> to track list items across renders. If you use index, reordering/removing items causes wrong components to be reused → bugs (e.g., wrong input value persists).</p>
+<h3>Q: useCallback vs useMemo vs React.memo — when to use which?</h3>
+<ul>
+<li><code>useMemo</code>: cache an expensive calculated <strong>value</strong>.</li>
+<li><code>useCallback</code>: cache a <strong>function reference</strong> (so referential equality holds).</li>
+<li><code>React.memo</code>: cache a <strong>component&#39;s render</strong> when props haven&#39;t changed.
+Don&#39;t over-memoize — adds overhead. Use only after profiling.</li>
+</ul>
+<hr>
+<h2>State Management</h2>
+<h3>Q: When do you need a state library?</h3>
+<ul>
+<li>Multi-component shared state.</li>
+<li>Server cache (data from API).</li>
+<li>Form state with cross-field deps.</li>
+<li>Time-travel debugging / persistence needed.</li>
+</ul>
+<h3>Q: Context API — pros / cons?</h3>
+<p><strong>Pros</strong>: Built-in, zero deps, simple API.
+<strong>Cons</strong>: Every consumer re-renders when context value changes; no built-in selector / partial subscription. Don&#39;t put rapidly-changing state (like cursor position) in context.</p>
+<h3>Q: Redux Toolkit (RTK) — modern Redux</h3>
+<pre><code class="language-js">// slice
+const counterSlice = createSlice({
+  name: &#39;counter&#39;,
+  initialState: { value: 0 },
+  reducers: {
+    increment: (s) =&gt; { s.value++ },     // immer makes this OK
+    setTo: (s, a) =&gt; { s.value = a.payload }
+  }
+});
+export const { increment, setTo } = counterSlice.actions;
+
+// store
+const store = configureStore({ reducer: { counter: counterSlice.reducer } });
+
+// component
+const value = useSelector(s =&gt; s.counter.value);
+const dispatch = useDispatch();
+dispatch(increment());
+</code></pre>
+<ul>
+<li><strong>Async</strong> with <code>createAsyncThunk</code> or RTK Query (built-in data fetching).</li>
+</ul>
+<h3>Q: Redux Thunk vs Saga?</h3>
+<ul>
+<li><strong>Thunk</strong>: Action creator returns a function <code>(dispatch, getState) =&gt; ...</code>. Simpler, most common.</li>
+<li><strong>Saga</strong>: Generators (<code>yield</code>), declarative side-effect management. Powerful but steep curve.</li>
+</ul>
+<h3>Q: Zustand — lightweight alternative</h3>
+<pre><code class="language-js">const useStore = create(set =&gt; ({
+  count: 0,
+  inc: () =&gt; set(s =&gt; ({ count: s.count + 1 })),
+}));
+const count = useStore(s =&gt; s.count);
+</code></pre>
+<p>No provider boilerplate. Selector-based — only re-renders when slice changes.</p>
+<h3>Q: TanStack Query (React Query) — for server state</h3>
+<pre><code class="language-js">const { data, isLoading, error } = useQuery({
+  queryKey: [&#39;users&#39;],
+  queryFn: () =&gt; fetch(&#39;/api/users&#39;).then(r =&gt; r.json())
+});
+</code></pre>
+<p>Handles caching, refetch, retry, dedup, background updates. <strong>Prefer it over Redux for server state</strong>.</p>
+<hr>
+<h2>Forms &amp; Validation</h2>
+<h3>Q: Controlled forms in React?</h3>
+<pre><code class="language-jsx">const [email, setEmail] = useState(&#39;&#39;);
+&lt;input value={email} onChange={e =&gt; setEmail(e.target.value)} /&gt;
+</code></pre>
+<h3>Q: React Hook Form (most popular today)?</h3>
+<pre><code class="language-jsx">const { register, handleSubmit, formState: { errors } } = useForm();
+&lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+  &lt;input {...register(&#39;email&#39;, { required: &#39;Required&#39; })} /&gt;
+  {errors.email &amp;&amp; &lt;span&gt;{errors.email.message}&lt;/span&gt;}
+&lt;/form&gt;
+</code></pre>
+<ul>
+<li><strong>Uncontrolled-by-default</strong> → less re-renders, faster than Formik.</li>
+<li>Integrates with Zod / Yup for schema validation.</li>
+</ul>
+<h3>Q: Schema validation (Zod)?</h3>
+<pre><code class="language-ts">import { z } from &#39;zod&#39;;
+const schema = z.object({
+  email: z.string().email(),
+  age: z.number().min(18),
+});
+schema.parse(data); // throws on invalid; or .safeParse() for non-throwing
+</code></pre>
+<h3>Q: HTML5 native validation?</h3>
+<p><code>&lt;input type=&quot;email&quot; required minlength=&quot;3&quot; pattern=&quot;[a-z]+&quot;&gt;</code> — browser shows error tooltips. Style with <code>:invalid</code>, <code>:valid</code>.</p>
+<hr>
+<h2>Browser &amp; Web APIs</h2>
+<h3>Q: localStorage vs sessionStorage vs cookies?</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Capacity</th>
+<th>Lifetime</th>
+<th>Sent with requests</th>
+<th>Accessible from JS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>localStorage</td>
+<td>~5–10MB</td>
+<td>Until cleared</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>sessionStorage</td>
+<td>~5MB</td>
+<td>Tab session</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Cookies</td>
+<td>~4KB</td>
+<td>Configurable</td>
+<td>Yes (auto)</td>
+<td>Yes (unless <code>httpOnly</code>)</td>
+</tr>
+</tbody></table>
+<p><strong>Token storage</strong>: <code>httpOnly</code> cookies are safest (XSS can&#39;t read). localStorage is simpler but XSS-vulnerable. SkillSync uses localStorage today — would migrate to httpOnly cookies in production.</p>
+<h3>Q: fetch vs XMLHttpRequest vs Axios?</h3>
+<ul>
+<li><strong>XHR</strong>: Old, callback-based.</li>
+<li><strong>fetch</strong>: Modern, promise-based, built-in. Doesn&#39;t reject on 4xx/5xx (need to check <code>res.ok</code>).</li>
+<li><strong>Axios</strong>: Library. Auto-JSON, interceptors, timeouts, request cancel. SkillSync uses it via <code>apiClient.js</code>.</li>
+</ul>
+<h3>Q: CORS — quick recap</h3>
+<p>Browser blocks cross-origin requests unless server sends <code>Access-Control-Allow-Origin</code>. For non-simple requests (PUT, custom headers), browser sends a <strong>preflight OPTIONS</strong> request first. Server must respond with allowed methods/headers.</p>
+<h3>Q: WebSockets vs HTTP?</h3>
+<ul>
+<li>HTTP: Request-response, stateless.</li>
+<li>WebSocket: Full-duplex persistent connection. Use for chat, live notifications, collaborative editing.</li>
+</ul>
+<h3>Q: Service Worker?</h3>
+<p>Background script that intercepts network requests. Enables offline support, push notifications, PWA install. Activates after first visit + reload.</p>
+<h3>Q: Web Worker?</h3>
+<p>Run JS in a background thread (no DOM access). Use for CPU-heavy tasks (image processing, parsing). Communicate via <code>postMessage</code>.</p>
+<h3>Q: How does browser render a page?</h3>
+<ol>
+<li>Parse HTML → DOM tree.</li>
+<li>Parse CSS → CSSOM.</li>
+<li>Combine → Render tree.</li>
+<li>Layout (compute positions/sizes).</li>
+<li>Paint (rasterize).</li>
+<li>Composite layers.</li>
+</ol>
+<p>Reflow (layout) is expensive. Avoid changing geometric properties in animations — prefer <code>transform</code> and <code>opacity</code> (composite-only).</p>
+<hr>
+<h2>Frontend Performance</h2>
+<h3>Q: Core Web Vitals?</h3>
+<ul>
+<li><strong>LCP</strong> (Largest Contentful Paint): &lt; 2.5s. Hero image/text loaded.</li>
+<li><strong>FID / INP</strong> (Input Delay / Interaction to Next Paint): &lt; 200ms. UI responsiveness.</li>
+<li><strong>CLS</strong> (Cumulative Layout Shift): &lt; 0.1. Visual stability.</li>
+</ul>
+<h3>Q: How to optimize a slow React app?</h3>
+<ol>
+<li><strong>Profile</strong> with React DevTools Profiler — find unnecessary re-renders.</li>
+<li><code>React.memo</code> for pure presentational components.</li>
+<li><code>useMemo</code> / <code>useCallback</code> for expensive calcs / stable refs.</li>
+<li><strong>Code-split</strong> routes with <code>React.lazy</code> + <code>&lt;Suspense&gt;</code>.</li>
+<li><strong>Virtualize</strong> long lists (<code>react-window</code>).</li>
+<li><strong>Defer</strong> non-critical work: <code>useTransition</code>, <code>useDeferredValue</code>.</li>
+<li>Avoid passing <strong>inline objects/functions</strong> as props (breaks <code>memo</code>).</li>
+<li>Move state down — closer to where it&#39;s used.</li>
+<li><strong>Image optimization</strong>: <code>&lt;img loading=&quot;lazy&quot;&gt;</code>, <code>srcSet</code>, modern formats (WebP/AVIF).</li>
+<li><strong>Remove unused libs</strong> — check bundle with <code>vite-bundle-visualizer</code> or <code>webpack-bundle-analyzer</code>.</li>
+</ol>
+<h3>Q: Critical rendering path optimizations?</h3>
+<ul>
+<li>Inline critical CSS, defer rest.</li>
+<li><code>&lt;link rel=&quot;preload&quot;&gt;</code> for fonts.</li>
+<li><code>&lt;link rel=&quot;preconnect&quot;&gt;</code> for third-party origins.</li>
+<li>Use HTTP/2, gzip/brotli.</li>
+<li>Minify + hash assets (long cache + cache-busting).</li>
+</ul>
+<h3>Q: Tree shaking?</h3>
+<p>Dead code elimination — bundlers (Vite/Webpack) remove unused exports. Only works with <strong>ES modules</strong> (static imports). Avoid <code>import * as x</code> and side-effectful imports.</p>
+<h3>Q: Lazy loading images?</h3>
+<pre><code class="language-html">&lt;img src=&quot;thumb.jpg&quot; loading=&quot;lazy&quot; alt=&quot;...&quot;&gt;
+</code></pre>
+<p>Or use <code>IntersectionObserver</code> for advanced control.</p>
+<hr>
+<h2>Frontend Security</h2>
+<h3>Q: XSS (Cross-Site Scripting)?</h3>
+<p>Attacker injects <code>&lt;script&gt;</code> into a page that another user views. Steals cookies/tokens.</p>
+<ul>
+<li><strong>React protection</strong>: JSX auto-escapes text content. <code>{userInput}</code> is safe.</li>
+<li><strong>Danger</strong>: <code>dangerouslySetInnerHTML={{__html: userInput}}</code> — sanitize first with <strong>DOMPurify</strong>.</li>
+<li><strong>CSP</strong> (Content-Security-Policy header): Whitelist script sources.</li>
+</ul>
+<h3>Q: CSRF (Cross-Site Request Forgery)?</h3>
+<p>Attacker tricks browser into sending authenticated request to your site (cookies auto-sent).</p>
+<ul>
+<li><strong>Defense 1</strong>: SameSite cookies (<code>SameSite=Strict</code> or <code>Lax</code>).</li>
+<li><strong>Defense 2</strong>: CSRF tokens (synchronizer token pattern).</li>
+<li><strong>Defense 3</strong>: Use <code>Authorization: Bearer</code> header (not cookies) → no CSRF.</li>
+</ul>
+<h3>Q: How does SkillSync prevent these?</h3>
+<ul>
+<li><strong>XSS</strong>: React auto-escaping, no <code>dangerouslySetInnerHTML</code> for user content.</li>
+<li><strong>CSRF</strong>: JWT in <code>Authorization</code> header (not cookie) → CSRF doesn&#39;t apply.</li>
+<li><strong>Clickjacking</strong>: <code>X-Frame-Options: DENY</code> would be added in production.</li>
+<li><strong>HTTPS</strong> in production (Let&#39;s Encrypt).</li>
+<li><strong>Helmet</strong> middleware in API gateway adds security headers.</li>
+</ul>
+<h3>Q: What&#39;s a CSP?</h3>
+<p>HTTP header telling browser which sources are allowed for scripts/styles/images. Defense-in-depth against XSS.</p>
+<pre><code>Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39; https://apis.example.com
+</code></pre>
+<hr>
+<h2>Testing (Frontend &amp; Backend)</h2>
+<h3>Q: Testing pyramid?</h3>
+<ul>
+<li><strong>Unit</strong> (most): Test single function/component in isolation. Fast.</li>
+<li><strong>Integration</strong>: Multiple modules together (e.g., service + repo with embedded DB).</li>
+<li><strong>E2E</strong> (fewest): Full app via real browser (Cypress, Playwright). Slow but realistic.</li>
+</ul>
+<h3>Q: Backend — JUnit + Mockito basics</h3>
+<pre><code class="language-java">@ExtendWith(MockitoExtension.class)
+class AuthServiceTest {
+  @Mock AuthUserRepository repo;
+  @Mock PasswordEncoder encoder;
+  @InjectMocks AuthService service;
+
+  @Test
+  void login_validUser_returnsToken() {
+    when(repo.findByEmail(&quot;a@b&quot;)).thenReturn(Optional.of(user));
+    when(encoder.matches(anyString(), anyString())).thenReturn(true);
+    var resp = service.login(new LoginRequest(&quot;a@b&quot;, &quot;pwd&quot;));
+    assertNotNull(resp.getAccessToken());
+    verify(repo).findByEmail(&quot;a@b&quot;);
+  }
+}
+</code></pre>
+<h3>Q: Spring Boot integration testing?</h3>
+<ul>
+<li><code>@SpringBootTest</code> — full app context.</li>
+<li><code>@WebMvcTest(Controller.class)</code> — only MVC slice (mocks services).</li>
+<li><code>@DataJpaTest</code> — only repo slice with embedded DB.</li>
+<li><code>MockMvc</code> — simulate HTTP requests without real server.</li>
+<li><strong>Testcontainers</strong> — spin up real MySQL/RabbitMQ in Docker for tests.</li>
+</ul>
+<h3>Q: React Testing Library (RTL) basics</h3>
+<pre><code class="language-jsx">import { render, screen, fireEvent } from &#39;@testing-library/react&#39;;
+
+test(&#39;clicking increments&#39;, () =&gt; {
+  render(&lt;Counter /&gt;);
+  const btn = screen.getByRole(&#39;button&#39;, { name: /increment/i });
+  fireEvent.click(btn);
+  expect(screen.getByText(&#39;1&#39;)).toBeInTheDocument();
+});
+</code></pre>
+<ul>
+<li><strong>Philosophy</strong>: Test what users see/do, not implementation.</li>
+<li>Query priority: <code>getByRole</code> &gt; <code>getByLabelText</code> &gt; <code>getByText</code> &gt; <code>getByTestId</code>.</li>
+</ul>
+<h3>Q: Mock fetch / API in RTL?</h3>
+<ul>
+<li><strong>MSW (Mock Service Worker)</strong> — intercept network at the worker level. Works for unit + e2e.</li>
+</ul>
+<pre><code class="language-js">server.use(rest.get(&#39;/users&#39;, (req,res,ctx) =&gt; res(ctx.json([{id:1}]))));
+</code></pre>
+<h3>Q: Cypress vs Playwright?</h3>
+<p>Both are E2E test runners. Playwright is newer, faster, supports multi-browser/multi-tab. Cypress has better debugging UI.</p>
+<hr>
+<h2>Build Tools (Vite, Webpack)</h2>
+<h3>Q: Vite — why so fast?</h3>
+<ul>
+<li>Dev: Native ES modules in browser. No bundling on save → instant HMR.</li>
+<li>Prod: Uses Rollup (smaller bundles than Webpack).</li>
+<li>esbuild for transpilation (Go-based, ~100x faster than Babel).</li>
+</ul>
+<h3>Q: Webpack basics</h3>
+<ul>
+<li>Entry → Loaders (transform files) → Plugins (broader hooks) → Output.</li>
+<li>Concepts: chunks, code splitting (<code>import()</code>), tree shaking, source maps.</li>
+</ul>
+<h3>Q: HMR (Hot Module Replacement)?</h3>
+<p>Replace updated module without full reload, <strong>preserving state</strong>. Vite&#39;s HMR via ES modules is much faster than Webpack&#39;s.</p>
+<h3>Q: Babel vs SWC vs esbuild?</h3>
+<p>All transpile newer JS/TS to older JS for browser support.</p>
+<ul>
+<li><strong>Babel</strong>: Plugin ecosystem, slow.</li>
+<li><strong>SWC</strong>: Rust-based, ~20x faster.</li>
+<li><strong>esbuild</strong>: Go-based, fastest.</li>
+</ul>
+<hr>
+<h2>Accessibility (a11y)</h2>
+<h3>Q: Why a11y?</h3>
+<p>Legal compliance (ADA, EU Accessibility Act), broader audience, better SEO.</p>
+<h3>Q: Quick wins</h3>
+<ul>
+<li><strong>Semantic HTML</strong> (<code>&lt;button&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>) &gt; <code>&lt;div onClick&gt;</code>.</li>
+<li><strong>Labels</strong>: <code>&lt;label htmlFor=&quot;email&quot;&gt;</code> linked to input.</li>
+<li><strong>alt</strong> on every meaningful image. <code>alt=&quot;&quot;</code> for decorative.</li>
+<li><strong>Focus ring</strong>: don&#39;t <code>outline: none</code> without alternative.</li>
+<li><strong>Color contrast</strong> ≥ 4.5:1 for text.</li>
+<li><strong>Keyboard navigable</strong>: Tab order makes sense, Esc closes modals.</li>
+<li><strong>ARIA only when HTML can&#39;t express it</strong>. Wrong ARIA is worse than none.</li>
+</ul>
+<h3>Q: ARIA basics</h3>
+<ul>
+<li><code>role=&quot;button&quot;</code> (only if not using <code>&lt;button&gt;</code>).</li>
+<li><code>aria-label=&quot;Close&quot;</code> for icon-only buttons.</li>
+<li><code>aria-live=&quot;polite&quot;</code> for toasts/announcements.</li>
+<li><code>aria-expanded</code>, <code>aria-haspopup</code> for dropdowns/menus.</li>
+</ul>
+<h3>Q: How to test?</h3>
+<ul>
+<li><strong>axe DevTools</strong> Chrome extension.</li>
+<li><strong>Lighthouse</strong> a11y audit.</li>
+<li>Try navigating with <strong>only keyboard</strong> (Tab, Enter, Esc, arrows).</li>
+<li>Screen reader: VoiceOver (Mac), NVDA (Windows free).</li>
+</ul>
+<hr>
+<h2>React Router</h2>
+<h3>Q: React Router basics?</h3>
+<pre><code class="language-jsx">&lt;BrowserRouter&gt;
+  &lt;Routes&gt;
+    &lt;Route path=&quot;/&quot; element={&lt;Home /&gt;} /&gt;
+    &lt;Route path=&quot;/users/:id&quot; element={&lt;UserPage /&gt;} /&gt;
+    &lt;Route path=&quot;*&quot; element={&lt;NotFound /&gt;} /&gt;
+  &lt;/Routes&gt;
+&lt;/BrowserRouter&gt;
+
+// Hooks
+const { id } = useParams();
+const navigate = useNavigate();
+const location = useLocation();
+</code></pre>
+<hr>
+<h2>SQL</h2>
+<h3>Q: Joins?</h3>
+<p><strong>Visual mental model:</strong></p>
+<pre><code>INNER JOIN     LEFT JOIN      RIGHT JOIN     FULL OUTER
+  A ∩ B         A + (A∩B)     B + (A∩B)      A ∪ B
+  ●●             ●●○○           ○○●●           ●●●●
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INNER JOIN</code></td>
+<td>Only rows matching in <strong>both</strong></td>
+</tr>
+<tr>
+<td><code>LEFT JOIN</code></td>
+<td>All from left + matches; right side NULL if no match</td>
+</tr>
+<tr>
+<td><code>RIGHT JOIN</code></td>
+<td>All from right + matches</td>
+</tr>
+<tr>
+<td><code>FULL OUTER JOIN</code></td>
+<td>All rows from both (NULLs where no match)</td>
+</tr>
+<tr>
+<td><code>CROSS JOIN</code></td>
+<td>Cartesian product (every left × every right)</td>
+</tr>
+<tr>
+<td><code>SELF JOIN</code></td>
+<td>Table joined to itself (e.g., employee → manager hierarchy)</td>
+</tr>
+</tbody></table>
+<p><strong>Example:</strong></p>
+<pre><code class="language-sql">SELECT u.name, o.id
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id;   -- includes users with no orders
+</code></pre>
+<p><strong>Performance tip:</strong> Always join on <strong>indexed columns</strong>. Foreign keys typically have one already.</p>
+<p><strong>Remember:</strong> <em>&quot;INNER = intersection. LEFT = keep all left. RIGHT = keep all right. FULL = keep all.&quot;</em></p>
+<h3>Q: Indexes?</h3>
+<p>Speed up reads at cost of writes. <code>CREATE INDEX idx_email ON users(email);</code>. B-tree is default. Use when column is frequently filtered/sorted on.</p>
+<h3>Q: Primary key vs Unique key?</h3>
+<ul>
+<li><strong>PK</strong>: One per table. NOT NULL + UNIQUE. Creates clustered index (MySQL InnoDB).</li>
+<li><strong>Unique</strong>: Multiple allowed. Can be NULL (once).</li>
+</ul>
+<h3>Q: Normalization?</h3>
+<ul>
+<li><strong>1NF</strong>: Atomic values, no repeating groups.</li>
+<li><strong>2NF</strong>: 1NF + no partial dependencies on composite PK.</li>
+<li><strong>3NF</strong>: 2NF + no transitive dependencies.</li>
+<li>Denormalize for read-heavy systems (trade space for speed).</li>
+</ul>
+<h3>Q: Transactions — ACID?</h3>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Means</th>
+<th>Real example (bank transfer)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A</strong>tomicity</td>
+<td>All-or-nothing</td>
+<td>If debit succeeds but credit fails → BOTH rolled back.</td>
+</tr>
+<tr>
+<td><strong>C</strong>onsistency</td>
+<td>Valid → valid state</td>
+<td>Constraints (FK, CHECK) never violated. Total money in bank unchanged.</td>
+</tr>
+<tr>
+<td><strong>I</strong>solation</td>
+<td>Concurrent tx don&#39;t interfere</td>
+<td>Two simultaneous transfers don&#39;t see each other&#39;s half-done state.</td>
+</tr>
+<tr>
+<td><strong>D</strong>urability</td>
+<td>Committed data survives crash</td>
+<td>Once <code>COMMIT</code> returns, even if server crashes, data is safe (WAL/redo log).</td>
+</tr>
+</tbody></table>
+<p><strong>Mnemonic:</strong> <em>&quot;A Crash Is Drama-free.&quot;</em></p>
+<h3>Q: Common query patterns:</h3>
+<pre><code class="language-sql">-- Top N per group
+SELECT * FROM (
+  SELECT *, ROW_NUMBER() OVER (PARTITION BY category ORDER BY score DESC) rn
+  FROM products
+) x WHERE rn &lt;= 3;
+
+-- Pagination
+SELECT * FROM users ORDER BY id LIMIT 20 OFFSET 40;
+
+-- Group by + having
+SELECT role, COUNT(*) FROM users GROUP BY role HAVING COUNT(*) &gt; 5;
+
+-- Exists
+SELECT * FROM users u WHERE EXISTS (
+  SELECT 1 FROM orders o WHERE o.user_id = u.id
+);
+</code></pre>
+<hr>
+<h2>SkillSync Project Viva</h2>
+<blockquote>
+<p>⭐ <strong>Rehearse this section OUT LOUD before the interview.</strong> Interviewers love project depth.</p>
+</blockquote>
+<h3>Tech Stack Decisions — &quot;Why X and not Y?&quot; ⭐</h3>
+<blockquote>
+<p>Interviewers love this. Be ready to defend every tech choice.</p>
+</blockquote>
+<h4><strong>Why Spring Boot (not plain Spring / Quarkus / Micronaut)?</strong></h4>
+<ul>
+<li>Spring Boot: opinionated, embedded server, auto-config, huge ecosystem.</li>
+<li>Plain Spring: tons of XML/Java config boilerplate.</li>
+<li>Quarkus / Micronaut: faster startup (great for serverless) but smaller ecosystem and less hiring familiarity.</li>
+<li><strong>Verdict</strong>: Spring Boot is the industry default for Java enterprise apps. Largest community = fastest unblocking.</li>
+</ul>
+<h4><strong>Why Microservices (not Monolith)?</strong></h4>
+<ul>
+<li>Honest answer for an interview: &quot;For a project this size, a modular monolith would have been simpler. I chose microservices to <strong>learn the distributed systems patterns</strong> — service discovery, gateway, distributed tracing, async messaging — that I&#39;d encounter in real production environments.&quot;</li>
+<li>Trade-off: complexity (network, eventual consistency, observability) vs independent deploy/scale.</li>
+</ul>
+<h4><strong>Why MySQL (not PostgreSQL / MongoDB)?</strong></h4>
+<ul>
+<li><strong>MySQL</strong>: Familiar, ubiquitous in Indian product companies, strong tooling.</li>
+<li><strong>PostgreSQL</strong>: Better for advanced features (JSONB, CTEs, window functions). Would be my pick for greenfield enterprise today.</li>
+<li><strong>MongoDB</strong>: Document store — wrong choice here because user/session data is highly relational (joins between users, sessions, mentor profiles).</li>
+<li><strong>Verdict</strong>: SkillSync data is relational → SQL. MySQL for ecosystem familiarity.</li>
+</ul>
+<h4><strong>Why JWT (not Sessions)?</strong></h4>
+<ul>
+<li>Microservices need to be <strong>stateless</strong>. Sessions require a shared session store (Redis) which becomes a bottleneck and SPOF.</li>
+<li>JWT = self-contained, signed token. Any service can verify offline using the public key (or shared secret here).</li>
+<li><strong>Trade-off</strong>: Hard to revoke before expiry. Mitigated by short-lived access tokens (15 min) + refresh tokens.</li>
+</ul>
+<h4><strong>Why BCrypt (not SHA-256 / MD5 / PBKDF2 / Argon2)?</strong></h4>
+<ul>
+<li><strong>MD5 / SHA-256</strong>: Designed to be <strong>fast</strong> → a GPU can crack billions/sec. <strong>NEVER</strong> use for passwords.</li>
+<li><strong>PBKDF2</strong>: Configurable rounds. Standardized but no built-in salt management.</li>
+<li><strong>BCrypt</strong>: Adaptive cost factor (<code>2^n</code> rounds). Includes salt automatically. Battle-tested since 1999.</li>
+<li><strong>Argon2</strong>: Winner of 2015 password hashing competition. Memory-hard (resists GPU). Best in class but library support in Java is newer.</li>
+<li><strong>Verdict</strong>: BCrypt is the Spring Security default. Strength 10 (<code>2^10</code> = 1024 rounds) takes ~100ms — fast enough for users, slow enough to defeat brute-force.</li>
+</ul>
+<h4><strong>Why RabbitMQ (not Kafka / ActiveMQ / Redis Pub/Sub)?</strong></h4>
+<ul>
+<li><strong>RabbitMQ</strong>: Smart broker, complex routing (topic/fanout/direct exchanges), per-message ack, easy retry/DLQ. Best for <strong>task queues</strong> (notifications, emails).</li>
+<li><strong>Kafka</strong>: Dumb broker, smart consumers. Distributed log for <strong>streaming</strong> (analytics, event sourcing). Overkill for SkillSync&#39;s notification volume.</li>
+<li><strong>ActiveMQ</strong>: Older, JMS-compliant. Less performant than RabbitMQ.</li>
+<li><strong>Redis Pub/Sub</strong>: Fire-and-forget, no persistence. Loses messages if no consumer is up.</li>
+<li><strong>Verdict</strong>: RabbitMQ fits SkillSync&#39;s pattern — reliable email/notification delivery with retry, dead-letter queues, and per-message ack.</li>
+</ul>
+<h4><strong>Why Eureka (not Consul / Zookeeper / Kubernetes service discovery)?</strong></h4>
+<ul>
+<li><strong>Eureka</strong>: Built for Spring Cloud. AP (availability over consistency) — fits microservices where stale data is OK briefly.</li>
+<li><strong>Consul</strong>: Multi-datacenter, includes KV store + health checks. CP (consistency over availability).</li>
+<li><strong>Zookeeper</strong>: Strong consistency but heavy, designed for distributed coordination, not service discovery.</li>
+<li><strong>Kubernetes</strong>: If on K8s, use built-in service discovery (DNS-based). No need for Eureka.</li>
+<li><strong>Verdict</strong>: Spring Cloud + Eureka = zero-config integration. Would switch to K8s service discovery if deploying on K8s.</li>
+</ul>
+<h4><strong>Why Spring Cloud Gateway (not Zuul 1 / Nginx / Kong)?</strong></h4>
+<ul>
+<li><strong>Spring Cloud Gateway</strong>: Reactive (Netty), non-blocking, integrates seamlessly with Spring Cloud (Eureka, Config).</li>
+<li><strong>Zuul 1</strong>: Servlet-based, blocking IO — worse throughput. Officially deprecated by Netflix.</li>
+<li><strong>Nginx</strong>: Excellent reverse proxy but custom logic (JWT validation) needs Lua or external auth subrequests.</li>
+<li><strong>Kong / Tyk</strong>: Production-grade API gateways with plugins. Overkill for this scope.</li>
+<li><strong>Verdict</strong>: Spring Cloud Gateway is the natural choice for a Spring Boot microservices stack — unified config, dynamic routing, easy filter chain.</li>
+</ul>
+<h4><strong>Why Vite (not Create React App / Webpack / Next.js)?</strong></h4>
+<ul>
+<li><strong>CRA</strong>: Officially deprecated. Slow dev startup (10s+), slow HMR.</li>
+<li><strong>Webpack alone</strong>: Powerful but lots of config.</li>
+<li><strong>Vite</strong>: Native ESM in dev (instant), Rollup in prod (smaller bundles), esbuild for transpile (~100x faster).</li>
+<li><strong>Next.js</strong>: SSR/SSG framework. Overkill for an authenticated SPA — SkillSync content is behind login, no SEO benefit.</li>
+<li><strong>Verdict</strong>: Vite for speed; SPA over SSR because no SEO requirement.</li>
+</ul>
+<h4><strong>Why React (not Angular / Vue / Svelte)?</strong></h4>
+<ul>
+<li><strong>React</strong>: Largest ecosystem, library-first (pick your own router/state), most jobs.</li>
+<li><strong>Angular</strong>: Full framework, opinionated, TypeScript-first, steeper curve. Better for large enterprise teams with strict structure.</li>
+<li><strong>Vue</strong>: Easier curve, similar perf. Smaller ecosystem outside Asia.</li>
+<li><strong>Svelte</strong>: No virtual DOM, smaller bundles. Newer, smaller community.</li>
+<li><strong>Verdict</strong>: React for hiring familiarity and ecosystem. Angular would be my pick for a 50+ person team.</li>
+</ul>
+<h4><strong>Why Context API (not Redux / Zustand / TanStack Query)?</strong></h4>
+<ul>
+<li>SkillSync only needs auth + theme as global state. <strong>Context is enough</strong>.</li>
+<li><strong>Redux Toolkit</strong>: Better for complex client state with time-travel debugging. Boilerplate not justified here.</li>
+<li><strong>Zustand</strong>: Lighter than Redux, would be a fine alternative.</li>
+<li><strong>TanStack Query</strong>: For server state (caching, refetch). Would adopt if app grew — currently we manage with simple Axios calls.</li>
+<li><strong>Verdict</strong>: YAGNI — don&#39;t introduce a state library until you need it.</li>
+</ul>
+<h4><strong>Why Axios (not native fetch)?</strong></h4>
+<ul>
+<li><strong>Axios pros</strong>: Auto-JSON, interceptors (perfect for attaching JWT), timeouts, request cancellation, better error handling (rejects on 4xx/5xx).</li>
+<li><strong>fetch</strong>: Built-in, but doesn&#39;t reject on HTTP errors — you must <code>if (!res.ok)</code> everywhere.</li>
+<li><strong>Verdict</strong>: Axios interceptor lets us add <code>Authorization</code> header in <strong>one place</strong>. Cleaner.</li>
+</ul>
+<h4><strong>Why Docker Compose (not Kubernetes / bare-metal)?</strong></h4>
+<ul>
+<li><strong>Docker Compose</strong>: Single-host orchestration. Perfect for <strong>local dev</strong> and small deployments.</li>
+<li><strong>Kubernetes</strong>: Multi-host, auto-scaling, self-healing. Overkill for dev. Production would use K8s.</li>
+<li><strong>Verdict</strong>: Compose for dev simplicity. Production roadmap: containerize → push to ECR → deploy on EKS/ECS.</li>
+</ul>
+<h4><strong>Why BCrypt strength 10 (not 12 / 14)?</strong></h4>
+<ul>
+<li>Strength <code>n</code> = <code>2^n</code> rounds.</li>
+<li><code>10</code> = ~100ms per hash on modern hardware.</li>
+<li><code>12</code> = ~400ms (login feels slow).</li>
+<li><code>14</code> = ~1.6s (DoS risk on login spike).</li>
+<li><strong>Verdict</strong>: 10 balances security and login UX. Production banking might use 12.</li>
+</ul>
+<h4><strong>Why TypeScript would have been better (honest weakness)?</strong></h4>
+<ul>
+<li>SkillSync frontend uses plain JS. With TS, props/state shapes are checked at compile time — catches whole classes of bugs.</li>
+<li>I&#39;d migrate to TS if continuing the project. Vite supports it out of the box.</li>
+</ul>
+<hr>
+<h3>The 60-second pitch</h3>
+<blockquote>
+<p>&quot;SkillSync is a peer-to-peer skill-exchange platform where learners book sessions with mentors. I built it as a <strong>Spring Boot microservices backend</strong> with a <strong>React frontend</strong>. There are 7 microservices — auth, user, mentor, skill, session, notification, and an API gateway — all registered with Eureka, configured via Spring Cloud Config, and containerized with Docker Compose. I implemented JWT-based auth with BCrypt, role-based access control, RabbitMQ for async email notifications, and full observability via Prometheus, Grafana, Loki, and Zipkin. The frontend is Vite + React with React Router, Context API for auth state, and a reusable component system with theming (light/dark).&quot;</p>
+</blockquote>
+<h3>Architecture diagram (draw this on paper during interview)</h3>
+<pre><code>                  ┌──────────────┐
+                  │  React SPA   │ (Vite, Nginx)
+                  └──────┬───────┘
+                         │ HTTPS
+                  ┌──────▼──────────┐
+                  │  API Gateway    │ (Spring Cloud Gateway, JWT validation)
+                  │  (port 8888)    │──────────┐
+                  └──────┬──────────┘          │
+                         │                     │ Register/discover
+                   routes│                ┌────▼─────┐
+                         │                │  Eureka  │
+         ┌───────────────┼───────────────┤  Server  │
+         │       │       │       │       └──────────┘
+    ┌────▼─┐ ┌───▼──┐ ┌──▼──┐ ┌──▼───┐
+    │ Auth │ │ User │ │Ment.│ │Skill │ ... etc.
+    └───┬──┘ └──┬───┘ └──┬──┘ └───┬──┘
+        │       │        │        │
+        └───────┴────────┴────────┘
+                    │
+              ┌─────▼─────┐   ┌──────────┐
+              │   MySQL   │   │ RabbitMQ │
+              └───────────┘   └──────────┘
+</code></pre>
+<h3>Q: Why microservices? Why not monolith?</h3>
+<p>&quot;I went with microservices to <strong>learn the industry standard</strong> for distributed systems and to isolate concerns — auth is security-critical, notifications are async, sessions are transactional. Each service has its own database schema (in the same MySQL instance for dev simplicity), so they can evolve independently. The trade-off is added complexity — service discovery, distributed tracing, eventual consistency — which I managed with Eureka, Zipkin, and idempotent REST endpoints.&quot;</p>
+<h3>Q: Walk me through what happens when a user logs in.</h3>
+<ol>
+<li>Frontend <code>LoginPage.jsx</code> POSTs <code>{email, password}</code> to <code>/auth/login</code>.</li>
+<li>Request hits <strong>API Gateway</strong>. Since <code>/auth/login</code> is in the <code>OPEN_ENDPOINTS</code> list of <code>JwtAuthenticationFilter</code>, gateway skips JWT validation.</li>
+<li>Gateway routes to <code>skillsync-auth-service</code> via Eureka (<code>lb://SKILLSYNC-AUTH-SERVICE</code>).</li>
+<li><code>AuthController.login()</code> → <code>AuthService.login()</code> → <code>authenticationManager.authenticate(...)</code> → triggers <code>CustomUserDetailsService.loadUserByUsername()</code> → queries DB → <code>BCryptPasswordEncoder.matches()</code> compares password hash.</li>
+<li>On success: <code>JwtService.generateToken(user)</code> creates HS256 JWT with <code>sub=userId, role=ROLE_X, email=...</code>, 15-min expiry. Refresh token with 7-day expiry.</li>
+<li>Response: <code>{ accessToken, refreshToken, role, email, userId }</code>.</li>
+<li>Frontend stores in memory/localStorage. Axios interceptor attaches <code>Authorization: Bearer ...</code> on every outgoing request.</li>
+<li><strong>Developer account special-case</strong>: If email matches the configured developer email, don&#39;t issue tokens immediately — issue a 6-digit OTP via email, return <code>{otpRequired: true}</code>. Frontend redirects to OTP screen, user submits to <code>/auth/verify-otp</code>, real tokens returned.</li>
+</ol>
+<h3>Q: How is role-based access enforced?</h3>
+<ol>
+<li>Gateway validates JWT → injects <code>X-User-Id</code>, <code>X-User-Role</code>, <code>X-User-Email</code> headers.</li>
+<li>Downstream services have <code>ServiceJwtFilter</code> (from <code>skillsync-common</code>) that reads those headers and populates <code>SecurityContextHolder</code> with a <code>UsernamePasswordAuthenticationToken(userId, null, [role])</code>.</li>
+<li>Controller methods use <code>@PreAuthorize(&quot;hasRole(&#39;ADMIN&#39;)&quot;)</code> — Spring Security checks the authority. <code>@EnableMethodSecurity(prePostEnabled = true)</code> enables this.</li>
+</ol>
+<h3>Q: Why did you put <code>ServiceJwtFilter</code> in <code>skillsync-common</code>?</h3>
+<p>&quot;DRY. Six downstream services all need the same logic — read headers from gateway, populate security context. Putting it in a shared lib means one place to maintain. I also put <code>GlobalExceptionHandler</code> and shared DTOs (<code>ErrorResponse</code>) there.&quot;</p>
+<h3>Q: What happens if gateway is down?</h3>
+<p>&quot;The frontend gets a connection refused. In production I&#39;d run multiple gateway instances behind an AWS ALB or use the sidecar pattern with Istio. For now, Eureka self-preservation keeps the last known registry, so downstream services still know about each other — but without the gateway, no external traffic flows.&quot;</p>
+<h3>Q: How did you handle the &quot;user sees empty list&quot; bug?</h3>
+<p><em>(The bug we fixed this session)</em></p>
+<p>&quot;In <code>adminListUsers</code>, the endpoint was throwing a 500 because <code>AuthUser.enabled</code> was a <code>boolean</code> primitive with <code>@Column(nullable=false)</code>, but some seed rows had <code>enabled=NULL</code> in the DB. Hibernate tried to unbox null → NullPointerException → 500. The frontend&#39;s <code>.catch(() =&gt; [])</code> silently swallowed it, so the admin saw &#39;No users yet&#39;.</p>
+<p><strong>Fix</strong>: </p>
+<ol>
+<li>Updated DB to set <code>enabled=1</code> for all rows.</li>
+<li>Fixed <code>GlobalExceptionHandler</code> to turn <code>BadCredentialsException</code> into 401 instead of falling through to generic 500.</li>
+<li>Changed the frontend catch to surface errors via a toast, so silent failures can&#39;t happen again.</li>
+<li>Fixed the users table in <code>AdminConsole.jsx</code> to use the actual response shape (<code>userId, email, fullName, role, enabled</code>) instead of guessed fields.&quot;</li>
+</ol>
+<h3>Q: How does the chatbot widget work?</h3>
+<p>&quot;<code>ChatbotWidget.jsx</code> is a floating drawer component mounted at the app root. It checks <code>useAuth()</code> — only renders when authenticated. It also checks <code>useLocation()</code> to hide on <code>/auth/*</code> routes, because <code>isAuthenticated</code> can be true on the login page (stale token before redirect). The chatbot itself calls a notification-service endpoint that forwards to an LLM — there are two personas: Nikki (general helper) and Elaichi (bookings specialist).&quot;</p>
+<h3>Q: Why Vite and not Create React App?</h3>
+<p>&quot;CRA is deprecated. Vite is faster — native ES modules in dev, Rollup for prod builds. Dev server starts in ~200ms vs CRA&#39;s 10+ seconds. HMR is near-instant. Also smaller bundles.&quot;</p>
+<h3>Q: How do you structure your React code?</h3>
+<p>&quot;Feature-first structure, not type-first:</p>
+<pre><code>src/
+  core/        # auth context, API client, services
+  features/
+    admin/AdminConsole.jsx
+    mentor/
+    chatbot/
+    landing/
+  shared/
+    components/ # Card, Button, Toast, Avatar
+    layouts/    # Shell, AuthLayout
+</code></pre>
+<p>Shared components go in <code>shared/</code>. Feature-specific pages + logic stay co-located. Services (API wrappers) in <code>core/services/*.js</code>.&quot;</p>
+<h3>Q: How does your theming work?</h3>
+<p>&quot;CSS variables defined at <code>:root</code> and <code>[data-theme=&quot;dark&quot;]</code> in <code>index.css</code>. Components use <code>var(--brand-600)</code>, <code>var(--text-primary)</code>, etc. A <code>ThemeContext</code> toggles the <code>data-theme</code> attribute on <code>document.documentElement</code>. Persisted to localStorage. Light theme is &#39;EdCare&#39; (teal primary, white surfaces), dark is &#39;Flacto&#39; (navy/cyan glow).&quot;</p>
+<h3>Q: What was the hardest bug you fixed?</h3>
+<p>&quot;Probably the admin users list. The symptom was &#39;empty list&#39; but the real cause was a chain of three issues: (1) NULL <code>enabled</code> column causing NPE in the entity, (2) <code>BadCredentialsException</code> falling through to a 500 generic handler so login also failed, (3) the frontend silently swallowing errors with <code>.catch(() =&gt; [])</code>. I traced it by testing the backend endpoint directly with curl, reading the docker logs for the real exception, then fixing upstream in the entity + exception handler, and downstream in the frontend error handling.&quot;</p>
+<h3>Q: Would you do anything differently?</h3>
+<ul>
+<li>&quot;Use UUIDs instead of auto-increment IDs — safer for distributed systems.&quot;</li>
+<li>&quot;Add per-service databases, not shared MySQL.&quot;</li>
+<li>&quot;Add OpenAPI specs + consumer-driven contract testing (Pact).&quot;</li>
+<li>&quot;Switch frontend localStorage JWT to httpOnly cookies for XSS protection.&quot;</li>
+<li>&quot;Add a proper refresh-token rotation flow.&quot;</li>
+<li>&quot;Kubernetes for orchestration, not Docker Compose.&quot;</li>
+</ul>
+<h3>Q: What&#39;s <code>docker-compose.full.yml</code>?</h3>
+<p>&quot;It&#39;s the full local dev stack — 15 containers: 7 microservices, gateway, MySQL, RabbitMQ, Eureka, Config Server, Prometheus, Grafana, Loki, Zipkin, and the frontend on Nginx. One command (<code>docker compose up</code>) brings the whole platform up. Each service has a healthcheck and <code>depends_on</code> so they start in order.&quot;</p>
+<h3>Q: How do you handle service-to-service auth?</h3>
+<p>&quot;Internal calls trust gateway-injected headers. A service calling another service within the mesh attaches the same <code>X-User-Id</code> / <code>X-User-Role</code> — no re-validation. If a service needs to call another <strong>without</strong> a user context (e.g., background job), I&#39;d use a signed internal token or mTLS between services. For now, the services aren&#39;t exposed publicly — only via the gateway — so internal trust is safe in the docker network.&quot;</p>
+<hr>
+<h2>System Design Lite</h2>
+<h3>Q: How would you scale SkillSync to 1M users?</h3>
+<ol>
+<li><strong>Horizontal scale</strong> each stateless service behind an ELB.</li>
+<li><strong>DB</strong>: Move to per-service databases. Add read replicas for heavy-read services (mentor search). Consider sharding by region.</li>
+<li><strong>Caching</strong>: Redis in front of hot endpoints (mentor list, skill catalog).</li>
+<li><strong>CDN</strong>: CloudFront in front of frontend static assets + API for cacheable GETs.</li>
+<li><strong>Async</strong>: Offload non-critical work (email, push notifs) to RabbitMQ/SQS.</li>
+<li><strong>Search</strong>: Elasticsearch for mentor/skill search instead of LIKE queries.</li>
+<li><strong>Rate limiting</strong>: Gateway-level.</li>
+<li><strong>Observability</strong>: Distributed tracing (already have Zipkin) + APM.</li>
+<li><strong>CI/CD</strong>: Blue-green deploys via Kubernetes.</li>
+</ol>
+<h3>Q: How would you design a URL shortener?</h3>
+<ul>
+<li>API: <code>POST /shorten</code> → returns <code>short</code>. <code>GET /{short}</code> → 301 redirect.</li>
+<li>DB: <code>(short_code VARCHAR(7) PRIMARY KEY, long_url TEXT, created_at, expires_at, clicks BIGINT)</code>.</li>
+<li><code>short_code</code> = base62-encoded counter, or hash truncation with collision retry.</li>
+<li>Cache recent redirects in Redis (TTL = remaining expiry).</li>
+<li>Analytics: fire event to Kafka for async click tracking.</li>
+</ul>
+<hr>
+<h2>Tricky Interview Qs</h2>
+<h3>Q: Can you explain the difference between <code>@SpringBootApplication</code> and <code>@EnableAutoConfiguration</code>?</h3>
+<p><code>@SpringBootApplication</code> = <code>@Configuration</code> + <code>@EnableAutoConfiguration</code> + <code>@ComponentScan</code>. It&#39;s a convenience meta-annotation.</p>
+<h3>Q: What is a Spring BeanPostProcessor?</h3>
+<p>Intercepts bean initialization. Two hooks: <code>postProcessBeforeInitialization</code> and <code>postProcessAfterInitialization</code>. Used internally for <code>@Autowired</code> injection, AOP proxying, etc.</p>
+<h3>Q: How does <code>@Transactional</code> propagation work?</h3>
+<ul>
+<li><code>REQUIRED</code> (default): Join existing tx or create new.</li>
+<li><code>REQUIRES_NEW</code>: Always start new tx; pause existing.</li>
+<li><code>NESTED</code>: Nested savepoint within existing.</li>
+<li><code>SUPPORTS</code>: Join if exists, else non-transactional.</li>
+<li><code>NOT_SUPPORTED</code>: Pause existing.</li>
+<li><code>NEVER</code>: Throw if tx exists.</li>
+<li><code>MANDATORY</code>: Throw if no tx.</li>
+</ul>
+<h3>Q: React — why are hooks called at top level only?</h3>
+<p>React tracks hook calls by order. Putting a hook inside a conditional changes call order across renders → state gets misaligned. Rule of Hooks enforces this via ESLint.</p>
+<h3>Q: What is hydration in React?</h3>
+<p>When SSR-rendered HTML is served, the client React &quot;hydrates&quot; it — attaches event listeners and state without re-rendering DOM. Saves work vs full client render.</p>
+<h3>Q: Why might <code>useState</code> setter not update immediately?</h3>
+<p>State updates are <strong>batched and async</strong>. <code>setCount(count+1); setCount(count+1);</code> only increments once. Use functional form: <code>setCount(c =&gt; c+1)</code>.</p>
+<h3>Q: What happens if you don&#39;t clean up <code>useEffect</code>?</h3>
+<p>Memory leaks, duplicate listeners, setInterval running forever. Always return cleanup function for subscriptions/timers/fetches.</p>
+<h3>Q: JVM memory model?</h3>
+<ul>
+<li><strong>Heap</strong>: All objects (Young Gen = Eden + S0 + S1, Old Gen, Metaspace).</li>
+<li><strong>Stack</strong>: Per-thread. Method frames, local vars.</li>
+<li><strong>Metaspace</strong>: Class metadata (replaced PermGen in Java 8).</li>
+<li><strong>GC</strong>: G1 (default 9+), Parallel, CMS (deprecated), ZGC/Shenandoah (low-pause).</li>
+</ul>
+<h3>Q: Difference between <code>ArrayList.remove(int)</code> and <code>ArrayList.remove(Object)</code>?</h3>
+<p><code>remove(int index)</code> removes by index. <code>remove(Object o)</code> removes first occurrence. For <code>List&lt;Integer&gt;</code>, <code>list.remove(1)</code> is ambiguous and calls <code>remove(int)</code> — autoboxing doesn&#39;t happen. Use <code>list.remove(Integer.valueOf(1))</code> to remove by value.</p>
+<h3>Q: What is a Deadlock? Livelock? Starvation?</h3>
+<ul>
+<li><strong>Deadlock</strong>: 2+ threads waiting on each other&#39;s locks forever.</li>
+<li><strong>Livelock</strong>: Threads keep changing state in response to each other without progress.</li>
+<li><strong>Starvation</strong>: Low-priority thread never gets CPU / lock.</li>
+</ul>
+<h3>Q: HTTP vs HTTPS?</h3>
+<p>HTTPS = HTTP over TLS. Encryption + server identity (cert). Required for modern auth / PWA / service workers.</p>
+<h3>Q: What is CORS?</h3>
+<p>Cross-Origin Resource Sharing. Browser security: blocks requests to a different origin unless the server sends <code>Access-Control-Allow-Origin</code>. Handled in Spring via <code>@CrossOrigin</code> or global <code>CorsConfigurationSource</code>.</p>
+<hr>
+<h2>HR / Behavioral</h2>
+<h3>&quot;Tell me about yourself.&quot;</h3>
+<blockquote>
+<p>&quot;I&#39;m a Java full-stack developer focused on Spring Boot and React. Most recently I&#39;ve been building SkillSync — a peer learning platform with 7 microservices, JWT auth, RabbitMQ, and a Vite + React frontend. I like working across the stack — I enjoy the challenge of chasing a bug from the database through the service layer up to the UI. I&#39;m most interested in roles where I can work on real product features and learn from senior engineers.&quot;</p>
+</blockquote>
+<h3>&quot;What&#39;s your biggest strength?&quot;</h3>
+<blockquote>
+<p>&quot;I debug methodically. Instead of guessing, I read logs, reproduce, isolate, and fix upstream. Recently I fixed an admin-users bug that was silently failing — I traced it from a 500 in the backend logs down to a NULL <code>enabled</code> column and a swallowed frontend catch block, and fixed all three layers.&quot;</p>
+</blockquote>
+<h3>&quot;Weakness?&quot;</h3>
+<blockquote>
+<p>&quot;I sometimes spend too long polishing details when moving on would be better. I&#39;ve been balancing this by timeboxing — set 30 min, and if not done, merge and create a follow-up ticket.&quot;</p>
+</blockquote>
+<h3>&quot;Why us?&quot;</h3>
+<blockquote>
+<p>Research the company. Pick 2 specific things — their stack, a product you admire, engineering culture posts. Generic answers are forgettable.</p>
+</blockquote>
+<h3>&quot;Where do you see yourself in 5 years?&quot;</h3>
+<blockquote>
+<p>&quot;Senior/staff level. Owning architecture for a major feature area, mentoring juniors, and still writing code every day. Full-stack capability is a long-term advantage I want to keep sharpening.&quot;</p>
+</blockquote>
+<h3>&quot;Tell me about a conflict.&quot;</h3>
+<blockquote>
+<p>Pick a real situation. Structure: <strong>Situation → Action → Result</strong>. Focus on what <strong>you</strong> did, not blaming others.</p>
+</blockquote>
+<h3>&quot;Any questions for us?&quot; (ALWAYS ask 2–3)</h3>
+<ul>
+<li>&quot;What does success look like in the first 90 days?&quot;</li>
+<li>&quot;What&#39;s the team&#39;s biggest technical challenge right now?&quot;</li>
+<li>&quot;How do you balance feature delivery with technical debt?&quot;</li>
+<li>&quot;What&#39;s the code review / deploy cadence?&quot;</li>
+<li>&quot;What&#39;s one thing you&#39;d change about the team&#39;s engineering practices?&quot;</li>
+</ul>
+<hr>
+<h2>Last-minute checklist (morning of interview)</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Read the <a href="#skillsync-project-viva">SkillSync Project Viva</a> section aloud twice</li>
+<li><input disabled="" type="checkbox"> Re-skim the JWT flow, microservice communication, and React hooks</li>
+<li><input disabled="" type="checkbox"> Have 3 strong STAR stories ready (challenge, learning, teamwork)</li>
+<li><input disabled="" type="checkbox"> Have 3 thoughtful questions for them</li>
+<li><input disabled="" type="checkbox"> Sleep well, eat before, water nearby</li>
+<li><input disabled="" type="checkbox"> If whiteboarding: draw the architecture diagram first, talk through it</li>
+<li><input disabled="" type="checkbox"> If coding: explain out loud, ask clarifying questions, write tests</li>
+</ul>
+<p><strong>Good luck!</strong> 🚀</p>
+
+</body></html>
